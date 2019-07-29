@@ -1,0 +1,12 @@
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.DevTools\obj\Debug\netcoreapp3.0\HeroBot.Plugins.DevTools.csprojAssemblyReference.cache
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.DevTools\obj\Debug\netcoreapp3.0\HeroBot.Plugins.DevTools.csproj.CoreCompileInputs.cache
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.DevTools\obj\Debug\netcoreapp3.0\HeroBot.Plugins.DevTools.AssemblyInfoInputs.cache
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.DevTools\obj\Debug\netcoreapp3.0\HeroBot.Plugins.DevTools.AssemblyInfo.cs
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.DevTools\bin\Debug\netcoreapp3.0\HeroBot.Plugins.DevTools.deps.json
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.DevTools\bin\Debug\netcoreapp3.0\HeroBot.Plugins.DevTools.dll
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.DevTools\bin\Debug\netcoreapp3.0\HeroBot.Plugins.DevTools.pdb
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.DevTools\bin\Debug\netcoreapp3.0\HeroBot.Common.dll
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.DevTools\bin\Debug\netcoreapp3.0\HeroBot.Common.pdb
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.DevTools\obj\Debug\netcoreapp3.0\HeroBot.Plugins.DevTools.csproj.CopyComplete
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.DevTools\obj\Debug\netcoreapp3.0\HeroBot.Plugins.DevTools.dll
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.DevTools\obj\Debug\netcoreapp3.0\HeroBot.Plugins.DevTools.pdb

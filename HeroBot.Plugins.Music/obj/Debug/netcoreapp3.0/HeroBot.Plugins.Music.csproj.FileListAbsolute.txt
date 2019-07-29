@@ -1,0 +1,11 @@
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Music\bin\Debug\netcoreapp3.0\V8_Net_Proxy_x64.dll
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Music\bin\Debug\netcoreapp3.0\V8_Net_Proxy_x86.dll
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Music\bin\Debug\netcoreapp3.0\HeroBot.Plugins.Music.deps.json
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Music\bin\Debug\netcoreapp3.0\HeroBot.Plugins.Music.dll
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Music\bin\Debug\netcoreapp3.0\HeroBot.Common.dll
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Music\bin\Debug\netcoreapp3.0\HeroBot.Common.pdb
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Music\obj\Debug\netcoreapp3.0\HeroBot.Plugins.Music.csprojAssemblyReference.cache
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Music\obj\Debug\netcoreapp3.0\HeroBot.Plugins.Music.csproj.CoreCompileInputs.cache
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Music\obj\Debug\netcoreapp3.0\HeroBot.Plugins.Music.AssemblyInfoInputs.cache
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Music\obj\Debug\netcoreapp3.0\HeroBot.Plugins.Music.AssemblyInfo.cs
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Music\obj\Debug\netcoreapp3.0\HeroBot.Plugins.Music.csproj.CopyComplete

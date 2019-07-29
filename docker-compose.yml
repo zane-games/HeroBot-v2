@@ -1,0 +1,14 @@
+version: '3'
+services:
+   herobot:
+      image: dotnet
+      depends_on:
+         - redis
+      networks:
+         - test
+   redis:
+      image: redis:custom
+      networks:
+         - test
+networks:
+   test:
