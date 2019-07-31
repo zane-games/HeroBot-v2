@@ -6,24 +6,20 @@ using System.Text;
 namespace HeroBot.Core.Migrations
 {
     [Migration(270720191)]
-    public class Migration1_270720191 : Migration
+    public class Migration1270720191 : Migration
     {
         public override void Down()
         {
-            Delete.Table("Plugins");
+            Delete.Table("GuildPlugin");
         }
 
         public override void Up()
         {
-            Create.Table("Plugins")
-                .WithColumn("Id").AsInt32().Identity().PrimaryKey()
-                .WithColumn("Name").AsString().Unique();
-            Create.Table("Guilds")
-                .WithColumn("Id").AsInt32().Identity().PrimaryKey();
             Create.Table("GuildPlugin")
                 .WithColumn("Id").AsInt32().Identity().PrimaryKey()
-                .WithColumn("Guild").AsInt32().ForeignKey("Guilds", "Id")
-                .WithColumn("Plugin").AsInt32().ForeignKey("Plugins", "Id");
+                .WithColumn("plugin").AsString()
+                .WithColumn("guild").AsInt64()
+                .WithColumn("Config").AsString().Nullable();
         }
     }
 }

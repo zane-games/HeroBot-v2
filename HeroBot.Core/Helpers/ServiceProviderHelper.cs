@@ -10,17 +10,22 @@ namespace HeroBot.Core.Helpers
 {
     public static class ServiceProviderHelper
     {
+        /// <summary>
+        /// Enable all the loaded services from <see cref="ServiceCollectionHelper.LoadAllServicesFromExternalAssembiles(IServiceCollection)"/>
+        /// </summary>
+        /// <param name="services">The this from the extension method</param>
+        /// <returns>this</returns>
         public static ServiceProvider GetAllServicesFromExternalAssemblies(this ServiceProvider services)
         {
             foreach (dynamic d in ModulesService.GetLoadedAssemblies())
             {
                 Assembly ass = d.ass;
                 IEnumerable<TypeInfo> servicesAss = ass.DefinedTypes.Where(x => !x.IsInterface && !x.IsEnum && x.IsClass && x.IsPublic && x.Name.Contains("Service"));
-                if (servicesAss.Count() > 0)
+                if (servicesAss.Any())
                 {
                     foreach (TypeInfo typeInfo in servicesAss)
                     {
-                        services.GetRequiredService(ass.GetTypes().Where(x => x.Name == typeInfo.Name).FirstOrDefault());
+                        services.GetRequiredService(ass.GetTypes().FirstOrDefault(x => x.Name == typeInfo.Name));
                     }
                 }
             }

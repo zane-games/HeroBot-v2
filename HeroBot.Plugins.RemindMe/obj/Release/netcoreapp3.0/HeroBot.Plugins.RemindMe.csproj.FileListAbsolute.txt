@@ -11,8 +11,12 @@ C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.RemindMe
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\out\HeroBot.Plugins.RemindMe.deps.json
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\out\HeroBot.Plugins.RemindMe.dll
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\out\HeroBot.Plugins.RemindMe.pdb
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\bin\Debug\netcoreapp3.0\Modules\V8_Net_Proxy_x64.dll
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\bin\Debug\netcoreapp3.0\Modules\V8_Net_Proxy_x86.dll
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\out\V8_Net_Proxy_x64.dll
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\out\V8_Net_Proxy_x86.dll
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\out\Modules\V8_Net_Proxy_x64.dll
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\out\Modules\V8_Net_Proxy_x86.dll
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\out\Modules\HeroBot.Plugins.RemindMe.deps.json
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\out\Modules\HeroBot.Plugins.RemindMe.dll
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\out\Modules\HeroBot.Plugins.RemindMe.pdb
-C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\bin\Debug\netcoreapp3.0\Modules\V8_Net_Proxy_x64.dll
-C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\bin\Debug\netcoreapp3.0\Modules\V8_Net_Proxy_x86.dll

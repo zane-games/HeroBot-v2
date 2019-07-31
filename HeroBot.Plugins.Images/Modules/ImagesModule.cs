@@ -18,23 +18,28 @@ namespace HeroBot.Plugins.Images.Modules
     [Name("Images")]
     public class ImagesModule : ModuleBase<SocketCommandContext>
     {
-        public static Random Random;
-        public static string[] CatGreet = new[] { "dream","royal","beautiful","great","funny","good looking" };
-        public static string[] CatGreetings = new[] {"Let's find a __great__ cat for you :3","Here is a __great__ cat !", "I've found this cat __great__ for you..."};
-        public static string[] DogGreet = new[] { "dream", "royal", "beautiful", "great", "funny", "good looking","loyal" };
-        public static string[] DogGreetings = new[] { "Let's find a __great__ dog for you :3", "Here is a __great__ dog !", "I've found this __great__ dog for you..." };
-
-        public ImagesModule(Random random) {
-            Random = random;
+        private readonly Random _random;
+        private static string[] CatGreet = new[] { "dream", "royal", "beautiful", "great", "funny", "good looking" };
+        private static string[] CatGreetings = new[] { "Let's find a __great__ cat for you :3", "Here is a __great__ cat !", "I've found this cat __great__ for you..." };
+        private static string[] DogGreet = new[] { "dream", "royal", "beautiful", "great", "funny", "good looking", "loyal" };
+        private static string[] DogGreetings = new[] { "Let's find a __great__ dog for you :3", "Here is a __great__ dog !", "I've found this __great__ dog for you..." };
+        private static readonly string CatUrl = "http://aws.random.cat/meow";
+        private static readonly string DogUrl = "https://random.dog/woof";
+        public ImagesModule(Random random)
+        {
+            _random = random;
         }
 
         [Command("cat"), Alias("meow")]
-        public Task RandomCat() {
-            using (WebClient webclient = new WebClient()) {
-                
-                return webclient.DownloadStringTaskAsync(new Uri("http://aws.random.cat/meow")).ContinueWith((x) => {
+        public Task RandomCat()
+        {
+            using (WebClient webclient = new WebClient())
+            {
+
+                return webclient.DownloadStringTaskAsync(new Uri(CatUrl)).ContinueWith((x) =>
+                {
                     var url = JsonConvert.DeserializeObject<dynamic>(x.Result).file;
-                    ReplyAsync($"{Context.User.Mention} {CatGreetings[Random.Next() % CatGreetings.Length].Replace("__great__", CatGreet[Random.Next() % CatGreet.Length])}", false, new EmbedBuilder()
+                    ReplyAsync($":cat:  {Context.User.Mention} {CatGreetings[_random.Next() % CatGreetings.Length].Replace("__great__", CatGreet[_random.Next() % CatGreet.Length])}", false, new EmbedBuilder()
                     {
                         ImageUrl = url
                     }.WithRandomColor().WithCopyrightFooter(Context.User.Username, "cat").Build());
@@ -44,11 +49,13 @@ namespace HeroBot.Plugins.Images.Modules
         }
 
         [Command("dog"), Alias(new[] { "wouf", "woof" })]
-        public Task RandomDog() {
+        public Task RandomDog()
+        {
             using (WebClient webclient = new WebClient())
             {
-                return webclient.DownloadStringTaskAsync(new Uri("https://random.dog/woof")).ContinueWith((x) => {
-                    ReplyAsync($"{Context.User.Mention} {DogGreetings[Random.Next() % DogGreetings.Length].Replace("__great__", DogGreet[Random.Next() % DogGreet.Length])}", false, new EmbedBuilder()
+                return webclient.DownloadStringTaskAsync(new Uri(DogUrl)).ContinueWith((x) =>
+                {
+                    ReplyAsync($":dog: {Context.User.Mention} {DogGreetings[_random.Next() % DogGreetings.Length].Replace("__great__", DogGreet[_random.Next() % DogGreet.Length])}", false, new EmbedBuilder()
                     {
                         ImageUrl = $"https://random.dog/{x.Result}"
                     }.WithRandomColor().WithCopyrightFooter(Context.User.Username, "dog").Build());
@@ -56,14 +63,17 @@ namespace HeroBot.Plugins.Images.Modules
             }
         }
         [Command("welcome")]
-        public async Task Welcome(string url = null) {
+        public async Task Welcome(string url = null)
+        {
             var rurl = ResolveUrl(url);
             using (HttpClient client = new HttpClient())
             {
                 var e = HttpUtility.UrlEncode(Context.User.Username + '#' + Context.User.Discriminator);
                 var bytearray = await client.GetByteArrayAsync($"http://localhost:3000/welcome?imageurl={rurl}&name={e}");
                 var stream = new MemoryStream(bytearray);
-                await Context.Channel.SendFileAsync(stream,"welcome.png","welcome :tada:");
+                await Context.Channel.SendFileAsync(stream, "welcome.png", embed: new EmbedBuilder().WithImageUrl("attachment://welcome.png").WithCopyrightFooter()
+                    .WithRandomColor()
+                    .WithAuthor(Context.User).Build());
                 stream.Close();
 
             }
@@ -76,7 +86,12 @@ namespace HeroBot.Plugins.Images.Modules
             {
                 var bytearray = await client.GetByteArrayAsync($"http://localhost:3000/pixelate?imageurl={rurl}");
                 var stream = new MemoryStream(bytearray);
-                await Context.Channel.SendFileAsync(stream, "pixelate.png", "welcome :tada:");
+                await Context.Channel.SendFileAsync(stream, "pixelate.png", embed: new EmbedBuilder()
+                    .WithCopyrightFooter()
+                    .WithRandomColor()
+                    .WithAuthor(Context.User)
+                    .WithImageUrl("attachment://pixelate.png").Build());
+
                 stream.Close();
 
             }
@@ -89,7 +104,10 @@ namespace HeroBot.Plugins.Images.Modules
             {
                 var bytearray = await client.GetByteArrayAsync($"http://localhost:3000/sepia?imageurl={rurl}");
                 var stream = new MemoryStream(bytearray);
-                await Context.Channel.SendFileAsync(stream, "sepia.png", "welcome :tada:");
+                await Context.Channel.SendFileAsync(stream, "sepia.png", embed: new EmbedBuilder().WithImageUrl("attachment://sepia.png").WithCopyrightFooter()
+                    .WithRandomColor()
+                    .WithAuthor(Context.User).Build());
+
                 stream.Close();
 
             }
@@ -103,7 +121,9 @@ namespace HeroBot.Plugins.Images.Modules
             {
                 var bytearray = await client.GetByteArrayAsync($"http://localhost:3000/mirror?imageurl={rurl}");
                 var stream = new MemoryStream(bytearray);
-                await Context.Channel.SendFileAsync(stream, "mirror.png", "welcome :tada:");
+                await Context.Channel.SendFileAsync(stream, "mirror.png", embed: new EmbedBuilder().WithImageUrl("attachment://mirror.png").WithCopyrightFooter()
+                    .WithRandomColor()
+                    .WithAuthor(Context.User).Build());
                 stream.Close();
 
             }
@@ -118,9 +138,9 @@ namespace HeroBot.Plugins.Images.Modules
                 Console.WriteLine(rurl);
                 var bytearray = await client.GetByteArrayAsync($"http://localhost:3000/invert?imageurl={rurl}");
                 var stream = new MemoryStream(bytearray);
-                await Context.Channel.SendFileAsync(stream, "mirror.png", "welcome :tada:");
-                //stream.Close();
-
+                await Context.Channel.SendFileAsync(stream, "invert.png", embed: new EmbedBuilder().WithImageUrl("attachment://invert.png").WithCopyrightFooter()
+                    .WithRandomColor()
+                    .WithAuthor(Context.User).Build());
             }
         }
 
@@ -132,7 +152,9 @@ namespace HeroBot.Plugins.Images.Modules
             {
                 var bytearray = await client.GetByteArrayAsync($"http://localhost:3000/upsidesown?imageurl={rurl}");
                 var stream = new MemoryStream(bytearray);
-                await Context.Channel.SendFileAsync(stream, "mirror.png", "welcome :tada:");
+                await Context.Channel.SendFileAsync(stream, "upsidesdown.png", embed: new EmbedBuilder().WithCopyrightFooter()
+                    .WithRandomColor()
+                    .WithAuthor(Context.User).WithImageUrl("attachment://upsidesdown.png").Build());
                 stream.Close();
 
             }
@@ -146,14 +168,14 @@ namespace HeroBot.Plugins.Images.Modules
             {
                 var bytearray = await client.GetByteArrayAsync($"http://localhost:3000/blur?imageurl={rurl}");
                 var stream = new MemoryStream(bytearray);
-                await Context.Channel.SendFileAsync(stream, "mirror.png", "welcome :tada:");
-                //stream.Close();
-
+                await Context.Channel.SendFileAsync(stream, "blur.png", embed: new EmbedBuilder().WithCopyrightFooter()
+                    .WithRandomColor()
+                    .WithAuthor(Context.User).WithImageUrl("attachment://blur.png").Build());
             }
         }
-        
 
-                    [Command("rgb")]
+
+        [Command("rgb")]
         public async Task RGB(string url = null)
         {
             var rurl = ResolveUrl(url);
@@ -161,13 +183,15 @@ namespace HeroBot.Plugins.Images.Modules
             {
                 var bytearray = await client.GetByteArrayAsync($"http://localhost:3000/rgb?imageurl={rurl}");
                 var stream = new MemoryStream(bytearray);
-                await Context.Channel.SendFileAsync(stream, "mirror.gif", "welcome :tada:");
+                await Context.Channel.SendFileAsync(stream, "rgb.gif", embed: new EmbedBuilder().WithCopyrightFooter()
+                    .WithRandomColor()
+                    .WithAuthor(Context.User).WithImageUrl("attachment://rgb.gif").Build());
                 stream.Close();
-                
+
             }
         }
-        
-                                [Command("levelcard")]
+
+        [Command("levelcard")]
         public async Task LevelCard(string url = null)
         {
             var rurl = ResolveUrl(url);
@@ -176,7 +200,9 @@ namespace HeroBot.Plugins.Images.Modules
 
                 var bytearray = await client.GetByteArrayAsync($"http://localhost:3000/levelcard?imageurl={rurl}");
                 var stream = new MemoryStream(bytearray);
-                await Context.Channel.SendFileAsync(stream, "mirror.png", "welcome :tada:");
+                await Context.Channel.SendFileAsync(stream, "levelcard.png", embed: new EmbedBuilder().WithCopyrightFooter()
+                    .WithRandomColor()
+                    .WithAuthor(Context.User).WithImageUrl("attachment://levelcard.png").Build());
                 stream.Close();
 
             }
@@ -191,7 +217,8 @@ namespace HeroBot.Plugins.Images.Modules
             {
                 return HttpUtility.UrlEncode($"{Context.Message.Attachments.First().Url}?size=480");
             }
-            else {
+            else
+            {
                 return HttpUtility.UrlEncode(Context.User.AvatarId == null ? $"{Context.User.GetDefaultAvatarUrl()}" : $"https://cdn.discordapp.com/avatars/{Context.User.Id}/{Context.User.AvatarId}.png");
             }
         }

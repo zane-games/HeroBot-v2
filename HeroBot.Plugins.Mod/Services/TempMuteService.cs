@@ -14,8 +14,8 @@ namespace HeroBot.Plugins.Mod.Services
     [Service]
     public class TempMuteService
     {
-        private IRedisService _redis;
-        private DiscordShardedClient _discord;
+        private readonly IRedisService _redis;
+        private readonly DiscordShardedClient _discord;
 
         public TempMuteService(IRedisService redisService, Random random, IConfigurationRoot o, DiscordShardedClient discordSocketClient)
         {
@@ -29,10 +29,8 @@ namespace HeroBot.Plugins.Mod.Services
             Console.WriteLine(arg2.ToString());
             var name = arg2.ToString().Split(':');
             Console.WriteLine(JsonConvert.SerializeObject(name));
-            if (name.Length == 4)
+            if (name.Length == 4 && name[0] == "tempmute" && name[1] == "remove")
             {
-                if (name[0] == "tempmute" && name[1] == "remove")
-                {
                     var guildId = name[3];
                     var userId = name[2];
                     var guild = _discord.GetGuild(ulong.Parse(guildId));
@@ -46,6 +44,7 @@ namespace HeroBot.Plugins.Mod.Services
                             }
                             catch (Exception)
                             {
+                                /* We ignore the expressions in the redis handler because, finally, we need to unmute the user */
                             }
                             finally
                             {
@@ -62,7 +61,7 @@ namespace HeroBot.Plugins.Mod.Services
                             }
                         });
                     }
-                }
+                
             }
         }
 
@@ -77,13 +76,9 @@ namespace HeroBot.Plugins.Mod.Services
         }
     }
     public class TempMute {
-        [JsonIgnore]
-        public string reason;
-        [JsonIgnore]
-        public TimeSpan TimeSpan;
-        [JsonIgnore]
-        public ulong guildId;
-        [JsonIgnore]
-        public ulong userId;
+        public TimeSpan TimeSpan { get; set; }
+        public string Reason { get; set; }
+        public ulong guildId { get; set; }
+        public ulong userId { get; set; }
     }
 }

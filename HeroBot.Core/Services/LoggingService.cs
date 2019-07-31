@@ -12,19 +12,12 @@ namespace HeroBotv2.Services
 {
     public class LoggingService
     {
-        private readonly DiscordShardedClient _discord;
-        private readonly CommandService _commands;
-
 
         // DiscordSocketClient and CommandService are injected automatically from the IServiceProvider
         public LoggingService(DiscordShardedClient discord, CommandService commands)
         {
-
-            _discord = discord;
-            _commands = commands;
-
-            _discord.Log += OnLogAsync;
-            _commands.Log += OnLogAsync;
+            discord.Log += OnLogAsync;
+            commands.Log += OnLogAsync;
         }
 
         public void Log(LogSeverity logSeverity, string message) {

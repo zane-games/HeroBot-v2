@@ -9,7 +9,7 @@ namespace HeroBot.Core.Services
 {
     public class CooldownService : ICooldownService
     {
-        private IRedisService _redis;
+        private readonly IRedisService _redis;
 
         public CooldownService(IRedisService redisService) {
             CooldownAttribute._cooldown = this;
@@ -27,11 +27,11 @@ namespace HeroBot.Core.Services
         }
 
         internal async Task OnCommand(CommandInfo commandInfo,SocketCommandContext commandContext) {
-            if (commandInfo.Preconditions.Where(x => x is CooldownAttribute).Count() > 0) {
+            if (commandInfo.Preconditions.Any(x => x is CooldownAttribute)) {
                 var seconds = (commandInfo.Preconditions.Where(x => x is CooldownAttribute).OrderByDescending(x => (x as CooldownAttribute).cooldown.Seconds).First() as CooldownAttribute).cooldown;
                 await _redis.GetDatabase().StringSetAsync($"{commandContext.User.Id}-c-{commandInfo.Name}", String.Empty, seconds);
             }
-            if (commandInfo.Module.Preconditions.Where(x => x is CooldownAttribute).Count() > 0) {
+            if (commandInfo.Module.Preconditions.Any(x => x is CooldownAttribute)) {
                 var seconds = (commandInfo.Module.Preconditions.Where(x => x is CooldownAttribute).OrderByDescending(x => (x as CooldownAttribute).cooldown.Seconds).First() as CooldownAttribute).cooldown;
                 await _redis.GetDatabase().StringSetAsync($"{commandContext.User.Id}-m-{commandInfo.Module.Name}", String.Empty,seconds);
             }

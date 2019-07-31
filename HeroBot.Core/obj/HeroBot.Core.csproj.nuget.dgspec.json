@@ -152,6 +152,14 @@
       "frameworks": {
         "netcoreapp3.0": {
           "dependencies": {
+            "Lavalink4NET": {
+              "target": "Package",
+              "version": "[1.4.0, )"
+            },
+            "Lavalink4NET.Discord.NET": {
+              "target": "Package",
+              "version": "[1.4.0, )"
+            },
             "Microsoft.NETCore.App": {
               "include": "None",
               "suppressParent": "All",

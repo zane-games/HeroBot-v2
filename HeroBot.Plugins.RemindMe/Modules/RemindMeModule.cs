@@ -5,6 +5,7 @@ using HeroBot.Common.Helpers;
 using HeroBot.Plugins.RemindMe.Services;
 using Newtonsoft.Json;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace HeroBot.Plugins.RemindMe.Modules
@@ -14,7 +15,7 @@ namespace HeroBot.Plugins.RemindMe.Modules
     [Name("Reminder")]
     public class RemindMeModule : ModuleBase<SocketCommandContext>
     {
-        private ReminderService _remainder;
+        private readonly ReminderService _remainder;
 
         public RemindMeModule(ReminderService remainderService) {
             _remainder = remainderService;
@@ -22,13 +23,15 @@ namespace HeroBot.Plugins.RemindMe.Modules
         [Cooldown(500)]
         [Command("remindme"),Alias("remind")]
         public async Task CreateReminder(TimeSpan time,[Remainder]string toRemind) {
-            await _remainder.CreateReminder(new Reminder()
+            if(await _remainder.CreateReminder(new Reminder()
             {
                 remind = toRemind,
                 TimeSpan = time,
                 userId = Context.User.Id
-            });
-            await ReplyAsync($":white_check_mark: I will remind you in {time.ToHumanReadable()}s");
+            }))
+                await ReplyAsync($":white_check_mark: I will remind you in {time.ToHumanReadable()}s");
+            else
+                await ReplyAsync("You have too many reminders !");
         }
         [Cooldown(5)]
         [Command("myreminders"), Alias("mr")]
@@ -38,12 +41,10 @@ namespace HeroBot.Plugins.RemindMe.Modules
                 .WithRandomColor()
                 .WithCopyrightFooter(Context.User.Username, "myreminders")
                 .WithTitle("Here is your active reminders");
-            foreach (dynamic d in reminders) {
-                if(!d.anulated)
+            foreach (dynamic d in reminders.Where(x => !x.anulated)) {
                 embed.AddField($"**`{d.x.reason}`**", $"*{((TimeSpan)d.r).ToHumanReadable()} remaining*", true);
             }
             await ReplyAsync(embed: embed.Build());
-            
         }
     }
 }

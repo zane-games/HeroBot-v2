@@ -1,58 +1,53 @@
-﻿using Discord.WebSocket;
+﻿using Discord;
+using Discord.WebSocket;
 using HeroBot.Common.Attributes;
 using Lavalink4NET;
 using Lavalink4NET.Cluster;
 using Lavalink4NET.Discord_NET;
+using Lavalink4NET.Player;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading.Tasks;
+
 namespace HeroBot.Plugins.Music.Services
 {
     [Service]
     public class MusicService
     {
-        private DiscordShardedClient _discord;
+        private readonly DiscordShardedClient _discord;
         private LavalinkCluster lavalinkCluster;
         public MusicService(DiscordShardedClient discordShardedclient)
         {
             _discord = discordShardedclient;
-            var dnsLavalinks = ScanDns();
 
-            var LavalinkNodeOptions = new List<LavalinkNodeOptions>();
-            foreach (var ip in dnsLavalinks)
-            {
-                LavalinkNodeOptions.Add(new Lavalink4NET.LavalinkNodeOptions()
-                {
-                    RestUri = $"http://{ip.ToString()}:8080/",
-                    WebSocketUri = $"ws://{ip.ToString()}:8080/",
-                    Password = "123",
-                    AllowResuming = true
-                });
-            }
-
-            lavalinkCluster = new LavalinkCluster(new LavalinkClusterOptions()
-            {
-                StayOnline = true,
-                Nodes = LavalinkNodeOptions.ToArray(),
-                LoadBalacingStrategy = LoadBalancingStrategies.ScoreStrategy
-            }, new DiscordClientWrapper(discordShardedclient));
             discordShardedclient.ShardReady += DiscordShardedclient_ShardReady;
         }
+        internal LavalinkCluster GetLavalinkCluster() { return lavalinkCluster; }
+
 
         private async System.Threading.Tasks.Task DiscordShardedclient_ShardReady(DiscordSocketClient arg)
         {
-            if (_discord.Shards.Where(x => x.ConnectionState == Discord.ConnectionState.Connected).Count() == _discord.Shards.Count)
-            {
-                await lavalinkCluster.InitializeAsync();
-            }
-        }
+                Console.WriteLine("Lunching lavalink");
+                lavalinkCluster = new LavalinkCluster(new LavalinkClusterOptions()
+                {
+                    StayOnline = true,
+                    Nodes = new[] { new Lavalink4NET.LavalinkNodeOptions()
+                {
+                    RestUri = $"http://lavalink.alivecreation.fr:80/",
+                    WebSocketUri = $"ws://lavalink.alivecreation.fr:80/",
+                    Password = Uri.EscapeDataString("AyF6c62M3Lu2t5jcRCMMfhcGZ34dGjBv95cVPJsbbhKcBUBcnFEDDbvXBzU7EFgAN2ucE2ZLz6gnrwWRDxYKwvWsvqYntxLYYb4quUdhQAPLvDWqYanwAusE3rcGxhyC6aswGgDDWwEZ8ZNWR5bUBWfTm62fzeXafmzjNTwNFRwDz9ksJHj9BCT2MwBgdcqTxpGMQ8QLNQdJqEUmuPR3Xn8SczmecFpjpSfDcC42xAL5LyNQMtZur6YAZRu5t85g"),
+                    AllowResuming = true
+                }},
 
-        private IEnumerable<IPAddress> ScanDns()
-        {
-            IPAddress[] ipaddress = Dns.GetHostAddresses("localhost");
-            return ipaddress.Where(x => x.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork);
+                    LoadBalacingStrategy = LoadBalancingStrategies.ScoreStrategy
+                }, new DiscordClientWrapper(_discord));
+                await lavalinkCluster.InitializeAsync();
+            
+
+
         }
     }
 }

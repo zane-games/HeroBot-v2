@@ -17,9 +17,9 @@ namespace HeroBot.Plugins.RemindMe.Services
     [Service]
     public class ReminderService
     {
-        private IRedisService _redis;
-        private DiscordShardedClient _discord;
-        private IDatabaseService _database;
+        private readonly IRedisService _redis;
+        private readonly DiscordShardedClient _discord;
+        private readonly IDatabaseService _database;
 
         private readonly string GetReminderById = "SELECT * FROM \"Reminders\" WHERE \"Id\"=@id";
         private readonly string GetReminderPerUser = "SELECT * FROM \"Reminders\" WHERE \"userId\"=@id";
@@ -41,32 +41,30 @@ namespace HeroBot.Plugins.RemindMe.Services
                 Console.WriteLine(arg2.ToString());
                 var name = arg2.ToString().Split(':');
                 Console.WriteLine(name.Length);
-                if (name.Length == 3)
+                if (name.Length == 3 && name[0] == "reminder" && name[1] == "remove")
                 {
-                    if (name[0] == "reminder" && name[1] == "remove")
+                    var reminderId = name[2];
+                    using (var conn = (NpgsqlConnection)_database.GetDbConnection())
                     {
-                        var reminderId = name[2];
-                        using (var conn = (NpgsqlConnection)_database.GetDbConnection())
-                        {
-                            conn.Open();
-                            conn.QueryAsync(GetReminderById, new { id = reminderId }).ContinueWith((x) =>
+                        conn.Open();
+                        conn.QueryAsync(GetReminderById, new { id = reminderId }).ContinueWith((x) =>
+                          {
+                              var cont = x.Result.FirstOrDefault();
+                              if (cont != null)
                               {
-                                  var cont = x.Result.FirstOrDefault();
-                                  if (cont != null)
+                                  var userId = (ulong)cont.userId;
+                                  var reason = (string)cont.reason;
+                                  _discord.GetUser(userId).GetOrCreateDMChannelAsync().ContinueWith((x) =>
                                   {
-                                      var userId = (ulong)cont.userId;
-                                      var reason = (string)cont.reason;
-                                      _discord.GetUser(userId).GetOrCreateDMChannelAsync().ContinueWith((x) =>
+                                      var dm = x.Result;
+                                      dm.SendMessageAsync($"Hay :watch: ! It's time to {reason}").ContinueWith((v) =>
                                       {
-                                          var dm = x.Result;
-                                          dm.SendMessageAsync($"Hay :watch: ! It's time to {reason}").ContinueWith((v) =>
-                                          {
-                                              conn.Execute(new CommandDefinition(DeleteReminderbyId, new { id = reminderId }));
-                                          });
+                                          conn.Execute(new CommandDefinition(DeleteReminderbyId, new { id = reminderId }));
                                       });
-                                  }
-                              });
-                        }
+                                  });
+                              }
+                          });
+
                     }
                 }
             }
@@ -77,7 +75,7 @@ namespace HeroBot.Plugins.RemindMe.Services
         {
             using (var conn = (NpgsqlConnection)_database.GetDbConnection())
             {
-                var result = conn.Query(GetReminderPerUser, new { id = (long)id});
+                var result = await conn.QueryAsync(GetReminderPerUser, new { id = (long)id });
                 return result.Select(async (x) =>
                 {
                     var v = (await _redis.GetDatabase().StringGetWithExpiryAsync($"reminder:remove:{x.Id}")).Expiry;
@@ -108,7 +106,7 @@ namespace HeroBot.Plugins.RemindMe.Services
             }
         }
 
-        public async Task CreateReminder(Reminder reminder)
+        public async Task<bool> CreateReminder(Reminder reminder)
         {
 
             using (var conn = (NpgsqlConnection)_database.GetDbConnection())
@@ -117,22 +115,21 @@ namespace HeroBot.Plugins.RemindMe.Services
                 var cont = conn.Query(CountRemindersPerUser, new { id = (long)reminder.userId }).First().count;
                 if (cont < 11)
                 {
-                    var id = conn.Query(InsertReminder, new { userId = (long)reminder.userId, reason = reminder.remind}).First().Id;
+                    var id = conn.Query(InsertReminder, new { userId = (long)reminder.userId, reason = reminder.remind }).First().Id;
                     await _redis.GetDatabase().StringSetAsync($"reminder:remove:{id}", String.Empty, reminder.TimeSpan);
+                    return true;
                 }
                 else
                 {
-                    throw new Exception("User has too many reminders !");
+                    return false;
                 }
             }
         }
     }
     public class Reminder
     {
-        [JsonIgnore]
-        public ulong userId;
-        public string remind;
-        [JsonIgnore]
-        public TimeSpan TimeSpan;
+        public ulong userId { get; set; }
+        public string remind { get; set; }
+        public TimeSpan TimeSpan { get; set; }
     }
 }

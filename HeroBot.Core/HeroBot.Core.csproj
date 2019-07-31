@@ -3,9 +3,12 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
+
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Lavalink4NET" Version="1.4.0" />
+    <PackageReference Include="Lavalink4NET.Discord.NET" Version="1.4.0" />
     <PackageReference Include="NetEscapades.Configuration.Yaml" Version="1.6.0" />
   </ItemGroup>
 

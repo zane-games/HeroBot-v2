@@ -15,20 +15,20 @@ namespace HeroBot.Core.Services
     public class StateObject
     {
         // Client  socket.  
-        public Socket workSocket = null;
+        public Socket workSocket { get; set; } = null;
         // Size of receive buffer.  
         public const int BufferSize = 1024;
         // Receive buffer.  
-        public byte[] buffer = new byte[BufferSize];
+        public byte[] buffer { get; set; } = new byte[BufferSize];
         // Received data string.  
-        public StringBuilder sb = new StringBuilder();
+        public StringBuilder sb { get; set; } = new StringBuilder();
     }
 
     public class AsynchronousSocketListener : IVoteService
     {
         // Thread signal.  
-        public static ManualResetEvent allDone = new ManualResetEvent(false);
-        private DiscordShardedClient _discord;
+        public static ManualResetEvent allDone { get; set; } = new ManualResetEvent(false);
+        private readonly DiscordShardedClient _discord;
 
         public event IVoteService.OnVoteHandler VoteHandler;
 

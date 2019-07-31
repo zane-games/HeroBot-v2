@@ -18,7 +18,7 @@ namespace HeroBotv2.Services
         private readonly CommandService _commands;
         private readonly IConfigurationRoot _config;
         private int[] ShardPresences;
-        private string[] presence = new[] {
+        private readonly string[] presence = new[] {
             "hb!help | v2.0",
             "hb!help | Dragon 🐉",
             "hb!help | [GuildCount] guilds",
@@ -78,7 +78,7 @@ namespace HeroBotv2.Services
         {
             string discordToken = _config["tokens:discord"];     // Get the discord token from the config file
             if (string.IsNullOrWhiteSpace(discordToken))
-                throw new Exception("Please enter your bot's token into the `_configuration.json` file found in the applications root directory.");
+                throw new InvalidProgramException("Please enter your bot's token into the `_configuration.json` file found in the applications root directory.");
 
             await _discord.LoginAsync(TokenType.Bot, discordToken);     // Login to discord
             await _discord.StartAsync();                                // Connect to the websocket

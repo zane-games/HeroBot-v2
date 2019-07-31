@@ -12,9 +12,8 @@ namespace HeroBotv2.Services
 {
     public class RedisService : IRedisService
     {
-        private LoggingService _loggingService;
-        private IConfigurationRoot _config;
-        private ConnectionMultiplexer redis;
+        private readonly LoggingService _loggingService;
+        private readonly IConfigurationRoot _config;
         private ISubscriber _subscriber;
         private IDatabaseAsync _database;
 
@@ -30,7 +29,7 @@ namespace HeroBotv2.Services
             config.Password = _config.GetSection("redis").GetSection("auth").GetSection("password").Value;
             config.DefaultDatabase = int.Parse(_config.GetSection("redis").GetSection("database").Value);
             config.EndPoints.Add($"{_config.GetSection("redis").GetSection("host").Value}:{_config.GetSection("redis").GetSection("port").Value}");
-            redis = ConnectionMultiplexer.Connect(config);
+            var redis = ConnectionMultiplexer.Connect(config);
             redis.ConnectionFailed += (sender,evcent) => {
                 _loggingService.Log(Discord.LogSeverity.Error, "Can't connect to Redis host");
             };

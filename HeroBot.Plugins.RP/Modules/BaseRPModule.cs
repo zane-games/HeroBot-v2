@@ -13,10 +13,10 @@ namespace HeroBot.Plugins.RP.Modules
     [NeedPlugin()]
     public class BaseRPModule : ModuleBase<SocketCommandContext>
     {
-        private RPService _rp;
-        private Random _random;
+        private readonly RPService _rp;
+        private readonly Random _random;
 
-        private string[] gear = new[] {
+        private readonly string[] gear = new[] {
             "⭐",
             "😎",
             "🎉",
@@ -57,9 +57,8 @@ namespace HeroBot.Plugins.RP.Modules
         [Command("start")]
         public async Task StartRP() {
             RPUser userAccount = null;
-            if (!_rp.GetAccount(Context.User, out userAccount))
+            if (!_rp.GetAccount(Context.User, out userAccount) && await _rp.Start(Context.User))
             {
-                if (await _rp.Start(Context.User))
                     await ReplyAsync(":tada: Welcome to the HeroBot's role-play game !");
             }
         }

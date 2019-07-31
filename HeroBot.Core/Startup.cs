@@ -8,6 +8,7 @@ using HeroBot.Core.Services;
 using HeroBotv2.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Npgsql.Logging;
 using System;
 using System.Threading.Tasks;
 
@@ -17,21 +18,22 @@ namespace HeroBotv2
     {
         public IConfigurationRoot Configuration { get; }
 
-        public Startup(string[] args)
+        public Startup()
         {
+            NpgsqlLogManager.Provider = new ConsoleLoggingProvider(NpgsqlLogLevel.Debug, true, true);
             var builder = new ConfigurationBuilder()                  // Create a new instance of the config builder
                 .SetBasePath(AppContext.BaseDirectory)                // Specify the default location for the config file
                 .AddYamlFile("_config.yml");                          // Add this (yaml encoded) file to the configuration
             Configuration = builder.Build();                          // Build the configuration
         }
 
-        public static async Task RunAsync(string[] args)
+        public static async Task RunAsync()
         {
-            var startup = new Startup(args);                          // Creating Startup object
-            await startup.RunAsync();                                 // Running
+            var startup = new Startup();                              // Creating Startup object
+            await startup._RunAsync();                                // Running
         }
 
-        public async Task RunAsync()
+        public async Task _RunAsync()
         {
             // 
             var services = new ServiceCollection();                   // Create a new instance of a service collection
@@ -54,17 +56,15 @@ namespace HeroBotv2
 
         internal void ConfigureServices(IServiceCollection services)
         {
-            var shardCount = 0;
-            var shardId = 1;
             services.AddSingleton(new DiscordShardedClient(new DiscordSocketConfig
             {                                                          // Add discord to the collection
-                LogLevel = LogSeverity.Verbose,                        // Tell the logger to give Verbose amount of info
+                LogLevel = LogSeverity.Info,                        // Tell the logger to give Verbose amount of info
                 MessageCacheSize = 5                                  // Cache 50 messages per channel
 
             }))
             .AddSingleton(new CommandService(new CommandServiceConfig
             {                                                         // Add the command service to the collection
-                LogLevel = LogSeverity.Verbose,                       // Tell the logger to give Verbose amount of info
+                LogLevel = LogSeverity.Info,                       // Tell the logger to give Verbose amount of info
                 DefaultRunMode = RunMode.Async,                       // Force all commands to run async by default
             }))
 

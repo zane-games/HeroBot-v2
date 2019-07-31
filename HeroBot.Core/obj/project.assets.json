@@ -345,6 +345,32 @@
           "build/netstandard2.0/_._": {}
         }
       },
+      "Lavalink4NET/1.4.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "3.0.0-preview.19073.11",
+          "Newtonsoft.Json": "12.0.2"
+        },
+        "compile": {
+          "lib/netcoreapp3.0/Lavalink4NET.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp3.0/Lavalink4NET.dll": {}
+        }
+      },
+      "Lavalink4NET.Discord.NET/1.4.0": {
+        "type": "package",
+        "dependencies": {
+          "Discord.Net.WebSocket": "2.0.1",
+          "Lavalink4NET": "1.4.0"
+        },
+        "compile": {
+          "lib/netcoreapp2.0/Lavalink4NET.Discord_NET.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp2.0/Lavalink4NET.Discord_NET.dll": {}
+        }
+      },
       "Microsoft.Extensions.Configuration/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -622,7 +648,7 @@
           "System.Xml.XDocument": "4.3.0"
         }
       },
-      "Newtonsoft.Json/11.0.2": {
+      "Newtonsoft.Json/12.0.2": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
@@ -2522,6 +2548,34 @@
         "runtimes/win-x86/sqlcese40.dll"
       ]
     },
+    "Lavalink4NET/1.4.0": {
+      "sha512": "elLtpRUhaUPwrfJwF0aFxArjAfrqT2Z/7eEeVuxWoAq2BlGHaKscj/UuLmNb6BC50f+ycQ4pvnRqX9qUgYaFug==",
+      "type": "package",
+      "path": "lavalink4net/1.4.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lavalink4net.1.4.0.nupkg.sha512",
+        "lavalink4net.nuspec",
+        "lib/netcoreapp2.0/Lavalink4NET.dll",
+        "lib/netcoreapp2.0/Lavalink4NET.xml",
+        "lib/netcoreapp3.0/Lavalink4NET.dll",
+        "lib/netcoreapp3.0/Lavalink4NET.xml"
+      ]
+    },
+    "Lavalink4NET.Discord.NET/1.4.0": {
+      "sha512": "KhB6kpKBxiPvQbMf57e7It3g1vP/mNf82m7tq/hGkHo72zxoL0fXaPkDKawzECngYmkL1hcgy8nLuyzze0EYYw==",
+      "type": "package",
+      "path": "lavalink4net.discord.net/1.4.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lavalink4net.discord.net.1.4.0.nupkg.sha512",
+        "lavalink4net.discord.net.nuspec",
+        "lib/netcoreapp2.0/Lavalink4NET.Discord_NET.dll",
+        "lib/netcoreapp2.0/Lavalink4NET.Discord_NET.xml"
+      ]
+    },
     "Microsoft.Extensions.Configuration/2.2.0": {
       "sha512": "nOP8R1mVb/6mZtm2qgAJXn/LFm/2kMjHDAg/QJLFG6CuWYJtaD3p1BwQhufBVvRzL9ceJ/xF0SQ0qsI2GkDQAA==",
       "type": "package",
@@ -2846,10 +2900,10 @@
         "netstandard.library.nuspec"
       ]
     },
-    "Newtonsoft.Json/11.0.2": {
-      "sha512": "IvJe1pj7JHEsP8B8J8DwlMEx8UInrs/x+9oVY+oCD13jpLu4JbJU2WCIsMRn5C4yW9+DgkaO8uiVE5VHKjpmdQ==",
+    "Newtonsoft.Json/12.0.2": {
+      "sha512": "rTK0s2EKlfHsQsH6Yx2smvcTCeyoDNgCW7FEYyV01drPlh2T243PR2DiDXqtC5N4GDm4Ma/lkxfW5a/4793vbA==",
       "type": "package",
-      "path": "newtonsoft.json/11.0.2",
+      "path": "newtonsoft.json/12.0.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -2872,7 +2926,7 @@
         "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.xml",
         "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.dll",
         "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.xml",
-        "newtonsoft.json.11.0.2.nupkg.sha512",
+        "newtonsoft.json.12.0.2.nupkg.sha512",
         "newtonsoft.json.nuspec"
       ]
     },
@@ -6789,6 +6843,8 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.0": [
       "HeroBot.Common >= 1.0.0",
+      "Lavalink4NET >= 1.4.0",
+      "Lavalink4NET.Discord.NET >= 1.4.0",
       "Microsoft.NETCore.App >= 3.0.0-preview6-27804-01",
       "NetEscapades.Configuration.Yaml >= 1.6.0"
     ]
@@ -6841,6 +6897,14 @@
     "frameworks": {
       "netcoreapp3.0": {
         "dependencies": {
+          "Lavalink4NET": {
+            "target": "Package",
+            "version": "[1.4.0, )"
+          },
+          "Lavalink4NET.Discord.NET": {
+            "target": "Package",
+            "version": "[1.4.0, )"
+          },
           "Microsoft.NETCore.App": {
             "include": "None",
             "suppressParent": "All",

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Discord.WebSocket;
 
@@ -10,7 +9,7 @@ namespace HeroBot.Plugins.RP.Services
     public class RPService
     {
 
-        public List<RPUser> rPUsers = new List<RPUser>();
+        private readonly List<RPUser> rPUsers = new List<RPUser>();
 
         internal async Task<bool> Start(SocketUser user)
         {
@@ -37,9 +36,9 @@ namespace HeroBot.Plugins.RP.Services
 
         internal bool GetAccount(SocketUser user, out RPUser userAccount)
         {
-            if (rPUsers.Where(x => x.UserId == user.Id).Count() > 0)
+            if (rPUsers.Any(x => x.UserId == user.Id))
             {
-                userAccount = rPUsers.Where(x => x.UserId == user.Id).First();
+                userAccount = rPUsers.First(x => x.UserId == user.Id);
             }
             else
             {
@@ -51,7 +50,7 @@ namespace HeroBot.Plugins.RP.Services
 
         internal void SetAccount(SocketUser user, RPUser userAccount)
         {
-            var userd = rPUsers.Where(x => x.Id == userAccount.Id).FirstOrDefault();
+            var userd = rPUsers.FirstOrDefault(x => x.Id == userAccount.Id);
             rPUsers.Remove(userd);
             rPUsers.Add(userAccount);
         }

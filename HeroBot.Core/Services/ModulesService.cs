@@ -91,8 +91,8 @@ namespace HeroBot.Core.Services
                     _logging.Log(LogSeverity.Info, $"Loaded {name} v{ass.ass.GetName().Version} assembly modules.");
 
 
-                    if (!_contexts.IsEmpty)
-                        continue;
+                    if (_contexts.IsEmpty)
+                        break;
                 }
             }
 
@@ -127,47 +127,16 @@ namespace HeroBot.Core.Services
 
         public async Task LoadModulesFromAssembliesAsync()
         {
-            using (var db = (NpgsqlConnection)_database.GetDbConnection())
+            foreach (var context in _contexts.Values)
             {
-                db.Open();
-                // We need to query all the plugins
-                var plugins = await db.QueryAsync(getPlugins);
-
-
-                foreach (var context in _contexts.Values)
+                var addModule = await _commandService.AddModulesAsync(context.Assembly, _provider);
+                context.Module = addModule.FirstOrDefault();
+                if (context.Module.Preconditions.Any(x => x is NeedPluginAttribute))
                 {
-                    var addModule = await _commandService.AddModulesAsync(context.Assembly, _provider);
-                    context.Module = addModule.FirstOrDefault();
-                    if (context.Module.Preconditions.Where(x => x is NeedPluginAttribute).Any())
-                    {
-                        var pluginid = 0L;
-                        _contexts.TryUpdate(context.Name, context, context);
-
-                        if (!plugins.Where(x => x.Name == context.Module.Name).Any())
-                        {
-                            Console.WriteLine("Init plugin " + context.Module.Name);
-                            pluginid = (long)await db.ExecuteScalarAsync(new CommandDefinition(pluginInsert, new
-                            {
-                                name = context.Module.Name
-                            }));
-
-                        }
-                        else
-                        {
-                            pluginid = plugins.Where(x => x.Name == context.Module.Name).First().Id;
-                        }
-                        if (RuntimeConstants.MasterPluginId == null && context.Module.Name == "Basic Module")
-                        {
-                            // Initialize the masterplugin
-                            RuntimeConstants.MasterPluginId = pluginid;
-                        }
-                    }
+                    _contexts.TryUpdate(context.Name, context, context);
                 }
             }
+
         }
-
-        private readonly string pluginInsert = "INSERT INTO \"Plugins\" (\"Name\") VALUES (@name) RETURNING \"Id\";";
-        private readonly string getPlugins = "SELECT * FROM \"Plugins\"";
     }
-
 }

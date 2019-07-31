@@ -1,7 +1,7 @@
 ﻿prefix: hb!
 discord: "atpsnu"
 tokens:
-    discord: "NTMyMTk2MzI5Mzg5MTYyNTEw.XTC8VQ.lahXbk71KTmyBSdn9Dd08oaZEwA"
+    discord: "NDkxNjczNDgwMDA2MjA1NDYx.XUG76A.e7iFIl2bcwOFz88v7yFkfzPTEBM"
 redis:
     host: redis
     database: 1
@@ -10,7 +10,7 @@ redis:
         name: null
         password: null
 postgres:
-    host: cockroachdb-1
+    host: ssh.alivecreation.fr
     port: 26257
     auth:
         name: matthieu

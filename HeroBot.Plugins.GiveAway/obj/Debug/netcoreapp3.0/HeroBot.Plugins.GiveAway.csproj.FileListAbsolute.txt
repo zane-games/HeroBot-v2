@@ -1,3 +1,5 @@
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.GiveAway\bin\Debug\netcoreapp3.0\V8_Net_Proxy_x64.dll
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.GiveAway\bin\Debug\netcoreapp3.0\V8_Net_Proxy_x86.dll
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.GiveAway\bin\Debug\netcoreapp3.0\HeroBot.Plugins.GiveAway.deps.json
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.GiveAway\bin\Debug\netcoreapp3.0\HeroBot.Plugins.GiveAway.dll
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.GiveAway\bin\Debug\netcoreapp3.0\HeroBot.Plugins.GiveAway.pdb

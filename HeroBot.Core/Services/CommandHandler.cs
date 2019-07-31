@@ -68,7 +68,7 @@ namespace HeroBotv2.Services
                                 await s.Channel.SendMessageAsync("Oops, it look like you sent us a bad argument :/");
                                 break;
                             case CommandError.UnmetPrecondition:
-                                await s.Channel.SendMessageAsync($"Oops, it look like you are not allowed to do this ! `{result.ErrorReason}`");
+                                await s.Channel.SendMessageAsync(result.ErrorReason);
                                 break;
                             case CommandError.Exception:
                                 await s.Channel.SendMessageAsync("Oops, HeroBot ran into an error :/");
@@ -78,14 +78,11 @@ namespace HeroBotv2.Services
                                 break;
                         }
 
-                    }else
-                    await _cooldown.OnCommand(command.Commands.First().Command, context);
+                    }
+                    else
+                        await _cooldown.OnCommand(command.Commands.First().Command, context);
                 }
-            }
-            
+            }  
         }
-
-
-       
     }
 }

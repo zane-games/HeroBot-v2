@@ -42,44 +42,23 @@ namespace HeroBot.Plugins.DevTools.Modules
                     responseString = reader.ReadToEnd();
                 }
                 var errors = Newtonsoft.Json.JsonConvert.DeserializeObject<List<dynamic>>(responseString);
-                var result = "```diff\n+Code analysis : ```\n";
-                if (errors.Count == 0) result += "`No errors/warnings found`";
+                var result = new StringBuilder("```diff\n+Code analysis : ```\n");
+                if (errors.Count == 0) result.Append("`No errors/warnings found`");
                 int i = 0;
                 foreach (dynamic err in errors)
                 {
                     var enp = "`" + err.code + " position:" + err.line + ":" + err.character + ", " + err.reason + "`\n";
                     if (result.Length + enp.Length >= 1990)
                     {
-                        result += "And " + (errors.Count - i) + " others";
+                        result.Append("and " + (errors.Count - i) + " others");
                         break;
                     }
                     result += enp;
                     i++;
 
                 }
-                await ReplyAsync(result);
+                await ReplyAsync(result.ToString());
             }
-        }
-        [Command("eval")]
-
-        public async Task ExecuteJs([Remainder]string code) {
-            var engine = new V8Engine(false);
-            var context = engine.CreateContext();
-            engine.DefaultMemberBindingSecurity = ScriptMemberSecurity.NoAcccess;
-            var timer = new System.Threading.Timer((state) => { engine.TerminateExecution(); ReplyAsync(":x: Votre code a pris trop de temps a s'éxécuter !").Wait(); }, new { }, 1000, System.Threading.Timeout.Infinite);
-            engine.SetContext(context);
-            using (var result = engine.Execute(code.Replace("```js",String.Empty).Replace("```",String.Empty),"HeroBotV2-GV8-Executor"))
-            {
-                if (result.IsNull || result.IsEmpty)
-                    await ReplyAsync("Le code n'as retourné aucun résultat");
-                else
-                    await ReplyAsync("```js\r\n" + result.AsString.Replace("```",String.Empty) + "```");
-            }
-            timer.Dispose();
-            engine.ForceV8GarbageCollection();
-            context.Dispose();
-            engine.Dispose();
-
         }
     }
 }
