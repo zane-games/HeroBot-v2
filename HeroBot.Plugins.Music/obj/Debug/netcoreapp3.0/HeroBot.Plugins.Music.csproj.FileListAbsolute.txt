@@ -1,5 +1,3 @@
-C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Music\bin\Debug\netcoreapp3.0\V8_Net_Proxy_x64.dll
-C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Music\bin\Debug\netcoreapp3.0\V8_Net_Proxy_x86.dll
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Music\bin\Debug\netcoreapp3.0\HeroBot.Plugins.Music.deps.json
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Music\bin\Debug\netcoreapp3.0\HeroBot.Plugins.Music.dll
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Music\bin\Debug\netcoreapp3.0\HeroBot.Plugins.Music.pdb

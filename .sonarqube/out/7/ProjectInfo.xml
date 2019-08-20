@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ProjectInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sonarsource.com/msbuild/integration/2015/1">
-  <ProjectName>HeroBot.Plugins.HeroBot</ProjectName>
+  <ProjectName>HeroBot.Core</ProjectName>
   <ProjectLanguage>C#</ProjectLanguage>
   <ProjectType>Product</ProjectType>
-  <ProjectGuid>bc47f079-8d31-42dc-8799-29f4472f37d2</ProjectGuid>
-  <FullPath>C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.HeroBot\HeroBot.Plugins.HeroBot.csproj</FullPath>
+  <ProjectGuid>3c3873ea-c790-4263-9414-cf156cfa3cd2</ProjectGuid>
+  <FullPath>C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\HeroBot.Core.csproj</FullPath>
   <IsExcluded>false</IsExcluded>
   <AnalysisResults>
     <AnalysisResult Id="FilesToAnalyze" Location="C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\.sonarqube\out\7\FilesToAnalyze.txt" />
   </AnalysisResults>
   <AnalysisSettings>
-    <Property Name="sonar.cs.roslyn.reportFilePath">C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.HeroBot\bin\Debug\netcoreapp3.0\HeroBot.Plugins.HeroBot.dll.RoslynCA.json|C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.HeroBot\bin\Debug\netcoreapp3.0\HeroBot.Plugins.HeroBot.dll.RoslynCA.json</Property>
+    <Property Name="sonar.cs.roslyn.reportFilePath">C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\bin\Debug\netcoreapp3.0\HeroBot.Core.dll.RoslynCA.json|C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\bin\Debug\netcoreapp3.0\HeroBot.Core.dll.RoslynCA.json</Property>
     <Property Name="sonar.cs.analyzer.projectOutPath">C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\.sonarqube\out\7</Property>
   </AnalysisSettings>
   <Configuration>Debug</Configuration>

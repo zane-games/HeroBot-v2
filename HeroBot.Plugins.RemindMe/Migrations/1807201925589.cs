@@ -1,12 +1,11 @@
 ﻿using FluentMigrator;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HeroBot.Plugins.RemindMe.Migrations
 {
     [Migration(1807201925589)]
+#pragma warning disable IDE1006
     public class _1807201925589 : Migration
+#pragma warning enable IDE1006
     {
         public override void Down()
         {

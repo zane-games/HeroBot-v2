@@ -6,10 +6,9 @@ namespace HeroBot.Plugins.RP
 {
     public class RPUser
     {
-        public int Id { get; set; }
-        public ulong UserId { get; set; }
+        public long Id { get; set; }
         public int Gold { get; set; }
-        public int Bolt { get; set; }
+        public int Bolts { get; set; }
 
     }
 }

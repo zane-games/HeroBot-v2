@@ -5,6 +5,7 @@ using HeroBot.Common.Attributes;
 using HeroBot.Common.Helpers;
 using HeroBot.Plugins.RP.Services;
 using System;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,11 +17,10 @@ namespace HeroBot.Plugins.RP.Modules
         private readonly RPService _rp;
         private readonly Random _random;
 
-        private readonly string[] gear = new[] {
-            "⭐",
-            "😎",
-            "🎉",
-            "❌"
+        private readonly object[] gear = new[] {
+            new {emoji = "⭐", money = 100 },
+            new {emoji = "🍰", money = 500 } ,
+            new {emoji = "💸", money = 800 }
         };
 
         public BaseRPModule(RPService rPService,Random random) {
@@ -31,47 +31,80 @@ namespace HeroBot.Plugins.RP.Modules
         [Command("me")]
         public async Task Me()
         {
-            RPUser userAccount = null;
-            if (_rp.GetAccount(Context.User, out userAccount))
+            if (_rp.GetAccount(Context.User, out RPUser userAccount))
             {
                 var embed = new EmbedBuilder();
                 embed.WithAuthor(Context.User)
                     .WithRandomColor()
-                    .WithCopyrightFooter(Context.User.Username,"me")
-                    .AddField("Ressources",$"gold: {userAccount.Gold}\nbolt: {userAccount.Bolt}");
+                    .WithCopyrightFooter(Context.User.Username, "me")
+                    .AddField("Ressources", $"Gold: {userAccount.Gold}\nBolt: {userAccount.Bolts}");
                 await ReplyAsync(embed: embed.Build());
             }
             else await ReplyAsync("... I can't find your account `hb!start`");
         }
-
+        [Cooldown(600)]
         [Command("lottery")]
         public async Task Lottery() {
-            var str = new StringBuilder("** | **");
-            for (int i = 0; i < 3*3; i++) {
-                if ((i % 3) == 0 && i != 0) str.Append("\n** | **");
-                str.Append("`").Append(gear[_random.Next() % gear.Length]).Append("`** | **");
+            if (_rp.GetAccount(Context.User, out RPUser userAccount))
+            {
+                var columnCount = 3;
+                var ligneCount = 3;
+                var array = new dynamic[ligneCount][];
+                for (int i = 0; i < ligneCount; i++)
+                {
+                    var isMiddle = (ligneCount / 2) == i;
+                    array[i] = new dynamic[columnCount];
+                    // For each line, we build the array
+                    for (int x = 0; x < columnCount; x++)
+                    {
+
+                        // We need to fill the array's column
+                        array[i][x] = gear[_random.Next(gear.Length)];
+
+                    }
+                }
+
+                var sb = new StringBuilder();
+                var v = array[1].Count(x =>
+                {
+                    if (array[1][0].emoji != x.emoji) return false;
+                    return true;
+                }) == columnCount;
+                if (v)
+                {
+                    userAccount.Gold += array[1][0].money;
+                    _rp.SetAccount(userAccount);
+                }
+                sb.Append(v ? $"**Congratulations ! You won {array[1][0].money} gold!**\r\n" : "*Sad trombone*\r\n");
+                foreach (dynamic ar in array)
+                {
+                    foreach (dynamic value in ar)
+                    {
+                        sb.Append("| `").Append(value.emoji).Append("`");
+                    }
+                    sb.Append(" |\r\n");
+                }
+                await ReplyAsync(sb.ToString());
             }
-            await ReplyAsync(str.ToString());
+            else await ReplyAsync("... I can't find your account `hb!start`");
         }
 
         [Command("start")]
         public async Task StartRP() {
-            RPUser userAccount = null;
-            if (!_rp.GetAccount(Context.User, out userAccount) && await _rp.Start(Context.User))
+            if (!_rp.GetAccount(Context.User, out RPUser userAccount) && await _rp.Start(Context.User))
             {
-                    await ReplyAsync(":tada: Welcome to the HeroBot's role-play game !");
+                await ReplyAsync(":tada: Welcome to the HeroBot's role-play game !");
             }
         }
 
         [Command("daily")]
         [Cooldown(86400)]
         public async Task Daily() {
-            RPUser userAccount = null;
-            if (_rp.GetAccount(Context.User, out userAccount))
+            if (_rp.GetAccount(Context.User, out RPUser userAccount))
             {
                 var gain = _random.Next() % 200;
-                userAccount.Bolt += gain;
-                _rp.SetAccount(Context.User,userAccount);
+                userAccount.Bolts += gain;
+                _rp.SetAccount(userAccount);
                 await ReplyAsync($"You won **{gain}** bolts");
             }
             else await ReplyAsync("... I can't find your account `hb!start`");
@@ -80,12 +113,11 @@ namespace HeroBot.Plugins.RP.Modules
         [Command("hourly")]
         [Cooldown(3600)]
         public async Task Hourly() {
-            RPUser userAccount = null;
-            if (_rp.GetAccount(Context.User, out userAccount))
+            if (_rp.GetAccount(Context.User, out RPUser userAccount))
             {
                 var gain = _random.Next() % 20;
-                userAccount.Bolt += gain;
-                _rp.SetAccount(Context.User, userAccount);
+                userAccount.Bolts += gain;
+                _rp.SetAccount(userAccount);
                 await ReplyAsync($"You won **{gain}** bolts");
             }
             else await ReplyAsync("... I can't find your account `hb!start`");
@@ -94,12 +126,10 @@ namespace HeroBot.Plugins.RP.Modules
         [Command("pay")]
         public async Task Pay(SocketUser target,String ressource,int amount) {
             var ress = RPService.ToRessourceEnum(ressource);
-            RPUser userAccount = null;
-            RPUser targetAccount = null;
-            if (_rp.GetAccount(Context.User, out userAccount)) {
+            if (_rp.GetAccount(Context.User, out RPUser userAccount)) {
                 if (ress == Ressources.BOLT)
                 {
-                    if (userAccount.Bolt < amount)
+                    if (userAccount.Bolts < amount)
                     {
                         await ReplyAsync($"... {Context.User.Mention} You do not have enough bolts");
                         return;
@@ -113,22 +143,22 @@ namespace HeroBot.Plugins.RP.Modules
                     }
                 }
 
-                if (_rp.GetAccount(target,out targetAccount))
+                if (_rp.GetAccount(target, out RPUser targetAccount))
                 {
                     if (ress == Ressources.BOLT)
                     {
-                        targetAccount.Bolt += amount;
-                        userAccount.Bolt -= amount;
-                        _rp.SetAccount(Context.User, userAccount);
-                        _rp.SetAccount(target, targetAccount);
+                        targetAccount.Bolts += amount;
+                        userAccount.Bolts -= amount;
+                        _rp.SetAccount( userAccount);
+                        _rp.SetAccount( targetAccount);
                     }
                     else
                     {
                         targetAccount.Gold += amount;
                         userAccount.Gold -= amount;
                     }
-                    _rp.SetAccount(Context.User, userAccount);
-                    _rp.SetAccount(target, targetAccount);
+                    _rp.SetAccount( userAccount);
+                    _rp.SetAccount(targetAccount);
                 }
                 else await ReplyAsync($"... I can't find {target.Mention}'s account `hb!start`");
             }

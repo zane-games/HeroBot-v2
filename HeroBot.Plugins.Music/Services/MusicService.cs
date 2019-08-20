@@ -1,16 +1,8 @@
-﻿using Discord;
-using Discord.WebSocket;
+﻿using Discord.WebSocket;
 using HeroBot.Common.Attributes;
-using Lavalink4NET;
 using Lavalink4NET.Cluster;
 using Lavalink4NET.Discord_NET;
-using Lavalink4NET.Player;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HeroBot.Plugins.Music.Services
 {
@@ -30,7 +22,6 @@ namespace HeroBot.Plugins.Music.Services
 
         private async System.Threading.Tasks.Task DiscordShardedclient_ShardReady(DiscordSocketClient arg)
         {
-                Console.WriteLine("Lunching lavalink");
                 lavalinkCluster = new LavalinkCluster(new LavalinkClusterOptions()
                 {
                     StayOnline = true,

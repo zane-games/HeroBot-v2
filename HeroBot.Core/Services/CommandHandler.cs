@@ -1,13 +1,10 @@
 ﻿using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
-using HeroBot.Common.Interfaces;
 using HeroBot.Core.Services;
 using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HeroBotv2.Services
@@ -44,7 +41,7 @@ namespace HeroBotv2.Services
 
         private async Task OnMessageReceivedAsync(SocketMessage s)
         {
-            var msg = s as SocketUserMessage;                                             // Ensure the message is from a user/bot
+            SocketUserMessage msg = s as SocketUserMessage;                                             // Ensure the message is from a user/bot
             if (msg == null) return;
             if (msg.Author.Id == _discord.CurrentUser.Id || msg.Author.IsBot) return;     // Ignore self or bot when checking commands
             if (!(msg.Channel is SocketGuildChannel)) return;

@@ -173,7 +173,7 @@ Attributes #
 ;3 4
 } 	
 } 
-} Õ
+} í
 hC:\Users\Matthieu\source\repos\HeroBot-deux-point-z√©ro\HeroBot.Common\Attributes\NeedPluginAttribute.cs
 	namespace 	
 HeroBot
@@ -191,98 +191,142 @@ Attributes #
 :% &!
 PreconditionAttribute' <
 { 
-public 
-static 
-IDatabaseService &
-databaseService' 6
-;6 7
-private 
-readonly 
-string 
-GetGuildByIdQuery  1
-=2 3
-$str4 _
-;_ `
-private 
-readonly 
-string 
-InsertGuild  +
-=, -
-$str. \
-;\ ]
-private 
-readonly 
-string 
-InsertGuildPlugin  1
-=2 3
-$str	4 Ä
-;
-Ä Å
-private 
-readonly 
-string 
-GetPluginId  +
-=, -
-$str. c
-;c d
-private 
-readonly 
-string "
-CheckIfPluginIsEnabled  6
-=7 8
-$str	9 à
-;
-à â
-public 
-override 
-async 
-Task "
-<" #
-PreconditionResult# 5
->5 6!
-CheckPermissionsAsync7 L
-(L M
-ICommandContextM \
-context] d
-,d e
-CommandInfof q
-commandr y
-,y z
-IServiceProvider	{ ã
+public 
+override 
+async 
+Task "
+<" #
+PreconditionResult# 5
+>5 6!
+CheckPermissionsAsync7 L
+(L M
+ICommandContextM \
+context] d
+,d e
+CommandInfof q
+commandr y
+,y z
+IServiceProvider	{ ã
 services
-å î
+å î
 )
-î ï
-{ 	
-returnJJ 
-PreconditionResultJJ %
-.JJ% &
-FromSuccessJJ& 1
-(JJ1 2
-)JJ2 3
-;JJ3 4
-}KK 	
-privateMM 
-boolMM 
-CheckSubModuleMM #
-(MM# $
-IDbConnectionMM$ 1
-guildMM2 7
-,MM7 8
+î ï
+{ 	
+var 
+isP 
+= 
+await 
+services $
+.$ %
+GetRequiredService% 7
+<7 8
+IModulesService8 G
+>G H
+(H I
+)I J
+.J K
+IsPluginEnabledK Z
+(Z [
+context[ b
+.b c
+Guildc h
+,h i!
+ResolveMainModuleNamei ~
+(~ 
+command	 Ü
+.
+Ü á
+Module
+á ç
+)
+ç é
+)
+é è
+;
+è ê
+if 
+( 
+! 
+isP 
+) 
+{ 
+return 
+PreconditionResult )
+.) *
+	FromError* 3
+(3 4
+$"4 6&
+Plugin is not enabled on `6 P
+{P Q
+contextQ X
+.X Y
+GuildY ^
+}^ _
+`_ `
+"` a
+)a b
+;b c
+} 
+return   
+PreconditionResult   %
+.  % &
+FromSuccess  & 1
+(  1 2
+)  2 3
+;  3 4
+}!! 	
+private## 
 
-ModuleInfoMM9 C
-moduleMMD J
-,MMJ K
-IGuildMMK Q
-bsonElementsMMR ^
-)MM^ _
-{NN 	
-returnOO 
-trueOO 
-;OO 
-}UU 	
-}VV 
-}WW É
+ModuleInfo## !
+ResolveMainModuleName## 0
+(##0 1
+
+ModuleInfo##1 ;
+
+moduleInfo##< F
+)##F G
+{$$ 	
+while%% 
+(%% 
+
+moduleInfo%% 
+.%% 
+IsSubmodule%% )
+)%%) *
+
+moduleInfo&& 
+=&& 
+
+moduleInfo&& '
+.&&' (
+Parent&&( .
+;&&. /
+return'' 
+
+moduleInfo'' 
+;'' 
+}(( 	
+private** 
+bool** 
+CheckSubModule** #
+(**# $
+IDbConnection**$ 1
+guild**2 7
+,**7 8
+
+ModuleInfo**9 C
+module**D J
+,**J K
+IGuild**L R
+bsonElements**S _
+)**_ `
+{++ 	
+return,, 
+true,, 
+;,, 
+}22 	
+}33 
+}44 É
 dC:\Users\Matthieu\source\repos\HeroBot-deux-point-z√©ro\HeroBot.Common\Attributes\PluginAttribute.cs
 	namespace 	
 HeroBot
@@ -380,88 +424,7 @@ Attributes #
 }
 
  
-} á	
-`C:\Users\Matthieu\source\repos\HeroBot-deux-point-z√©ro\HeroBot.Common\Entities\Contextentity.cs
-	namespace 	
-HeroBot
- 
-. 
-Common 
-. 
-Entities !
-{ 
-public 
-
-sealed 
-class 
-ContextEntity %
-{		 
-public
-
- 
-string
-
- 
-Name
-
- 
-{
-
- 
-get
-
-  
-;
-
-  !
-set
-
-" %
-;
-
-% &
-}
-
-' (
-public 
-
-ModuleInfo 
-Module  
-{! "
-get# &
-;& '
-set( +
-;+ ,
-}- .
-public 
-Assembly 
-Assembly  
-{! "
-get# &
-;& '
-set( +
-;+ ,
-}- .
-public 
-ModuleLoadContext  
-Context! (
-{) *
-get+ .
-;. /
-set0 3
-;3 4
-}5 6
-public 
-IPluginRefferal 
-pluginRefferal -
-{. /
-get0 3
-;3 4
-set5 8
-;8 9
-}: ;
-} 
-} ª
+} ª
 kC:\Users\Matthieu\source\repos\HeroBot-deux-point-z√©ro\HeroBot.Common\ExtendedModules\ModuleLoadcontext.cs
 	namespace 	
 HeroBot
@@ -1399,7 +1362,75 @@ propertiesbb% /
 ;7 8
 } 	
 } 
-} Ê
+} ©	
+cC:\Users\Matthieu\source\repos\HeroBot-deux-point-z√©ro\HeroBot.Common\Interfaces\AssemblyEntity.cs
+	namespace 	
+HeroBot
+ 
+. 
+Common 
+. 
+
+Interfaces #
+{ 
+public		 
+
+class		 
+AssemblyEntity		 
+{
+
+ 
+public 
+Assembly 
+Assembly  
+{! "
+get# &
+;& '
+set) ,
+;, -
+}. /
+public 
+ModuleLoadContext  
+Context! (
+{) *
+get+ .
+;. /
+set1 4
+;4 5
+}6 7
+public 
+string 
+Name 
+{ 
+get  
+;  !
+set" %
+;% &
+}' (
+public 
+List 
+< 
+
+ModuleInfo 
+> 
+Module  &
+{' (
+get) ,
+;, -
+set. 1
+;1 2
+}3 4
+public 
+IPluginRefferal 
+pluginRefferal -
+{. /
+get0 3
+;3 4
+set5 8
+;8 9
+}: ;
+} 
+} Ê
 eC:\Users\Matthieu\source\repos\HeroBot-deux-point-z√©ro\HeroBot.Common\Interfaces\ICooldownService.cs
 	namespace 	
 HeroBot
@@ -1475,38 +1506,107 @@ moduleName
 } 
 } Ò
 eC:\Users\Matthieu\source\repos\HeroBot-deux-point-z√©ro\HeroBot.Common\Interfaces\IDatabaseService.cs
-	namespace 	
-HeroBot
+	namespace 	
+HeroBot
  
-. 
-Common 
-. 
+. 
+Common 
+. 
 
-Interfaces #
-{ 
-public		 
+Interfaces #
+{ 
+public 
 
-	interface		 
-IDatabaseService		 %
-{
-
- 
+	interface 
+IDatabaseService %
+{		 
+public 
+IDbConnection 
+GetDbConnection ,
+(, -
+)- .
+;. /
 public 
 IDbConnection 
 GetDbConnection ,
-(, -
-)- .
-;. /
-public 
-IDbConnection 
-GetDbConnection ,
-(, -
-string- 3
-v4 5
-)5 6
-;6 7
-} 
-} ⁄
+(, -
+string- 3
+v4 5
+)5 6
+;6 7
+} 
+} Î
+dC:\Users\Matthieu\source\repos\HeroBot-deux-point-z√©ro\HeroBot.Common\Interfaces\IModulesService.cs
+	namespace 	
+HeroBot
+ 
+. 
+Common 
+. 
+
+Interfaces #
+{		 
+public
+
+ 
+
+	interface
+
+ 
+IModulesService
+
+ $
+{ 
+Task 
+DisablePlugin 
+( 
+IGuild !
+guild" '
+,' (
+
+ModuleInfo) 3
+
+moduleInfo4 >
+)> ?
+;? @
+Task 
+EnablePlugin 
+( 
+IGuild  
+guild! &
+,& '
+
+ModuleInfo( 2
+
+moduleInfo3 =
+)= >
+;> ?
+AssemblyEntity %
+GetAssemblyEntityByModule 0
+(0 1
+
+ModuleInfo1 ;
+
+moduleInfo< F
+)F G
+;G H
+Task 
+< 
+bool 
+> 
+IsPluginEnabled "
+(" #
+IGuild# )
+guild* /
+,/ 0
+
+ModuleInfo1 ;
+
+moduleInfo< F
+)F G
+;G H
+} 
+} ⁄
 dC:\Users\Matthieu\source\repos\HeroBot-deux-point-z√©ro\HeroBot.Common\Interfaces\IPluginRefferal.cs
 	namespace 	
 HeroBot
@@ -1562,54 +1662,7 @@ Interfaces #
 )# $
 ;$ %
 } 
-} ”
-aC:\Users\Matthieu\source\repos\HeroBot-deux-point-z√©ro\HeroBot.Common\Interfaces\IVoteService.cs
-	namespace 	
-HeroBot
- 
-. 
-Common 
-. 
-
-Interfaces #
-{ 
-public		 
-
-	interface		 
-IVoteService		 !
-{
-
- 
-public 
-delegate 
-void 
-OnVoteHandler *
-(* +
-DblVote, 3
-e4 5
-)5 6
-;6 7
-public 
-event 
-OnVoteHandler "
-VoteHandler# .
-;. /
-} 
-public 
-
-class 
-DblVote 
-{ 
-public 
-IUser 
-user 
-; 
-public 
-bool 
-isPrimed 
-; 
-} 
-} ù	
+} ù	
 pC:\Users\Matthieu\source\repos\HeroBot-deux-point-z√©ro\HeroBot.Common\Migrations\201807182_Migration_Plugins.cs
 	namespace 	
 HeroBot
@@ -1677,4 +1730,138 @@ WithColumn 
 ;, -
 } 	
 } 
-} 
+} Ÿ
+cC:\Users\Matthieu\source\repos\HeroBot-deux-point-z√©ro\HeroBot.Common\SimpleCacheImplementation.cs
+	namespace 	
+HeroBot
+ 
+. 
+Common 
+{		 
+public
+
+ 
+
+class
+
+ %
+SimpleCacheImplementation
+
+ *
+{ 
+private 
+IDatabaseAsync 
+_redis %
+;% &
+public %
+SimpleCacheImplementation (
+(( )
+IRedisService) 6
+redisService7 C
+)C D
+{E F
+_redis 
+= 
+redisService !
+.! "
+GetDatabase" -
+(- .
+). /
+;/ 0
+} 	
+public 
+Task 
+CacheValueAsync #
+(# $
+string$ *
+key+ .
+,. /
+string/ 5
+value6 ;
+); <
+{= >
+return 
+_redis 
+. 
+StringSetAsync (
+(( )
+key) ,
+,, -
+value. 3
+,3 4
+TimeSpan5 =
+.= >
+FromSeconds> I
+(I J
+$numJ M
+)M N
+)N O
+;O P
+} 	
+public 
+async 
+Task 
+< 
+
+RedisValue $
+>$ %
+GetValueAsync& 3
+(3 4
+string4 :
+key; >
+)> ?
+{@ A
+if 
+( 
+await 
+_redis 
+. 
+KeyExistsAsync *
+(* +
+key+ .
+). /
+)/ 0
+await 
+_redis 
+. 
+KeyExpireAsync '
+(' (
+key( +
+,+ ,
+TimeSpan- 5
+.5 6
+FromSeconds6 A
+(A B
+$numB E
+)E F
+)F G
+;G H
+return 
+await 
+_redis #
+.# $
+StringGetAsync$ 2
+(2 3
+key3 6
+)6 7
+;7 8
+} 	
+public 
+Task  
+InvalidateValueAsync (
+(( )
+string) /
+key0 3
+)3 4
+{5 6
+return 
+_redis 
+. 
+KeyDeleteAsync (
+(( )
+key) ,
+), -
+;- .
+} 	
+} 
+} 

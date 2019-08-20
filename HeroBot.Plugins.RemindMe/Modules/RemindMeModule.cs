@@ -3,7 +3,6 @@ using Discord.Commands;
 using HeroBot.Common.Attributes;
 using HeroBot.Common.Helpers;
 using HeroBot.Plugins.RemindMe.Services;
-using Newtonsoft.Json;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,9 +24,9 @@ namespace HeroBot.Plugins.RemindMe.Modules
         public async Task CreateReminder(TimeSpan time,[Remainder]string toRemind) {
             if(await _remainder.CreateReminder(new Reminder()
             {
-                remind = toRemind,
+                Remind = toRemind,
                 TimeSpan = time,
-                userId = Context.User.Id
+                UserId = Context.User.Id
             }))
                 await ReplyAsync($":white_check_mark: I will remind you in {time.ToHumanReadable()}s");
             else

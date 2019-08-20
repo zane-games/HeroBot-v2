@@ -1,9 +1,6 @@
 ﻿using HeroBot.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace HeroBot.Plugins.HeroBot
+namespace HeroBot.Plugins.GiveAway
 {
     public class PluginRefferal : IPluginRefferal
     {

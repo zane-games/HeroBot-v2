@@ -1,55 +1,49 @@
-﻿using Dapper;
-using Discord;
+﻿using Discord;
 using Discord.Commands;
 using Discord.Rest;
 using HeroBot.Common.Attributes;
-using HeroBot.Common.Entities;
 using HeroBot.Common.Helpers;
 using HeroBot.Common.Interfaces;
 using Microsoft.Extensions.Configuration;
-using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace HeroBot.Plugins.HeroBot.Modules
 {
     [NeedPlugin()]
     [Cooldown(2)]
-    [Name("Basic Module")]
+    [Name("HeroBot Commands")]
     public class HeroBotModule : ModuleBase<SocketCommandContext>
     {
-
-
         private readonly CommandService _service;
         private readonly IConfigurationRoot _config;
         private readonly IServiceProvider _provider;
+        private readonly IModulesService _modules;
 
-        public HeroBotModule(CommandService service, IConfigurationRoot config,IServiceProvider serviceProvider)
+        public HeroBotModule(CommandService service, IConfigurationRoot config, IServiceProvider serviceProvider,IModulesService _module)
         {
             _service = service;
             _config = config;
             _provider = serviceProvider;
+            _modules = _module;
         }
 
-        [Command("help"), Alias(new[] { "h", "hh", "hmp" })]
+        [Command("help"), Alias(new[] { "h", "hh", "hmp" }),Summary("Gives you some information about a certain command")]
         public async Task HelpCommandAsync([Remainder]string command = null)
         {
             string prefix = _config["prefix"];
-            var builder = new EmbedBuilder()
-            {
-                Description = "These are the commands you can use"
-            };
+            var builder = new EmbedBuilder();
             builder.AddField("**HeroBot**", "HeroBot is a bot with a plugin system that can be developped by the community, maintained by **Matthieu#2050**, it is supposed to be able to replace several bots. \n [ [**Our Discord**](https://alivecreation.fr/discord) | [**Website `📟`**](https://herobot.alivecreation.fr) ] \n [ [*Invite HeroBot `😍`*](https://alivecreation.fr/invite) | [*Upvote us on DBL `🎉`*](https://discordbots.org/bot/491673480006205461) ]\r **<> is a required argument, [] is an optional argument** If your argument contains spaces, you must put it behind two `\"` Pro tip : You can use ;hh to send the message in the current channel", false)
             .WithDescription("Hay ! Thanks for using HeroBot ! I hope you enjoy using our bot :P, is you have any suggestions, you can tell us your beautiful idea !")
             .WithAuthor(Context.User)
             .WithThumbnailUrl("https://cdn.discordapp.com/avatars/491673480006205461/30abe7a1feffb0b06a1611a94fbc1248.png")
             .WithRandomColor().WithCopyrightFooter(Context.User.Username, "help");
+
             if (command != null)
             {
                 var result = _service.Search(Context, command);
@@ -69,11 +63,26 @@ namespace HeroBot.Plugins.HeroBot.Modules
                 });
                 builder.AddField((x) =>
                 {
-                    x.Name = "Summary :";
+                    x.Name = "Summary";
                     x.IsInline = true;
                     x.Value = cmd.Summary == null ? "*no summary*" : cmd.Summary;
                 });
-
+                var permBot = string.Join(", ", cmd.Preconditions.Where(v => v is RequireBotPermissionAttribute).Select(v => ((RequireBotPermissionAttribute)v).ChannelPermission).Where(x => x.HasValue).Select(x => x.Value));
+                builder.AddField(x => {
+                    x.Name = "Permissions nécessaires au bot";
+                    x.Value = string.IsNullOrEmpty(permBot) ? "*no permissions required*" : permBot;
+                });
+                var permUser = string.Join(", ", cmd.Preconditions.Where(v => v is RequireUserPermissionAttribute).Select(v => ((RequireUserPermissionAttribute)v).ChannelPermission).Where(x => x.HasValue).Select(x => x.Value));
+                builder.AddField(x =>
+                {
+                    x.Name = "Permissions nécessaires a l'utilisateur";
+                    x.Value = string.IsNullOrEmpty(permUser) ? "*no permissions required*" : permUser;
+                });
+                builder.AddField(x =>
+                {
+                    x.Name = "Plugin";
+                    x.Value = _modules.GetAssemblyEntityByModule(cmd.Module).Assembly.GetName().Name.SanitizAssembly();
+                });
             }
             else
             {
@@ -84,30 +93,27 @@ namespace HeroBot.Plugins.HeroBot.Modules
                 {
                     var description = new StringBuilder();
                     var precondition = module.Preconditions.First(x => x is NeedPluginAttribute);
-                    
+
                     var run = await precondition.CheckPermissionsAsync(Context, module.Commands.First(), _provider);
                     if (run.IsSuccess)
                     {
                         foreach (var cmd in module.Commands)
                         {
-
-
                             total++;
                             description.Append($"**>** `{prefix}{cmd.Aliases.First()}`");
-
                         }
                     }
 
-                        if (!string.IsNullOrWhiteSpace(description.ToString()))
+                    if (!string.IsNullOrWhiteSpace(description.ToString()))
+                    {
+                        builder.AddField(x =>
                         {
-                            builder.AddField(x =>
-                            {
-                                x.Name = module.Name;
-                                x.Value = description;
-                                x.IsInline = false;
-                            });
-                        }
-                    
+                            x.Name = module.Name;
+                            x.Value = description;
+                            x.IsInline = false;
+                        });
+                    }
+
                 }
                 realCommands = total - subcommands;
                 await ReplyAsync($"{realCommands} real commands, {subcommands} sub-commands and {total} total commands commands for {this.Context.User.Mention}", false, builder.Build());
@@ -155,7 +161,7 @@ namespace HeroBot.Plugins.HeroBot.Modules
                 await Task.Delay(500);
             }
             var restPing = pingMoyenne.Average();
-            var memoryCount = $" Heap {SizeSuffix(getAvailableRAM())}";
+            var memoryCount = $" Heap {SizeSuffix(GetAvailableRam())}";
             var processor = await GetCpuUsageForProcess();
             var dotnetVersion = Environment.Version.ToString();
             var processorCount = Environment.ProcessorCount;
@@ -165,23 +171,23 @@ namespace HeroBot.Plugins.HeroBot.Modules
                 .WithRandomColor()
                 .WithCopyrightFooter(Context.User.Username, "bot")
                 .WithDescription("Voici quelques informations concernant HeroBot")
-                .AddField("REST Latency avg",$"> {Math.Round(restPing)}ms",true)
-                .AddField("Server latency",$"> {hostPing}ms",true)
-                .AddField("Memory details",memoryCount,true)
-                .AddField("Websocket latency",$"> {Math.Round(websocketPing.TotalMilliseconds)} ms",true)
-                .AddField("CPU Usage",$"> {processor}%",true)
-                .AddField(".NET Version","> "+dotnetVersion,true)
-                .AddField("Processor(s)",$"> {processorCount}c",true)
-                .AddField("Threads actifs", "> "+threadCount.Count, true)
-                .AddField("Uptime","> "+uptime.ToHumanReadable())
-                .AddField("🎉 Contribs","`Moitié prix#4263`\n`PsyKo ツ ♡#2586`\n`TheDarkny#9253`\n`Ernest#6450`");
+                .AddField("REST Latency avg", $"> {Math.Round(restPing)}ms", true)
+                .AddField("Server latency", $"> {hostPing}ms", true)
+                .AddField("Memory details", memoryCount, true)
+                .AddField("Websocket latency", $"> {Math.Round(websocketPing.TotalMilliseconds)} ms", true)
+                .AddField("CPU Usage", $"> {processor}%", true)
+                .AddField(".NET Version", "> " + dotnetVersion, true)
+                .AddField("Processor(s)", $"> {processorCount}c", true)
+                .AddField("Threads actifs", "> " + threadCount.Count, true)
+                .AddField("Uptime", "> " + uptime.ToHumanReadable())
+                .AddField("🎉 Contribs", "`Moitié prix#4263`\n`PsyKo ツ ♡#2586`\n`TheDarkny#9253`\n`Ernest#6450`");
             await message.ModifyAsync((x) =>
             {
                 x.Embed = embed.Build();
                 x.Content = String.Empty;
             });
         }
-        public long getAvailableRAM()
+        public long GetAvailableRam()
         {
             return Process.GetCurrentProcess().PrivateMemorySize64;
         }
@@ -248,53 +254,36 @@ namespace HeroBot.Plugins.HeroBot.Modules
         [Cooldown(120)]
         public class PluginCommands : ModuleBase<SocketCommandContext>
         {
-            private readonly IDatabaseService _databaseService;
             private readonly CommandService _commands;
-
-            private readonly static string IsPluginEnabled = "SELECT \"plugin\" FROM \"GuildPlugin\" WHERE \"guild\"=@guild";
-            private readonly static string InsertPlugin = "INSERT INTO \"GuildPlugin\" (\"guild\",\"plugin\") VALUES (@guild,@plugin)";
-            public PluginCommands(IDatabaseService databaseService, CommandService commandService)
+            private readonly IModulesService _modules;
+            public PluginCommands(CommandService commandService, IModulesService modulesService)
             {
-                _databaseService = databaseService;
                 _commands = commandService;
+                _modules = modulesService;
             }
 
             [Command("list")]
             public async Task ListPlugins()
             {
-                NpgsqlConnection guildService = (NpgsqlConnection)_databaseService.GetDbConnection("HeroBot.Core");
-                
-
-                    var plugins = await guildService.QueryAsync(IsPluginEnabled,new {
-                        guild = (long)Context.Guild.Id
-                    });
-                    var resp = new StringBuilder("**Liste des modules disponibles**\n");
-                    foreach (var module in _commands.Modules)
+                var resp = new StringBuilder("**Liste des modules disponibles**\n");
+                foreach (var module in _commands.Modules)
+                {
+                    if (!module.IsSubmodule)
                     {
-                        if (!module.IsSubmodule)
-                        {
-                            var isEnabled = plugins.Any(x => x.plugin == module.Name);
-                            resp.Append($"**{(isEnabled ? "\\🔷" : "\\🔶")}** • {module.Name} {(isEnabled ? "Enabled" : "Disabled")}\n");
-                        }
+                        var isEnabled = await _modules.IsPluginEnabled(Context.Guild, module);
+                        resp.Append($"**{(isEnabled ? "\\🔷" : "\\🔶")} • {(isEnabled ? "Enabled" : "Disabled")}** • {_modules.GetAssemblyEntityByModule(module).Assembly.GetName().Name.SanitizAssembly()} \n");
                     }
-                    await ReplyAsync(resp.ToString());
-                
+                }
+                await ReplyAsync(resp.ToString());
             }
             [Command("enable")]
             [RequireContext(ContextType.Guild)]
             public async Task EnablePlugin([Remainder]string plugin)
             {
-                if (_commands.Modules.Any(x => x.Name == plugin))
+                if (_commands.Modules.Any(x => plugin == _modules.GetAssemblyEntityByModule(x).Assembly.GetName().Name.SanitizAssembly()))
                 {
-                    NpgsqlConnection guildService = (NpgsqlConnection)_databaseService.GetDbConnection("HeroBot.Core");
-                    
-                        var module = _commands.Modules.First(x => x.Name == plugin);
-                        await guildService.ExecuteAsync(InsertPlugin,new {
-                            guild = (long)Context.Guild.Id,
-                            plugin = module.Name
-                        });
-                        await ReplyAsync("<:check:606088713897902081> The plugin is now enabled.");
-                    
+                    await _modules.EnablePlugin(Context.Guild,_commands.Modules.First(x => plugin == _modules.GetAssemblyEntityByModule(x).Assembly.GetName().Name.SanitizAssembly()));
+                    await ReplyAsync("<:check:606088713897902081> The plugin is now enabled.");
                 }
                 else
                 {
@@ -305,14 +294,15 @@ namespace HeroBot.Plugins.HeroBot.Modules
             [RequireContext(ContextType.Guild)]
             public async Task DisablePlugin([Remainder]string plugin)
             {
-            }
-            [Command("disablecommand")]
-            public async Task DisableCommand([Remainder]string command)
-            {
-            }
-            [Command("enablecommand")]
-            public async Task EnableCommand(string command)
-            {
+                if (_commands.Modules.Any(x => plugin == _modules.GetAssemblyEntityByModule(x).Assembly.GetName().Name.SanitizAssembly()))
+                {
+                    await _modules.DisablePlugin(Context.Guild, _commands.Modules.First(x => plugin == _modules.GetAssemblyEntityByModule(x).Assembly.GetName().Name.SanitizAssembly()));
+                    await ReplyAsync("<:check:606088713897902081> The plugin is now disabled.");
+                }
+                else
+                {
+                    await ReplyAsync($"I can't find a plugin named `{plugin}`");
+                }
             }
         }
     }

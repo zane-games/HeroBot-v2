@@ -1,14 +1,12 @@
-C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Mod\bin\Debug\netcoreapp3.0\V8_Net_Proxy_x64.dll
-C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Mod\bin\Debug\netcoreapp3.0\V8_Net_Proxy_x86.dll
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Mod\bin\Debug\netcoreapp3.0\HeroBot.Plugins.Mod.deps.json
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Mod\bin\Debug\netcoreapp3.0\HeroBot.Plugins.Mod.dll
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Mod\bin\Debug\netcoreapp3.0\HeroBot.Plugins.Mod.pdb
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Mod\bin\Debug\netcoreapp3.0\HeroBot.Common.dll
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Mod\bin\Debug\netcoreapp3.0\HeroBot.Common.pdb
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Mod\obj\Debug\netcoreapp3.0\HeroBot.Plugins.Mod.csprojAssemblyReference.cache
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Mod\obj\Debug\netcoreapp3.0\HeroBot.Plugins.Mod.csproj.CoreCompileInputs.cache
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Mod\obj\Debug\netcoreapp3.0\HeroBot.Plugins.Mod.AssemblyInfoInputs.cache
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Mod\obj\Debug\netcoreapp3.0\HeroBot.Plugins.Mod.AssemblyInfo.cs
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Mod\obj\Debug\netcoreapp3.0\HeroBot.Plugins.Mod.csproj.CopyComplete
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Mod\obj\Debug\netcoreapp3.0\HeroBot.Plugins.Mod.dll
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Mod\obj\Debug\netcoreapp3.0\HeroBot.Plugins.Mod.pdb
-C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Mod\obj\Debug\netcoreapp3.0\HeroBot.Plugins.Mod.csprojAssemblyReference.cache

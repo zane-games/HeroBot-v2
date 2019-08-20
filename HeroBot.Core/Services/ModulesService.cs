@@ -1,46 +1,38 @@
 ﻿using Dapper;
 using Discord;
 using Discord.Commands;
-using HeroBot.Common.Attributes;
-using HeroBot.Common.Entities;
+using HeroBot.Common;
 using HeroBot.Common.ExtendedModules;
 using HeroBot.Common.Helpers;
 using HeroBot.Common.Interfaces;
+using HeroBot.Core.Services.Structs;
 using HeroBotv2.Services;
+using Newtonsoft.Json;
 using Npgsql;
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HeroBot.Core.Services
 {
-    public sealed class ModulesService
+    public sealed class ModulesService : IModulesService
     {
         private readonly IServiceProvider _provider;
-        private readonly IDatabaseService _database;
         private readonly CommandService _commandService;
+        private readonly IDatabaseService _database;
         private readonly LoggingService _logging;
-        private readonly ConcurrentDictionary<string, ContextEntity> _contexts;
-        private static readonly List<dynamic> LoadedAssemblies = new List<dynamic>();
-        public ModulesService(CommandService commandService, IServiceProvider provider, LoggingService loggingService, IDatabaseService databaseService)
+        private readonly List<ToLoadAssembly> toLoadAssemblies = new List<ToLoadAssembly>();
+        private readonly SimpleCacheImplementation _simpleCacheImplementation;
+        public ModulesService(SimpleCacheImplementation simpleCacheImplementation,LoggingService logging, CommandService commandService, IServiceProvider provider, IDatabaseService databaseService)
         {
+            _simpleCacheImplementation = simpleCacheImplementation;
             _provider = provider;
-            _database = databaseService;
             _commandService = commandService;
-            _logging = loggingService;
-            _contexts = new ConcurrentDictionary<string, ContextEntity>();
-
+            _database = databaseService;
+            _logging = logging;
             FetchExternalAssemblies();
-        }
-
-        internal static IEnumerable<dynamic> GetLoadedAssemblies()
-        {
-            return LoadedAssemblies;
         }
 
         internal static void LoadAssembliesInDirrectory()
@@ -58,52 +50,49 @@ namespace HeroBot.Core.Services
 
                 var moduleContext = new ModuleLoadContext();
                 var ass = moduleContext.LoadFromAssemblyPath(file);
-                LoadedAssemblies.Add(new { ass, moduleContext });
-                Console.WriteLine($"Loaded {ass.GetName()} v{ass.GetName().Version} assembly.");
+                RuntimeAssemblies.AssemblyEntities.TryAdd(ass.GetName().Name, new AssemblyEntity() { Assembly = ass, Context = moduleContext });
             }
         }
 
         private void FetchExternalAssemblies()
         {
-
-            foreach (dynamic ass in LoadedAssemblies)
+            foreach (ToLoadAssembly ass in toLoadAssemblies)
             {
-                var name = ((String)ass.ass.GetName().Name).SanitizAssembly();
-
-                var classesRefferal = (ass.ass as Assembly).DefinedTypes.Where(x => !x.IsInterface && x.IsPublic && !x.IsAbstract && x.Name == "PluginRefferal");
-
+                var assembly = ass.Assembly;
+                var name = assembly.GetName().Name.SanitizAssembly();
+                var classesRefferal = assembly.DefinedTypes.Where(x => !x.IsInterface && x.IsPublic && !x.IsAbstract && x.Name == "PluginRefferal");
                 if (classesRefferal.Any())
                 {
-                    var instance = (IPluginRefferal)classesRefferal.First().GetConstructors().First().Invoke(new object[] { });
-
-
-                    var context = new ContextEntity
+                    var PluginRefferal = (IPluginRefferal)classesRefferal.First().GetConstructors().First().Invoke(new object[] { });
+                    var AssemblyEntity = new AssemblyEntity()
                     {
+                        Assembly = assembly,
+                        Context = ass.AssemblyContext,
+                        Module = new List<ModuleInfo>(),
                         Name = name,
-                        Context = ass.moduleContext,
-                        Assembly = ass.ass,
-                        pluginRefferal = instance
+                        pluginRefferal = PluginRefferal
                     };
-                    if (_contexts.ContainsKey(name))
+                    if (RuntimeAssemblies.AssemblyEntities.Any(x => x.Value.Name == name))
                         continue;
-
-                    _contexts.TryAdd(name, context);
-                    _logging.Log(LogSeverity.Info, $"Loaded {name} v{ass.ass.GetName().Version} assembly modules.");
-
-
-                    if (_contexts.IsEmpty)
+                    RuntimeAssemblies.AssemblyEntities.TryAdd(name, AssemblyEntity);
+                    _logging.Log(LogSeverity.Info, $"Loaded {name} v{ass.Assembly.GetName().Version} assembly modules.");
+                    if (!RuntimeAssemblies.AssemblyEntities.Any())
                         break;
                 }
             }
-
         }
 
         public async Task TempUnloadAssemblyAsync(string assemblyName)
         {
-            if (!_contexts.TryGetValue(assemblyName, out var context))
+            if (!RuntimeAssemblies.AssemblyEntities.TryGetValue(assemblyName, out var context))
                 return;
+            var check = true;
+            foreach (ModuleInfo moduleInfo in context.Module)
+            {
+                if (check)
+                    check = await _commandService.RemoveModuleAsync(moduleInfo);
+            }
 
-            var check = await _commandService.RemoveModuleAsync(context.Module);
             if (!check)
             {
                 _logging.Log(LogSeverity.Error, $"Failed to unload {context.Name} module.");
@@ -116,7 +105,7 @@ namespace HeroBot.Core.Services
 
         public async Task LoadAssemblyAsync(string assemblyName)
         {
-            if (!_contexts.TryGetValue(assemblyName, out var context))
+            if (!RuntimeAssemblies.AssemblyEntities.TryGetValue(assemblyName, out var context))
                 return;
 
             context.Context.LoadFromAssemblyName(context.Assembly.GetName());
@@ -125,18 +114,75 @@ namespace HeroBot.Core.Services
             _logging.Log(LogSeverity.Info, $"Loaded {context.Name} assembly.");
         }
 
-        public async Task LoadModulesFromAssembliesAsync()
+        internal async Task LoadModulesFromAssembliesAsync()
         {
-            foreach (var context in _contexts.Values)
+            foreach (var context in new Dictionary<String, AssemblyEntity>(RuntimeAssemblies.AssemblyEntities).Values)
             {
                 var addModule = await _commandService.AddModulesAsync(context.Assembly, _provider);
-                context.Module = addModule.FirstOrDefault();
-                if (context.Module.Preconditions.Any(x => x is NeedPluginAttribute))
-                {
-                    _contexts.TryUpdate(context.Name, context, context);
-                }
+                context.Module = addModule.ToList();
+                RuntimeAssemblies.AssemblyEntities[context.Assembly.GetName().Name.SanitizAssembly()] = context;
             }
 
+        }
+        public AssemblyEntity GetAssemblyEntityByModule(ModuleInfo moduleInfo)
+        {
+            while (moduleInfo.IsSubmodule)
+                moduleInfo = moduleInfo.Parent;
+            var m = RuntimeAssemblies.AssemblyEntities;
+            return m.First(x => x.Value.Module.Any(v => v == moduleInfo)).Value;
+        }
+        private readonly string GetGuildEnabledPlugins = "SELECT * FROM \"GuildPlugin\" WHERE \"guild\"=@guild";
+        private readonly static string InsertPlugin = "INSERT INTO \"GuildPlugin\" (\"guild\",\"plugin\") VALUES (@guild,@plugin)";
+        private readonly static string DeletePlugin = "DELETE FROM \"GuildPlugin\" WHERE \"guild\"=@guild AND \"plugin\"=@plugin";
+
+        public async Task<bool> IsPluginEnabled(IGuild guild, ModuleInfo moduleInfo)
+        {
+            var moduleAssemblyName = GetAssemblyEntityByModule(moduleInfo);
+            if (moduleAssemblyName.Assembly.GetName().Name.SanitizAssembly() == "HeroBot.Plugins.HeroBot") return true;
+            PluginEnabling[] cv;
+            var rd = await _simpleCacheImplementation.GetValueAsync($"guildPluginsCache-{guild.Id}");
+            if (!rd.HasValue)
+            {
+                var connection = _database.GetDbConnection();
+                cv = (await connection.QueryAsync<PluginEnabling>(GetGuildEnabledPlugins, new
+                {
+                    guild = (long)guild.Id
+                })).ToArray();
+                await _simpleCacheImplementation.CacheValueAsync($"guildPluginsCache-{guild.Id}", JsonConvert.SerializeObject(cv));
+            }
+            else
+            {
+                cv = JsonConvert.DeserializeObject<PluginEnabling[]>(rd);
+            }
+            if (!cv.Any(x => x.Plugin == moduleAssemblyName.Assembly.GetName().Name.SanitizAssembly()))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public async Task EnablePlugin(IGuild guild, ModuleInfo moduleInfo)
+        {
+            await _simpleCacheImplementation.InvalidateValueAsync($"guildPluginsCache-{guild.Id}");
+            NpgsqlConnection guildService = (NpgsqlConnection)_database.GetDbConnection("HeroBot.Core");
+            var r = this.GetAssemblyEntityByModule(moduleInfo).Assembly.GetName().Name.SanitizAssembly();
+            await guildService.ExecuteAsync(InsertPlugin, new
+            {
+                guild = (long)guild.Id,
+                plugin = r
+            });
+        }
+
+        public async Task DisablePlugin(IGuild guild, ModuleInfo moduleInfo)
+        {
+            await _simpleCacheImplementation.InvalidateValueAsync($"guildPluginsCache-{guild.Id}");
+            NpgsqlConnection guildService = (NpgsqlConnection)_database.GetDbConnection("HeroBot.Core");
+            var r = this.GetAssemblyEntityByModule(moduleInfo).Assembly.GetName().Name.SanitizAssembly();
+            await guildService.ExecuteAsync(DeletePlugin, new
+            {
+                guild = (long)guild.Id,
+                plugin = r
+            });
         }
     }
 }

@@ -5,10 +5,7 @@ using HeroBot.Common.Attributes;
 using HeroBot.Plugins.Music.Attributes;
 using HeroBot.Plugins.Music.Services;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,10 +18,8 @@ namespace HeroBot.Plugins.Music.Modules
 
         public MusicModule(MusicService musicService) {
             _music = musicService;
-            Assembly assembly = this.GetType().Assembly;
-
         }
-        [Voice(false,true)]
+        [Voice(false, true)]
         [Command("join")]
         public async Task Join() {
             var playerExists = _music.GetLavalinkCluster().GetPlayer<Player>(Context.Guild.Id);
@@ -32,11 +27,12 @@ namespace HeroBot.Plugins.Music.Modules
                 await ReplyAsync($"I'm already connected to <#{playerExists.VoiceChannelId}>");
             }
             var member = Context.Guild.GetUser(Context.User.Id);
-             await _music.GetLavalinkCluster().JoinAsync<Player>(Context.Guild.Id,member.VoiceChannel.Id);
+            var payer = await _music.GetLavalinkCluster().JoinAsync<Player>(Context.Guild.Id, member.VoiceChannel.Id);
+            payer.socketTextchannel = Context.Channel;
         }
 
         [Command("play")]
-        [Voice(true,true)]
+        [Voice(true, true)]
         public async Task Play([Remainder]string search) {
             var player = _music.GetLavalinkCluster().GetPlayer<Player>(Context.Guild.Id);
             if (player.socketTextchannel == null) player.socketTextchannel = Context.Channel;
@@ -74,8 +70,8 @@ namespace HeroBot.Plugins.Music.Modules
             {
                 var player = _music.GetLavalinkCluster().GetPlayer<Player>(Context.Guild.Id);
                 if (player.socketTextchannel == null) player.socketTextchannel = Context.Channel;
-                
-                await player.SetVolumeAsync(volume/100);
+
+                await player.SetVolumeAsync(volume / 100);
             }
             else
                 await ReplyAsync("Volume must br greater than 0 and lower than 100");
@@ -83,16 +79,22 @@ namespace HeroBot.Plugins.Music.Modules
         [Voice(true, true)]
         [Command("megavolume")]
         public async Task SetMegaVolume(float volume) {
-            var player = _music.GetLavalinkCluster().GetPlayer<Player>(Context.Guild.Id);
-            if (player.socketTextchannel == null) player.socketTextchannel = Context.Channel;
-            await player.SetVolumeAsync(volume);
+            if (volume <= 10 && volume > 0)
+            {
+                var player = _music.GetLavalinkCluster().GetPlayer<Player>(Context.Guild.Id);
+                if (player.socketTextchannel == null) player.socketTextchannel = Context.Channel;
+
+                await player.SetVolumeAsync(volume);
+            }
+            else
+                await ReplyAsync("Volume must br greater than 0 and lower than 10");
         }
         [Voice(true, true)]
         [Command("skip")]
         public async Task Skip(int count = 1) {
             var player = _music.GetLavalinkCluster().GetPlayer<Player>(Context.Guild.Id);
             if (player.socketTextchannel == null) player.socketTextchannel = Context.Channel;
-            await player.SkipAsync();
+            await player.SkipAsync(count);
         }
         [Voice(true, true)]
         [Command("changeChannel")]
@@ -111,11 +113,42 @@ namespace HeroBot.Plugins.Music.Modules
             var queue = player.Queue;
 
             if (queue.Count == 0) { await ReplyAsync("There is no song in the queue"); return; }
-            var sb = new StringBuilder($"There is {queue.Count} song(s) in the queue :");
+            var sb = new StringBuilder($"There is {queue.Count} song(s) in the queue :\r\n");
             foreach (var song in queue) {
                 sb.Append("**~>** *").Append(song.Title).Append(" - ").Append(song.Author).Append("*\r\n");
             }
             await ReplyAsync(sb.ToString());
+        }
+        [Voice(true, true)]
+        [Command("stop")]
+        public async Task StopMusic() {
+            var player = _music.GetLavalinkCluster().GetPlayer<Player>(Context.Guild.Id);
+            await player.StopAsync();
+        }
+        [Voice(true, true)]
+        [Command("disconnect")]
+        public async Task Disconnect() {
+            var player = _music.GetLavalinkCluster().GetPlayer<Player>(Context.Guild.Id);
+            await player.DisconnectAsync();
+            await player.DisposeAsync();
+        }
+        [Voice(true, true)]
+        [Command("resume")]
+        public async Task Resume() {
+            var player = _music.GetLavalinkCluster().GetPlayer<Player>(Context.Guild.Id);
+            await player.ResumeAsync();
+        }
+        [Command("pause")]
+        public async Task Pause() {
+            var player = _music.GetLavalinkCluster().GetPlayer<Player>(Context.Guild.Id);
+            await player.PauseAsync();
+        }
+        [Command("loop")]
+        public Task Loop()
+        {
+            var player = _music.GetLavalinkCluster().GetPlayer<Player>(Context.Guild.Id);
+            player.IsLooping = !player.IsLooping;
+            return Task.CompletedTask;
         }
     }
 }

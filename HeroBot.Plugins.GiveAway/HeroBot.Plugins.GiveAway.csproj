@@ -12,9 +12,4 @@
     <ProjectReference Include="..\HeroBot.Common\HeroBot.Common.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Migrations\" />
-    <Folder Include="Services\" />
-  </ItemGroup>
-
 </Project>

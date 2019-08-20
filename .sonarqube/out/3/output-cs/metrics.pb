@@ -1,11 +1,12 @@
-‹
-lC:\Users\Matthieu\source\repos\HeroBot-deux-point-z√©ro\HeroBot.Plugins.RemindMe\Migrations\1807201925589.cs (08@HR 0=1;5=0;10=0;20=0;30=0;60=0;90=0Z1=2;2=0;4=0;6=0;8=0;10=0;12=0r	
-Ç˛
-jC:\Users\Matthieu\source\repos\HeroBot-deux-point-z√©ro\HeroBot.Plugins.RemindMe\Modules\RemindMeModule.cs	 (08@HR 0=0;5=1;10=0;20=0;30=0;60=0;90=0Z1=1;2=2;4=0;6=0;8=0;10=0;12=0r/	 !"#$%&'()*+,-./012xÇ "'(*,-/∑
-bC:\Users\Matthieu\source\repos\HeroBot-deux-point-z√©ro\HeroBot.Plugins.RemindMe\PluginRefferal.cs(0R 0=1;5=0;10=0;20=0;30=0;60=0;90=0Z1=0;2=0;4=0;6=0;8=0;10=0;12=0r
+◊
+gC:\Users\Matthieu\source\repos\HeroBot-deux-point-z√©ro\HeroBot.Plugins.RP\Migrations\FirstMigration.cs (08@HR 0=1;5=0;10=0;20=0;30=0;60=0;90=0Z1=2;2=0;4=0;6=0;8=0;10=0;12=0r	
+ÇÚ
+bC:\Users\Matthieu\source\repos\HeroBot-deux-point-z√©ro\HeroBot.Plugins.RP\Modules\BaseRPModule.csK (	0	8@HR 0=0;5=0;10=0;20=1;30=0;60=0;90=0Z1=2;2=4;4=0;6=1;8=1;10=0;12=0j;>r⁄	
+ !"#$%&'()*+,-./0123456789:<?ABDEFGHIJKLMNOPQRSTUVWYZ[\]^_`bcdefghijklmnpqrstuvwxyz{|~ÄÅÇÉÑÖÜáàâäãåçéèêëíîïñóòôöõúùûü†°¢£§•¶ß®´¨≠ÆØ∞±≤≥¥µ∂x-ÇW#&()*,27:<?EFGIJKMNOPRTV\^fhijkmtvwxy{ÄÉÑÜàâçèêîñòôöõü†¢£•ß≠≥±
+\C:\Users\Matthieu\source\repos\HeroBot-deux-point-z√©ro\HeroBot.Plugins.RP\PluginRefferal.cs(0R 0=1;5=0;10=0;20=0;30=0;60=0;90=0Z1=0;2=0;4=0;6=0;8=0;10=0;12=0r
 	
-˜
-lC:\Users\Matthieu\source\repos\HeroBot-deux-point-z√©ro\HeroBot.Plugins.RemindMe\Services\ReminderService.cs( 
-(08@HR 0=0;5=0;10=1;20=0;30=0;60=0;90=0Z1=7;2=2;4=1;6=0;8=0;10=0;12=0rá	
- !"#%&'()*+,-./0123456789:;<=>?@ABDEFGHJKLMNOPQSTUVWXYZ[\]^_`abcdefghijkmnpqrstuvwxyz{|}~ÄÅÇÉÑÖÜáx
-Ç) !")*+,/1245789;<>GLNOQSXZ\^_cefprstvwx|
+≥
+TC:\Users\Matthieu\source\repos\HeroBot-deux-point-z√©ro\HeroBot.Plugins.RP\RPUser.cs (08@HR 0=0;5=1;10=0;20=0;30=0;60=0;90=0Z1=6;2=0;4=0;6=0;8=0;10=0;12=0r	
+˝
+`C:\Users\Matthieu\source\repos\HeroBot-deux-point-z√©ro\HeroBot.Plugins.RP\Services\RPService.cs (08@HR 0=0;5=1;10=0;20=0;30=0;60=0;90=0Z1=3;2=2;4=0;6=0;8=0;10=0;12=0r5	
+ !"#$%'()*+,-./023456789:;xÇ!#)*+,./4

@@ -62,10 +62,10 @@
               "resultFile": {
                 "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.Images/Modules/ImagesModule.cs",
                 "region": {
-                  "startLine": 107,
-                  "startColumn": 113,
-                  "endLine": 107,
-                  "endColumn": 137
+                  "startLine": 93,
+                  "startColumn": 35,
+                  "endLine": 93,
+                  "endColumn": 62
                 }
               }
             }
@@ -104,27 +104,6 @@
               "resultFile": {
                 "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.Images/Modules/ImagesModule.cs",
                 "region": {
-                  "startLine": 93,
-                  "startColumn": 35,
-                  "endLine": 93,
-                  "endColumn": 62
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S1075",
-          "level": "warning",
-          "message": "Refactor your code not to use hardcoded absolute paths or URIs.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.Images/Modules/ImagesModule.cs",
-                "region": {
                   "startLine": 124,
                   "startColumn": 114,
                   "endLine": 124,
@@ -146,10 +125,10 @@
               "resultFile": {
                 "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.Images/Modules/ImagesModule.cs",
                 "region": {
-                  "startLine": 173,
-                  "startColumn": 60,
-                  "endLine": 173,
-                  "endColumn": 83
+                  "startLine": 107,
+                  "startColumn": 113,
+                  "endLine": 107,
+                  "endColumn": 137
                 }
               }
             }
@@ -188,27 +167,6 @@
               "resultFile": {
                 "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.Images/Modules/ImagesModule.cs",
                 "region": {
-                  "startLine": 188,
-                  "startColumn": 60,
-                  "endLine": 188,
-                  "endColumn": 82
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S1075",
-          "level": "warning",
-          "message": "Refactor your code not to use hardcoded absolute paths or URIs.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.Images/Modules/ImagesModule.cs",
-                "region": {
                   "startLine": 157,
                   "startColumn": 60,
                   "endLine": 157,
@@ -230,10 +188,52 @@
               "resultFile": {
                 "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.Images/Modules/ImagesModule.cs",
                 "region": {
+                  "startLine": 173,
+                  "startColumn": 60,
+                  "endLine": 173,
+                  "endColumn": 83
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S1075",
+          "level": "warning",
+          "message": "Refactor your code not to use hardcoded absolute paths or URIs.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.Images/Modules/ImagesModule.cs",
+                "region": {
                   "startLine": 205,
                   "startColumn": 60,
                   "endLine": 205,
                   "endColumn": 88
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S1075",
+          "level": "warning",
+          "message": "Refactor your code not to use hardcoded absolute paths or URIs.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.Images/Modules/ImagesModule.cs",
+                "region": {
+                  "startLine": 188,
+                  "startColumn": 60,
+                  "endLine": 188,
+                  "endColumn": 82
                 }
               }
             }

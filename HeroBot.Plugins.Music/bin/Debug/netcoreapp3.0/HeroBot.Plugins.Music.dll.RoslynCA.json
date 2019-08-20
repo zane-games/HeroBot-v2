@@ -12,6 +12,48 @@
       },
       "results": [
         {
+          "ruleId": "CS1998",
+          "level": "warning",
+          "message": "Cette méthode async n'a pas d'opérateur 'await' et elle s'exécutera de façon synchrone. Utilisez l'opérateur 'await' pour attendre les appels d'API non bloquants ou 'await Task.Run(…)' pour effectuer un travail utilisant le processeur sur un thread d'arrière-plan.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.Music/Modules/MusicModule.cs",
+                "region": {
+                  "startLine": 152,
+                  "startColumn": 27,
+                  "endLine": 152,
+                  "endColumn": 31
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
+          "ruleId": "S1185",
+          "level": "warning",
+          "message": "Remove this method 'OnTrackStuckAsync' to simply inherit its behavior.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.Music/Services/Player.cs",
+                "region": {
+                  "startLine": 46,
+                  "startColumn": 9,
+                  "endLine": 49,
+                  "endColumn": 10
+                }
+              }
+            }
+          ],
+          "properties": {
+            "warningLevel": 1
+          }
+        },
+        {
           "ruleId": "S1481",
           "level": "warning",
           "message": "Remove the unused local variable 'assembly'.",
@@ -34,6 +76,36 @@
         }
       ],
       "rules": {
+        "CS1998": {
+          "id": "CS1998",
+          "shortDescription": "Cette méthode async n'a pas d'opérateur 'await' et elle s'exécutera de façon synchrone",
+          "defaultLevel": "warning",
+          "properties": {
+            "category": "Compiler",
+            "isEnabledByDefault": true,
+            "tags": [
+              "Compiler",
+              "Telemetry"
+            ]
+          }
+        },
+        "S1185": {
+          "id": "S1185",
+          "shortDescription": "Overriding members should do more than simply call the same member in the base class",
+          "fullDescription": "Overriding a method just to call the same method from the base class without performing any other actions is useless and misleading. The only time this is justified is in sealed overriding methods, where the effect is to lock in the parent class behavior. This rule ignores overrides of Equals and GetHashCode.",
+          "defaultLevel": "warning",
+          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-1185",
+          "properties": {
+            "category": "Minor Code Smell",
+            "isEnabledByDefault": true,
+            "tags": [
+              "C#",
+              "SonarWay",
+              "MainSourceScope",
+              "TestSourceScope"
+            ]
+          }
+        },
         "S1481": {
           "id": "S1481",
           "shortDescription": "Unused local variables should be removed",

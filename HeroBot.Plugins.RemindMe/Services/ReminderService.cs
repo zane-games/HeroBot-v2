@@ -44,28 +44,25 @@ namespace HeroBot.Plugins.RemindMe.Services
                 if (name.Length == 3 && name[0] == "reminder" && name[1] == "remove")
                 {
                     var reminderId = name[2];
-                    using (var conn = (NpgsqlConnection)_database.GetDbConnection())
-                    {
-                        conn.Open();
-                        conn.QueryAsync(GetReminderById, new { id = reminderId }).ContinueWith((x) =>
+                    using var conn = (NpgsqlConnection)_database.GetDbConnection();
+                    conn.Open();
+                    conn.QueryAsync(GetReminderById, new { id = reminderId }).ContinueWith((x) =>
+                      {
+                          var cont = x.Result.FirstOrDefault();
+                          if (cont != null)
                           {
-                              var cont = x.Result.FirstOrDefault();
-                              if (cont != null)
+                              var userId = (ulong)cont.userId;
+                              var reason = (string)cont.reason;
+                              _discord.GetUser(userId).GetOrCreateDMChannelAsync().ContinueWith((x) =>
                               {
-                                  var userId = (ulong)cont.userId;
-                                  var reason = (string)cont.reason;
-                                  _discord.GetUser(userId).GetOrCreateDMChannelAsync().ContinueWith((x) =>
+                                  var dm = x.Result;
+                                  dm.SendMessageAsync($"Hay :watch: ! It's time to {reason}").ContinueWith((v) =>
                                   {
-                                      var dm = x.Result;
-                                      dm.SendMessageAsync($"Hay :watch: ! It's time to {reason}").ContinueWith((v) =>
-                                      {
-                                          conn.Execute(new CommandDefinition(DeleteReminderbyId, new { id = reminderId }));
-                                      });
+                                      conn.Execute(new CommandDefinition(DeleteReminderbyId, new { id = reminderId }));
                                   });
-                              }
-                          });
-
-                    }
+                              });
+                          }
+                      });
                 }
             }
             catch (Exception e) { Console.WriteLine(e); }
@@ -73,63 +70,59 @@ namespace HeroBot.Plugins.RemindMe.Services
 
         internal async Task<IEnumerable<dynamic>> GetReminders(ulong id)
         {
-            using (var conn = (NpgsqlConnection)_database.GetDbConnection())
+            using var conn = (NpgsqlConnection)_database.GetDbConnection();
+            var result = await conn.QueryAsync(GetReminderPerUser, new { id = (long)id });
+            return result.Select(async (x) =>
             {
-                var result = await conn.QueryAsync(GetReminderPerUser, new { id = (long)id });
-                return result.Select(async (x) =>
-                {
-                    var v = (await _redis.GetDatabase().StringGetWithExpiryAsync($"reminder:remove:{x.Id}")).Expiry;
+                var v = (await _redis.GetDatabase().StringGetWithExpiryAsync($"reminder:remove:{x.Id}")).Expiry;
 
-                    return new
-                    {
-                        x,
-                        r = v
-                    };
-                }).Select((x) => { x.Wait(); return x.Result; }).Select(x =>
+                return new
                 {
-                    if (!x.r.HasValue)
-                    {
-                        return new
-                        {
-                            x.x,
-                            r = x.r,
-                            anulated = true
-                        };
-                    }
+                    x,
+                    r = v
+                };
+            }).Select((x) => { x.Wait(); return x.Result; }).Select(x =>
+            {
+                if (!x.r.HasValue)
+                {
                     return new
                     {
                         x.x,
-                        r = x.r,
-                        anulated = false
+                        x.r,
+                        anulated = true
                     };
-                });
-            }
+                }
+                return new
+                {
+                    x.x,
+                     x.r,
+                    anulated = false
+                };
+            });
         }
 
         public async Task<bool> CreateReminder(Reminder reminder)
         {
 
-            using (var conn = (NpgsqlConnection)_database.GetDbConnection())
+            using var conn = (NpgsqlConnection)_database.GetDbConnection();
+            conn.Open();
+            var cont = conn.Query(CountRemindersPerUser, new { id = (long)reminder.UserId }).First().count;
+            if (cont < 11)
             {
-                conn.Open();
-                var cont = conn.Query(CountRemindersPerUser, new { id = (long)reminder.userId }).First().count;
-                if (cont < 11)
-                {
-                    var id = conn.Query(InsertReminder, new { userId = (long)reminder.userId, reason = reminder.remind }).First().Id;
-                    await _redis.GetDatabase().StringSetAsync($"reminder:remove:{id}", String.Empty, reminder.TimeSpan);
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                var id = conn.Query(InsertReminder, new { userId = (long)reminder.UserId, reason = reminder.Remind }).First().Id;
+                await _redis.GetDatabase().StringSetAsync($"reminder:remove:{id}", String.Empty, reminder.TimeSpan);
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }
     public class Reminder
     {
-        public ulong userId { get; set; }
-        public string remind { get; set; }
+        public ulong UserId { get; set; }
+        public string Remind { get; set; }
         public TimeSpan TimeSpan { get; set; }
     }
 }

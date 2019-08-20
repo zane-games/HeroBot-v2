@@ -1,8 +1,7 @@
-﻿using Dapper;
-using FluentMigrator.Runner;
+﻿using FluentMigrator.Runner;
+using HeroBot.Common.Interfaces;
 using HeroBot.Core.Migrations;
 using HeroBot.Core.Services;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -32,38 +31,24 @@ namespace HeroBot.Core.Helpers
             }
             // Call the loading method from the ModulesService
             ModulesService.LoadAssembliesInDirrectory();
-            List<Assembly> ass = new List<Assembly>();
-            // We add each assemblies to the "ass" assembly list
-            foreach (dynamic assembly in ModulesService.GetLoadedAssemblies())
-            {
-                ass.Add(assembly.ass);
-            }
+            List<AssemblyEntity> ass = RuntimeAssemblies.AssemblyEntities.Values.ToList();
             // For each assemblies, we load the migrations
-            foreach (dynamic assembly in ModulesService.GetLoadedAssemblies())
+            foreach (AssemblyEntity assembly in ass)
             {
+                var assm = assembly.Assembly;
                 try
                 {
-                    var assm = ((Assembly)(assembly.ass));
+
                     var serviceProviderMigrate = CreateserviceMigrator(assm);
 
-                    using (var scope = serviceProviderMigrate.CreateScope())
-                    {
-                        (scope as IServiceProvider).GetRequiredService<IMigrationRunner>().MigrateUp();
-                    }
+                    using var scope = serviceProviderMigrate.CreateScope();
+                    (scope as IServiceProvider).GetRequiredService<IMigrationRunner>().MigrateUp();
                 }
                 catch { /* We ignore the assemblies loading exceptions */ }
-            }
-            // We register each service into the ServiceCollection
-            foreach (Assembly assm in ass)
-            {
                 IEnumerable<TypeInfo> servicesAss = assm.DefinedTypes.Where(x => !x.IsInterface && !x.IsEnum && x.IsClass && x.IsPublic && x.Name.Contains("Service"));
-                if (servicesAss.Any())
-                {
-                    foreach (TypeInfo typeInfo in servicesAss)
-                    {
+                    foreach(TypeInfo typeInfo in servicesAss) 
                         services.AddSingleton(assm.GetTypes().FirstOrDefault(x => x.Name == typeInfo.Name));
-                    }
-                }
+
             }
             return services;
         }

@@ -1,6 +1,5 @@
 ﻿using Discord;
 using Discord.Commands;
-using Discord.Rest;
 using Discord.WebSocket;
 using HeroBot.Common.Attributes;
 using HeroBot.Common.Helpers;
@@ -45,7 +44,7 @@ namespace HeroBot.Plugins.Mod.Modules
         [Command("kick"), Alias("k")]
         [RequireBotPermission(GuildPermission.KickMembers)]
         [RequireUserPermission(GuildPermission.KickMembers)]
-        [RequireContext(ContextType.Guild)]
+        [Summary("Kick a user from the server.")]
         public async Task KickMember(SocketGuildUser target, [Remainder]string reason = "*no reason*")
         {
             // Check if we can kick the user
@@ -85,7 +84,7 @@ namespace HeroBot.Plugins.Mod.Modules
         [Command("ban"), Alias("b")]
         [RequireBotPermission(GuildPermission.BanMembers)]
         [RequireUserPermission(GuildPermission.BanMembers)]
-        [RequireContext(ContextType.Guild)]
+        [Summary("Definitively ban a user from the server.")]
         public async Task BanMember(SocketGuildUser target, [Remainder]string reason = "*no reason*")
         {
             // Check if we can kick the user
@@ -123,9 +122,9 @@ namespace HeroBot.Plugins.Mod.Modules
         /// <param name="reason">Why</param>
         /// <returns></returns>
         [Command("softban"), Alias("sb")]
-        [RequireBotPermission(GuildPermission.KickMembers)]
+        [RequireBotPermission(GuildPermission.BanMembers)]
         [RequireUserPermission(GuildPermission.KickMembers)]
-        [RequireContext(ContextType.Guild)]
+        [Summary("Kick the user from the server and delete their messages.")]
         public async Task SoftBan(SocketGuildUser target, [Remainder]string reason = "*no reason*")
         {
             // Check if we can kick the user
@@ -166,6 +165,7 @@ namespace HeroBot.Plugins.Mod.Modules
         [RequireBotPermission(GuildPermission.ManageChannels)]
         [RequireUserPermission(GuildPermission.ManageChannels)]
         [RequireContext(ContextType.Guild)]
+        [Summary("Deletes a certain count of messages.")]
         public async Task Clear(int count)
         {
             // We can't delete more than 300 messages
@@ -184,6 +184,25 @@ namespace HeroBot.Plugins.Mod.Modules
             await Task.Delay(3000);
             await message.DeleteAsync();
         }
+        [Command("setupMute")]
+        [RequireBotPermission(GuildPermission.ManageChannels)]
+        [RequireUserPermission(GuildPermission.ManageChannels)]
+        [Summary("Creates & configure the mutes role.")]
+        public async Task SetupMute() {
+            // First, we need to create the role
+            try
+            {
+                var role = await Context.Guild.CreateRoleAsync("Muted", new GuildPermissions(sendMessages: false, addReactions: false, speak: false), Color.DarkerGrey);
+                foreach (IGuildChannel channel in Context.Guild.Channels)
+                {
+                    await channel.AddPermissionOverwriteAsync(role, new OverwritePermissions(sendMessages: PermValue.Deny, addReactions: PermValue.Deny, speak: PermValue.Deny));
+                }
+                await ReplyAsync("Setup finished !");
+            }
+            catch (Exception) {
+                await ReplyAsync("Something wrong happended... Please, check my permissions");
+            }
+        }
         /// <summary>
         /// Deny the permission "talk" to a user
         /// </summary>
@@ -194,42 +213,37 @@ namespace HeroBot.Plugins.Mod.Modules
         [RequireBotPermission(GuildPermission.ManageChannels)]
         [RequireUserPermission(GuildPermission.ManageChannels)]
         [RequireContext(ContextType.Guild)]
+        [Summary("Mutes a user from a server.")]
         public async Task Mute(SocketGuildUser target, [Remainder]string reason = "*no reason*")
         {
             // Definitively need some optimizations
             if (this.Context.Guild.CurrentUser.Hierarchy > target.Hierarchy)
             {
-                var mp = await target.GetOrCreateDMChannelAsync();
-                bool canSentMp = true;
-                try
+                if (Context.Guild.Roles.Any(x => x.Name.ToLower().Contains("mute")))
                 {
-                    await mp.TriggerTypingAsync();
-                    await mp.SendMessageAsync($"Hey {target.Mention} ! You have been **muted** in `{Context.Guild.Name}` for `{reason}`");
-                }
-                catch (Exception)
-                {
-                    canSentMp = false;
-                }
-                finally
-                {
-                    foreach (SocketCategoryChannel socketTextChannel in Context.Guild.CategoryChannels)
+                    var mp = await target.GetOrCreateDMChannelAsync();
+                    bool canSentMp = true;
+                    try
                     {
-                        await socketTextChannel.AddPermissionOverwriteAsync(target, new OverwritePermissions(sendMessages: PermValue.Deny));
-
+                        await mp.TriggerTypingAsync();
+                        await mp.SendMessageAsync($"Hey {target.Mention} ! You have been **muted** in `{Context.Guild.Name}` for `{reason}`");
                     }
-                    foreach (SocketTextChannel socketTextChannel1 in Context.Guild.TextChannels)
+                    catch (Exception)
                     {
-
-                        await socketTextChannel1.AddPermissionOverwriteAsync(target, new OverwritePermissions(sendMessages: PermValue.Deny));
-
+                        canSentMp = false;
                     }
-                    await ReplyAsync($"<:check:606088713897902081> `{target.Username}#{target.Discriminator} {(target.Nickname == null ? String.Empty : $"({target.Nickname})")}` has been muted in this server ! {(canSentMp ? "i've sent him the reason in private message !" : "i can't send him a message in DM")}");
+                    finally
+                    {
+                        var role = Context.Guild.Roles.First(x => x.Name.ToLower().Contains("mute"));
+                        await target.AddRoleAsync(role);
+                        await ReplyAsync($"<:check:606088713897902081> `{target.Username}#{target.Discriminator} {(target.Nickname == null ? String.Empty : $"({target.Nickname})")}` has been muted in this server ! {(canSentMp ? "i've sent him the reason in private message !" : "i can't send him a message in DM")}");
+                    }
                 }
+                else
+                    await ReplyAsync("<:fail:606088713705095208> There is no muted role...");
             }
             else
-            {
                 await ReplyAsync($"<:fail:606088713705095208> {target.Mention} has too much power for me ! Please check if the user is behind me !");
-            }
         }
         /// <summary>
         /// Add the permission "talk" to a user
@@ -244,32 +258,29 @@ namespace HeroBot.Plugins.Mod.Modules
         {
             if (this.Context.Guild.CurrentUser.Hierarchy > target.Hierarchy)
             {
-                var mp = await target.GetOrCreateDMChannelAsync();
-                bool canSentMp = true;
-                try
+                if (Context.Guild.Roles.Any(x => x.Name.ToLower().Contains("mute")))
                 {
-                    await mp.TriggerTypingAsync();
-                    await mp.SendMessageAsync($"Hey {target.Mention} ! You have been **unmuted** in `{Context.Guild.Name}`");
-                }
-                catch (Exception)
-                {
-                    canSentMp = false;
-                }
-                finally
-                {
-                    foreach (SocketCategoryChannel socketTextChannel in Context.Guild.CategoryChannels)
+                    var mp = await target.GetOrCreateDMChannelAsync();
+                    bool canSentMp = true;
+                    try
                     {
-                        if (socketTextChannel.GetPermissionOverwrite(target) != null)
-                            await socketTextChannel.RemovePermissionOverwriteAsync(target);
+                        await mp.TriggerTypingAsync();
+                        await mp.SendMessageAsync($"Hey {target.Mention} ! You have been **unmuted** in `{Context.Guild.Name}`");
                     }
-                    foreach (SocketTextChannel socketTextChannel1 in Context.Guild.TextChannels)
+                    catch (Exception)
                     {
-                        if (socketTextChannel1.GetPermissionOverwrite(target) != null)
-                            await socketTextChannel1.RemovePermissionOverwriteAsync(target);
+                        canSentMp = false;
                     }
-                    await ReplyAsync($"<:check:606088713897902081> `{target.Username}#{target.Discriminator} {(target.Nickname == null ? String.Empty : $"({target.Nickname})")}` has been unmutes in this server ! {(canSentMp ? "i've sent him a message in private message !" : "i can't send him a message in DM")}");
+                    finally
+                    {
+                        var role = Context.Guild.Roles.First(x => x.Name.ToLower().Contains("mute"));
+                        await target.RemoveRoleAsync(role);
+                        await ReplyAsync($"<:check:606088713897902081> `{target.Username}#{target.Discriminator} {(target.Nickname == null ? String.Empty : $"({target.Nickname})")}` has been unmutes in this server ! {(canSentMp ? "i've sent him a message in private message !" : "i can't send him a message in DM")}");
+                    }
                 }
-            }
+                else
+                    await ReplyAsync("<:fail:606088713705095208> There is no muted role...");
+                }
             else
             {
                 await ReplyAsync($"<:fail:606088713705095208> {target.Mention} has too much power for me ! Please check if the user is behind me !");
@@ -331,7 +342,6 @@ namespace HeroBot.Plugins.Mod.Modules
                 {
                     if (channel.GetPermissionOverwrite(target) != null)
                         await channel.RemovePermissionOverwriteAsync(target);
-                    await channel.SendMessageAsync($"{target.Mention} is gone !");
                     await ReplyAsync("<:check:606088713897902081> This user was removed from this channel");
                 }
             }
@@ -391,8 +401,8 @@ namespace HeroBot.Plugins.Mod.Modules
         /// <returns></returns>
         [Command("say"), Alias("s")]
         [Summary("Made the bots say something")]
-        [RequireBotPermission(Discord.GuildPermission.SendMessages)]
-        [RequireUserPermission(Discord.ChannelPermission.ManageMessages)]
+        [RequireBotPermission(GuildPermission.SendMessages)]
+        [RequireUserPermission(ChannelPermission.ManageMessages)]
         public Task Say([Remainder]string text) => ReplyAsync(text.Replace("@everyone","`@everyone`").Replace("@here","`@here`"));
         /// <summary>
         /// Temporaly deny the permission "talk" to a user
@@ -402,43 +412,42 @@ namespace HeroBot.Plugins.Mod.Modules
         /// <param name="reason"></param>
         /// <returns></returns>
         [Command("tempmute"), Alias("tm")]
-        [RequireBotPermission(Discord.GuildPermission.SendMessages)]
-        [RequireUserPermission(Discord.ChannelPermission.ManageChannels)]
+        [RequireBotPermission(GuildPermission.SendMessages)]
+        [RequireUserPermission(ChannelPermission.ManageChannels)]
         public async Task TempMute(SocketGuildUser target, TimeSpan time, [Remainder]string reason = "*no reason*")
         {
 
             if (this.Context.Guild.CurrentUser.Hierarchy > target.Hierarchy)
             {
-                if (await _tempMuteService.CreatetempMute(new TempMute() { guildId = Context.Guild.Id, userId = target.Id, Reason = reason, TimeSpan = time }))
+                if (Context.Guild.Roles.Any(x => x.Name.ToLower().Contains("mute")))
                 {
-                    var mp = await target.GetOrCreateDMChannelAsync();
-                    bool canSentMp = true;
-                    try
+                    if (await _tempMuteService.CreatetempMute(new TempMute() { GuildId = Context.Guild.Id, UserId = target.Id, Reason = reason, TimeSpan = time }))
                     {
-                        await mp.TriggerTypingAsync();
-                        await mp.SendMessageAsync($"Hey {target.Mention} ! You have been **kicked** from `{Context.Guild.Name}` for `{reason.Replace("noinvite", String.Empty)}` {(reason.Contains("noinvite") ? $"you can re-join the server with this invite https://discord.gg/{(await Context.Guild.DefaultChannel.CreateInviteAsync(maxUses: 1, isUnique: true)).Code}" : String.Empty)}");
-                    }
-                    catch (Exception)
-                    {
-                        canSentMp = false;
-                    }
-                    finally
-                    {
-                        foreach (SocketCategoryChannel socketTextChannel in Context.Guild.CategoryChannels)
+                        var mp = await target.GetOrCreateDMChannelAsync();
+                        bool canSentMp = true;
+                        try
                         {
-                            await socketTextChannel.AddPermissionOverwriteAsync(target, new OverwritePermissions(sendMessages: PermValue.Deny));
+                            await mp.TriggerTypingAsync();
+                            await mp.SendMessageAsync($"Hey {target.Mention} ! You have been **tempmuted** from `{Context.Guild.Name}` for `{reason.Replace("noinvite", String.Empty)}` during {time.ToHumanReadable()} {(reason.Contains("noinvite") ? $"you can re-join the server with this invite https://discord.gg/{(await Context.Guild.DefaultChannel.CreateInviteAsync(maxUses: 1, isUnique: true)).Code}" : String.Empty)}");
                         }
-                        foreach (SocketTextChannel socketTextChannel1 in Context.Guild.TextChannels)
+                        catch (Exception)
                         {
-                            await socketTextChannel1.AddPermissionOverwriteAsync(target, new OverwritePermissions(sendMessages: PermValue.Deny));
+                            canSentMp = false;
                         }
-                        await ReplyAsync($"<:check:606088713897902081> `{target.Username}#{target.Discriminator} {(target.Nickname == null ? String.Empty : $"({target.Nickname})")}` has been muted for {time.Seconds}s from the server ! {(canSentMp ? "i've sent him the reason in private message !" : "i can't send him a message in DM")}");
+                        finally
+                        {
+                            var role = Context.Guild.Roles.First(x => x.Name.ToLower().Contains("mute"));
+                            await target.AddRoleAsync(role);
+                            await ReplyAsync($"<:check:606088713897902081> `{target.Username}#{target.Discriminator} {(target.Nickname == null ? String.Empty : $"({target.Nickname})")}` has been muted for {time.ToHumanReadable()}s from the server ! {(canSentMp ? "i've sent him the reason in private message !" : "i can't send him a message in DM")}");
+                        }
+                    }
+                    else
+                    {
+                        await ReplyAsync($"<:fail:606088713705095208> `{target.Username}#{target.Discriminator} {(target.Nickname == null ? String.Empty : $"({target.Nickname})")}` is already muted ...");
                     }
                 }
                 else
-                {
-                    await ReplyAsync($"<:fail:606088713705095208> `{target.Username}#{target.Discriminator} {(target.Nickname == null ? String.Empty : $"({target.Nickname})")}` is already muted ...");
-                }
+                    await ReplyAsync("<:fail:606088713705095208> There is no muted role...");
             }
             else
             {
@@ -454,6 +463,7 @@ namespace HeroBot.Plugins.Mod.Modules
         public class Embed : ModuleBase<SocketCommandContext>
         {
             [Command("create")]
+            [Summary("Creates an embed for you :3")]
             public async Task CreateEmbed(SocketTextChannel channel, string title, string link = null, uint color = 0xFFF)
             {
                 var Embed = new EmbedBuilder();
@@ -469,6 +479,7 @@ namespace HeroBot.Plugins.Mod.Modules
             }
             #region import/export
             [Command("import")]
+            [Summary("Import an embed via .json")]
             public async Task ImportEmbed(SocketTextChannel channel, ulong id = 0)
             {
                 if (Context.Message.Attachments.Count == 1 && Context.Message.Attachments.First().Filename.EndsWith(".json"))
@@ -521,19 +532,21 @@ namespace HeroBot.Plugins.Mod.Modules
 
             }
             [Command("export")]
+            [Summary("Export an embed as .json")]
             public async Task ExportEmbed(SocketTextChannel channel, ulong id)
             {
                 var message = (IUserMessage)await channel.GetMessageAsync(id);
                 if (message != null && message.Author.Id == Context.Client.CurrentUser.Id)
                 {
                     var embed = message.Embeds.First();
-                    var export = new EmbedExport();
-                    export.description = embed.Description == null ? "" : embed.Description;
-                    export.color = embed.Color.HasValue ? embed.Color.Value.RawValue : 0xFFF;
-                    export.thubmail = embed.Thumbnail.HasValue ? embed.Thumbnail.Value.Url : "";
-                    export.title = embed.Title == null ? "" : embed.Title;
-                    export.timeStamp = embed.Timestamp;
-                    export.url = embed.Url;
+                    var export = new EmbedExport() {
+                        description = embed.Description == null ? "" : embed.Description,
+                        color = embed.Color.HasValue ? embed.Color.Value.RawValue : 0xFFF,
+                        thubmail = embed.Thumbnail.HasValue ? embed.Thumbnail.Value.Url : string.Empty,
+                        title = embed.Title == null ? "" : embed.Title,
+                        timeStamp = embed.Timestamp,
+                        url = embed.Url
+                    };
                     List<EmbedExportField> fields = new List<EmbedExportField>();
                     foreach (EmbedField embedField in embed.Fields)
                     {
@@ -578,6 +591,7 @@ namespace HeroBot.Plugins.Mod.Modules
 
 
             [Command("thumbmail")]
+            [Summary("Set the thumbmail of your embed")]
             public async Task SetThumbmail(SocketTextChannel channel, ulong id, string imageUrl = null)
             {
                 var message = (IUserMessage)await channel.GetMessageAsync(id);
@@ -595,6 +609,7 @@ namespace HeroBot.Plugins.Mod.Modules
                 await ReplyAsync("I can't find the message !");
             }
             [Command("description")]
+            [Summary("Set the description of your embed")]
             public async Task SetDescription(SocketTextChannel channel, ulong id, string description = null)
             {
                 var message = (IUserMessage)await channel.GetMessageAsync(id);
@@ -612,6 +627,7 @@ namespace HeroBot.Plugins.Mod.Modules
                 await ReplyAsync("I can't find the message !");
             }
             [Command("color")]
+            [Summary("Set the color of your embed")]
             public async Task SetColor(SocketTextChannel channel, ulong id, uint color = 0xFFF)
             {
                 var message = (IUserMessage)await channel.GetMessageAsync(id);
@@ -626,6 +642,7 @@ namespace HeroBot.Plugins.Mod.Modules
                 await ReplyAsync("I can't find the message !");
             }
             [Command("title")]
+            [Summary("Set the title of your embed")]
             public async Task SetTitle(SocketTextChannel channel, ulong id, string title = null)
             {
                 var message = (IUserMessage)await channel.GetMessageAsync(id);
@@ -643,6 +660,7 @@ namespace HeroBot.Plugins.Mod.Modules
                 await ReplyAsync("I can't find the message !");
             }
             [Command("url")]
+            [Summary("Set the url of your embed")]
             public async Task SetUrl(SocketTextChannel channel, ulong id, string url = null)
             {
                 var message = (IUserMessage)await channel.GetMessageAsync(id);
@@ -660,6 +678,7 @@ namespace HeroBot.Plugins.Mod.Modules
                 await ReplyAsync("I can't find the message !");
             }
             [Command("addfield")]
+            [Summary("Add a field tu your embed")]
             public async Task AddField(SocketTextChannel channel, ulong id,string name,string value,bool inline)
             {
                 var message = (IUserMessage)await channel.GetMessageAsync(id);

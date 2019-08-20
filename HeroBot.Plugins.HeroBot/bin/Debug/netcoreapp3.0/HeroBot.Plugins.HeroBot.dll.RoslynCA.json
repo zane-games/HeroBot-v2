@@ -20,30 +20,9 @@
               "resultFile": {
                 "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.HeroBot/Modules/HeroBotModule.cs",
                 "region": {
-                  "startLine": 301,
+                  "startLine": 315,
                   "startColumn": 31,
-                  "endLine": 301,
-                  "endColumn": 44
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "CS1998",
-          "level": "warning",
-          "message": "Cette méthode async n'a pas d'opérateur 'await' et elle s'exécutera de façon synchrone. Utilisez l'opérateur 'await' pour attendre les appels d'API non bloquants ou 'await Task.Run(…)' pour effectuer un travail utilisant le processeur sur un thread d'arrière-plan.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.HeroBot/Modules/HeroBotModule.cs",
-                "region": {
-                  "startLine": 305,
-                  "startColumn": 31,
-                  "endLine": 305,
+                  "endLine": 315,
                   "endColumn": 45
                 }
               }
@@ -62,9 +41,9 @@
               "resultFile": {
                 "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.HeroBot/Modules/HeroBotModule.cs",
                 "region": {
-                  "startLine": 309,
+                  "startLine": 319,
                   "startColumn": 31,
-                  "endLine": 309,
+                  "endLine": 319,
                   "endColumn": 44
                 }
               }
@@ -83,9 +62,9 @@
               "resultFile": {
                 "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.HeroBot/Modules/HeroBotModule.cs",
                 "region": {
-                  "startLine": 305,
+                  "startLine": 315,
                   "startColumn": 31,
-                  "endLine": 305,
+                  "endLine": 315,
                   "endColumn": 45
                 }
               }
@@ -104,9 +83,9 @@
               "resultFile": {
                 "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.HeroBot/Modules/HeroBotModule.cs",
                 "region": {
-                  "startLine": 301,
+                  "startLine": 319,
                   "startColumn": 31,
-                  "endLine": 301,
+                  "endLine": 319,
                   "endColumn": 44
                 }
               }
@@ -117,24 +96,184 @@
           }
         },
         {
-          "ruleId": "S1186",
+          "ruleId": "S3776",
           "level": "warning",
-          "message": "Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation.",
+          "message": "Refactor this method to reduce its Cognitive Complexity from 37 to the 15 allowed.",
           "locations": [
             {
               "resultFile": {
                 "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.HeroBot/Modules/HeroBotModule.cs",
                 "region": {
-                  "startLine": 309,
-                  "startColumn": 31,
-                  "endLine": 309,
-                  "endColumn": 44
+                  "startLine": 43,
+                  "startColumn": 27,
+                  "endLine": 43,
+                  "endColumn": 43
+                }
+              }
+            }
+          ],
+          "relatedLocations": [
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.HeroBot/Modules/HeroBotModule.cs",
+                "region": {
+                  "startLine": 53,
+                  "startColumn": 13,
+                  "endLine": 53,
+                  "endColumn": 15
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.HeroBot/Modules/HeroBotModule.cs",
+                "region": {
+                  "startLine": 57,
+                  "startColumn": 17,
+                  "endLine": 57,
+                  "endColumn": 19
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.HeroBot/Modules/HeroBotModule.cs",
+                "region": {
+                  "startLine": 67,
+                  "startColumn": 66,
+                  "endLine": 67,
+                  "endColumn": 67
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.HeroBot/Modules/HeroBotModule.cs",
+                "region": {
+                  "startLine": 67,
+                  "startColumn": 184,
+                  "endLine": 67,
+                  "endColumn": 185
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.HeroBot/Modules/HeroBotModule.cs",
+                "region": {
+                  "startLine": 67,
+                  "startColumn": 213,
+                  "endLine": 67,
+                  "endColumn": 214
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.HeroBot/Modules/HeroBotModule.cs",
+                "region": {
+                  "startLine": 67,
+                  "startColumn": 269,
+                  "endLine": 67,
+                  "endColumn": 270
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.HeroBot/Modules/HeroBotModule.cs",
+                "region": {
+                  "startLine": 74,
+                  "startColumn": 51,
+                  "endLine": 74,
+                  "endColumn": 52
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.HeroBot/Modules/HeroBotModule.cs",
+                "region": {
+                  "startLine": 91,
+                  "startColumn": 13,
+                  "endLine": 91,
+                  "endColumn": 17
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.HeroBot/Modules/HeroBotModule.cs",
+                "region": {
+                  "startLine": 96,
+                  "startColumn": 17,
+                  "endLine": 96,
+                  "endColumn": 24
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.HeroBot/Modules/HeroBotModule.cs",
+                "region": {
+                  "startLine": 96,
+                  "startColumn": 83,
+                  "endLine": 96,
+                  "endColumn": 85
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.HeroBot/Modules/HeroBotModule.cs",
+                "region": {
+                  "startLine": 102,
+                  "startColumn": 21,
+                  "endLine": 102,
+                  "endColumn": 23
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.HeroBot/Modules/HeroBotModule.cs",
+                "region": {
+                  "startLine": 104,
+                  "startColumn": 25,
+                  "endLine": 104,
+                  "endColumn": 32
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.HeroBot/Modules/HeroBotModule.cs",
+                "region": {
+                  "startLine": 114,
+                  "startColumn": 21,
+                  "endLine": 114,
+                  "endColumn": 23
                 }
               }
             }
           ],
           "properties": {
-            "warningLevel": 1
+            "warningLevel": 1,
+            "customProperties": {
+              "0": "+1",
+              "1": "+2 (incl 1 for nesting)",
+              "10": "+3 (incl 2 for nesting)",
+              "11": "+4 (incl 3 for nesting)",
+              "12": "+3 (incl 2 for nesting)",
+              "2": "+3 (incl 2 for nesting)",
+              "3": "+4 (incl 3 for nesting)",
+              "4": "+5 (incl 4 for nesting)",
+              "5": "+5 (incl 4 for nesting)",
+              "6": "+3 (incl 2 for nesting)",
+              "7": "+1",
+              "8": "+2 (incl 1 for nesting)",
+              "9": "+1"
+            }
           }
         },
         {
@@ -146,9 +285,9 @@
               "resultFile": {
                 "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.HeroBot/Modules/HeroBotModule.cs",
                 "region": {
-                  "startLine": 65,
+                  "startLine": 67,
                   "startColumn": 199,
-                  "endLine": 65,
+                  "endLine": 67,
                   "endColumn": 235
                 }
               }
@@ -167,9 +306,9 @@
               "resultFile": {
                 "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.HeroBot/Modules/HeroBotModule.cs",
                 "region": {
-                  "startLine": 65,
+                  "startLine": 67,
                   "startColumn": 255,
-                  "endLine": 65,
+                  "endLine": 67,
                   "endColumn": 291
                 }
               }
@@ -177,175 +316,6 @@
           ],
           "properties": {
             "warningLevel": 1
-          }
-        },
-        {
-          "ruleId": "S3776",
-          "level": "warning",
-          "message": "Refactor this method to reduce its Cognitive Complexity from 35 to the 15 allowed.",
-          "locations": [
-            {
-              "resultFile": {
-                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.HeroBot/Modules/HeroBotModule.cs",
-                "region": {
-                  "startLine": 39,
-                  "startColumn": 27,
-                  "endLine": 39,
-                  "endColumn": 43
-                }
-              }
-            }
-          ],
-          "relatedLocations": [
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.HeroBot/Modules/HeroBotModule.cs",
-                "region": {
-                  "startLine": 51,
-                  "startColumn": 13,
-                  "endLine": 51,
-                  "endColumn": 15
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.HeroBot/Modules/HeroBotModule.cs",
-                "region": {
-                  "startLine": 55,
-                  "startColumn": 17,
-                  "endLine": 55,
-                  "endColumn": 19
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.HeroBot/Modules/HeroBotModule.cs",
-                "region": {
-                  "startLine": 65,
-                  "startColumn": 66,
-                  "endLine": 65,
-                  "endColumn": 67
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.HeroBot/Modules/HeroBotModule.cs",
-                "region": {
-                  "startLine": 65,
-                  "startColumn": 184,
-                  "endLine": 65,
-                  "endColumn": 185
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.HeroBot/Modules/HeroBotModule.cs",
-                "region": {
-                  "startLine": 65,
-                  "startColumn": 213,
-                  "endLine": 65,
-                  "endColumn": 214
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.HeroBot/Modules/HeroBotModule.cs",
-                "region": {
-                  "startLine": 65,
-                  "startColumn": 269,
-                  "endLine": 65,
-                  "endColumn": 270
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.HeroBot/Modules/HeroBotModule.cs",
-                "region": {
-                  "startLine": 72,
-                  "startColumn": 51,
-                  "endLine": 72,
-                  "endColumn": 52
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.HeroBot/Modules/HeroBotModule.cs",
-                "region": {
-                  "startLine": 76,
-                  "startColumn": 13,
-                  "endLine": 76,
-                  "endColumn": 17
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.HeroBot/Modules/HeroBotModule.cs",
-                "region": {
-                  "startLine": 81,
-                  "startColumn": 17,
-                  "endLine": 81,
-                  "endColumn": 24
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.HeroBot/Modules/HeroBotModule.cs",
-                "region": {
-                  "startLine": 85,
-                  "startColumn": 21,
-                  "endLine": 85,
-                  "endColumn": 28
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.HeroBot/Modules/HeroBotModule.cs",
-                "region": {
-                  "startLine": 90,
-                  "startColumn": 21,
-                  "endLine": 90,
-                  "endColumn": 28
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.HeroBot/Modules/HeroBotModule.cs",
-                "region": {
-                  "startLine": 99,
-                  "startColumn": 21,
-                  "endLine": 99,
-                  "endColumn": 23
-                }
-              }
-            }
-          ],
-          "properties": {
-            "warningLevel": 1,
-            "customProperties": {
-              "0": "+1",
-              "1": "+2 (incl 1 for nesting)",
-              "10": "+3 (incl 2 for nesting)",
-              "11": "+3 (incl 2 for nesting)",
-              "2": "+3 (incl 2 for nesting)",
-              "3": "+4 (incl 3 for nesting)",
-              "4": "+5 (incl 4 for nesting)",
-              "5": "+5 (incl 4 for nesting)",
-              "6": "+3 (incl 2 for nesting)",
-              "7": "+1",
-              "8": "+2 (incl 1 for nesting)",
-              "9": "+3 (incl 2 for nesting)"
-            }
           }
         },
         {
@@ -357,9 +327,9 @@
               "resultFile": {
                 "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.HeroBot/Modules/HeroBotModule.cs",
                 "region": {
-                  "startLine": 49,
+                  "startLine": 50,
                   "startColumn": 31,
-                  "endLine": 49,
+                  "endLine": 50,
                   "endColumn": 123
                 }
               }

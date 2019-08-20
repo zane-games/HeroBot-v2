@@ -1,4 +1,5 @@
-﻿using HeroBot.Core.Services;
+﻿using HeroBot.Common.Interfaces;
+using HeroBot.Core.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,9 @@ namespace HeroBot.Core.Helpers
         /// <returns>this</returns>
         public static ServiceProvider GetAllServicesFromExternalAssemblies(this ServiceProvider services)
         {
-            foreach (dynamic d in ModulesService.GetLoadedAssemblies())
+            foreach (AssemblyEntity d in RuntimeAssemblies.AssemblyEntities.Values)
             {
-                Assembly ass = d.ass;
+                Assembly ass = d.Assembly;
                 IEnumerable<TypeInfo> servicesAss = ass.DefinedTypes.Where(x => !x.IsInterface && !x.IsEnum && x.IsClass && x.IsPublic && x.Name.Contains("Service"));
                 if (servicesAss.Any())
                 {

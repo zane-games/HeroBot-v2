@@ -3,10 +3,8 @@ using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HeroBotv2.Services
@@ -41,19 +39,19 @@ namespace HeroBotv2.Services
                             {
                                 if (discordSocketClient.ShardId > 3)
                                 {
-                                    if (ShardPresences[discordSocketClient.ShardId] == presence.Length-1)
+                                    if (ShardPresences[discordSocketClient.ShardId] == presence.Length - 1)
                                         ShardPresences[discordSocketClient.ShardId] = 0;
                                     else
                                         ShardPresences[discordSocketClient.ShardId]++;
-                                    await discordSocketClient.SetGamewithPlaceholder(_discord,presence[ShardPresences[discordSocketClient.ShardId]]);
+                                    await discordSocketClient.SetGamewithPlaceholder(_discord, presence[ShardPresences[discordSocketClient.ShardId]]);
                                 }
                                 else
                                 {
-                                    if (ShardPresences[0] == presence.Length-1)
+                                    if (ShardPresences[0] == presence.Length - 1)
                                         ShardPresences[0] = 0;
                                     else
                                         ShardPresences[0]++;
-                                    await discordSocketClient.SetGamewithPlaceholder(_discord,presence[ShardPresences[0]]);
+                                    await discordSocketClient.SetGamewithPlaceholder(_discord, presence[ShardPresences[0]]);
                                 }
                             }
                         }
@@ -87,8 +85,10 @@ namespace HeroBotv2.Services
             await _commands.AddModulesAsync(Assembly.GetEntryAssembly(), _provider);     // Load commands and modules into the command service
         }
     }
-    public static class DiscordShardedClientExtension {
-        public static Task SetGamewithPlaceholder(this DiscordSocketClient discordsocket,DiscordShardedClient discordShardedClient, string str) {
+    public static class DiscordShardedClientExtension
+    {
+        public static Task SetGamewithPlaceholder(this DiscordSocketClient discordsocket, DiscordShardedClient discordShardedClient, string str)
+        {
             return discordsocket.SetGameAsync(str
                 .Replace("[GuildCount]", discordShardedClient.Guilds.Count.ToString())
                 .Replace("[UsersCount]", discordShardedClient.Guilds.Sum(x => x.Users.Count).ToString())

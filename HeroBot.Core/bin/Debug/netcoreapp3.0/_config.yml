@@ -1,9 +1,9 @@
 ﻿prefix: hb!
-discord: "atpsnu"
+discord: "jXp6KtA"
 tokens:
-    discord: "NTMyMTk2MzI5Mzg5MTYyNTEw.XTC8VQ.lahXbk71KTmyBSdn9Dd08oaZEwA"
+    discord: "NTMyMTk2MzI5Mzg5MTYyNTEw.XVwrtg.7aARORYuIW54S_HMHjZb6c-WCY4"
 redis:
-    host: localhost
+    host: redis
     database: 1
     port: 6379
     auth:

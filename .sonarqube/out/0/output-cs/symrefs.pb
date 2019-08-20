@@ -14,38 +14,27 @@ fC:\Users\Matthieu\source\repos\HeroBot-deux-point-z√©ro\HeroBot.Common\Attribut
 
 å î
   ` g
-  _ d†
+  _ d·
 hC:\Users\Matthieu\source\repos\HeroBot-deux-point-z√©ro\HeroBot.Common\Attributes\NeedPluginAttribute.cs
 
  $
 
-' 6
+7 L
+] d[ bQ X
+r y	 Ü
 
-  1
+å î $
+  
+## 0i ~2
+##< F%% && && ''' 
 
-  +
+** #
 
-  1
+**2 7
 
-  +
+**D J
 
-  6
-
-7 L
-
-] d
-
-r y
-
-å î
-
-MM #
-
-MM2 7
-
-MMD J
-
-MMR ^r
+**S _r
 dC:\Users\Matthieu\source\repos\HeroBot-deux-point-z√©ro\HeroBot.Common\Attributes\PluginAttribute.cs
 
 
@@ -59,22 +48,7 @@ eC:\Users\Matthieu\source\repos\HeroBot-deux-point-z√©ro\HeroBot.Common\Attribut
  's
 eC:\Users\Matthieu\source\repos\HeroBot-deux-point-z√©ro\HeroBot.Common\Attributes\ServiceAttribute.cs
 
- !™
-`C:\Users\Matthieu\source\repos\HeroBot-deux-point-z√©ro\HeroBot.Common\Entities\Contextentity.cs
-
- %
-
-
-
- 
-
-  
-
-  
-
-! (
-
- -ß
+ !ß
 kC:\Users\Matthieu\source\repos\HeroBot-deux-point-z√©ro\HeroBot.Common\ExtendedModules\ModuleLoadcontext.cs
 
  )
@@ -162,7 +136,20 @@ bC:\Users\Matthieu\source\repos\HeroBot-deux-point-z√©ro\HeroBot.Common\Helpers\
 		 ,
 		; C
 
-_ gª
+_ g≠
+cC:\Users\Matthieu\source\repos\HeroBot-deux-point-z√©ro\HeroBot.Common\Interfaces\AssemblyEntity.cs
+
+		 
+
+  
+
+! (
+
+ 
+
+  &
+
+ -ª
 eC:\Users\Matthieu\source\repos\HeroBot-deux-point-z√©ro\HeroBot.Common\Interfaces\ICooldownService.cs
 
  %
@@ -186,13 +173,40 @@ eC:\Users\Matthieu\source\repos\HeroBot-deux-point-z√©ro\HeroBot.Common\Interfac
 A Ló
 eC:\Users\Matthieu\source\repos\HeroBot-deux-point-z√©ro\HeroBot.Common\Interfaces\IDatabaseService.cs
 
-		 %
+ %
+
+ ,
 
  ,
 
- ,
+4 5ˆ
+dC:\Users\Matthieu\source\repos\HeroBot-deux-point-z√©ro\HeroBot.Common\Interfaces\IModulesService.cs
 
-4 5r
+
+
+ $
+
+ 
+
+" '
+
+4 >
+
+ 
+
+! &
+
+3 =
+
+ 0
+
+< F
+
+ "
+
+* /
+
+< Fr
 dC:\Users\Matthieu\source\repos\HeroBot-deux-point-z√©ro\HeroBot.Common\Interfaces\IPluginRefferal.cs
 
  $à
@@ -204,20 +218,7 @@ bC:\Users\Matthieu\source\repos\HeroBot-deux-point-z√©ro\HeroBot.Common\Interfac
 
  !
 
- "À
-aC:\Users\Matthieu\source\repos\HeroBot-deux-point-z√©ro\HeroBot.Common\Interfaces\IVoteService.cs
-
-		 !
- * "
- , 3
-
-4 5
-
-# .
-
- 
-
- ñ
+ "ñ
 pC:\Users\Matthieu\source\repos\HeroBot-deux-point-z√©ro\HeroBot.Common\Migrations\201807182_Migration_Plugins.cs
 
 		
@@ -225,4 +226,23 @@ pC:\Users\Matthieu\source\repos\HeroBot-deux-point-z√©ro\HeroBot.Common\Migratio
 
  !
 
- 
+ Î
+cC:\Users\Matthieu\source\repos\HeroBot-deux-point-z√©ro\HeroBot.Common\SimpleCacheImplementation.cs
+
+
+
+ *F
+ %     # 
+
+ (
+7 C !
+
+ #
++ .) ,
+6 ;. 3
+
+& 3(
+; >+ .( +3 6
+
+ (
+0 3) ,
