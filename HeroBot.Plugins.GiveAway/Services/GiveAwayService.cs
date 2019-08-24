@@ -76,14 +76,14 @@ namespace HeroBot.Plugins.GiveAway.Services
                                         var emote = new Emoji("🎉");
                                         var reactions = await message.GetReactionUsersAsync(emote, 9999).FlattenAsync();
                                         var win = new List<IUser>();
-                                        var count = reactions.Count();
+                                        var count = reactions.Count() - reactions.Count(x => x.IsBot);
                                         var wC = giveaway.winners;
                                         if (wC > count)
                                             wC = count;
                                         while (wC != 0)
                                         {
                                             var winner = reactions.ElementAt(_random.Next(count));
-                                            while (win.Any(x => x.Id == winner.Id))
+                                            while (win.Any(x => x.Id == winner.Id ) || winner.IsBot)
                                                 winner = reactions.ElementAt(_random.Next(count));
                                             win.Add(winner);
                                             wC--;
@@ -107,6 +107,10 @@ namespace HeroBot.Plugins.GiveAway.Services
             var connection = _sqlDatabase.GetDbConnection();
             var id = (long)await connection.ExecuteScalarAsync(Creategiveaway, new { winners, price, message = (long)message.Id, channel = (long)channel.Id });
             await _redisDatabase.GetDatabase().StringSetAsync($"giveaway:{id}", String.Empty,time);
+        }
+
+        public async Task FinishGiveaway() {
+            
         }
     }
 }

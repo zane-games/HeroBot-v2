@@ -162,8 +162,8 @@ namespace HeroBot.Plugins.Mod.Modules
         /// <param name="count"></param>
         /// <returns></returns>
         [Command("clear"), Alias("c")]
-        [RequireBotPermission(GuildPermission.ManageChannels)]
-        [RequireUserPermission(GuildPermission.ManageChannels)]
+        [RequireBotPermission(GuildPermission.ManageMessages)]
+        [RequireUserPermission(GuildPermission.ManageMessages)]
         [RequireContext(ContextType.Guild)]
         [Summary("Deletes a certain count of messages.")]
         public async Task Clear(int count)
@@ -185,9 +185,9 @@ namespace HeroBot.Plugins.Mod.Modules
             await message.DeleteAsync();
         }
         [Command("setupMute")]
-        [RequireBotPermission(GuildPermission.ManageChannels)]
+        [RequireBotPermission(GuildPermission.Administrator)]
         [RequireUserPermission(GuildPermission.ManageChannels)]
-        [Summary("Creates & configure the mutes role.")]
+        [Summary("Creates & configure the mute role.")]
         public async Task SetupMute() {
             // First, we need to create the role
             try
@@ -210,8 +210,8 @@ namespace HeroBot.Plugins.Mod.Modules
         /// <param name="reason"></param>
         /// <returns></returns>
         [Command("mute"), Alias("m")]
-        [RequireBotPermission(GuildPermission.ManageChannels)]
-        [RequireUserPermission(GuildPermission.ManageChannels)]
+        [RequireBotPermission(GuildPermission.Administrator)]
+        [RequireUserPermission(GuildPermission.ManageMessages)]
         [RequireContext(ContextType.Guild)]
         [Summary("Mutes a user from a server.")]
         public async Task Mute(SocketGuildUser target, [Remainder]string reason = "*no reason*")
@@ -251,8 +251,8 @@ namespace HeroBot.Plugins.Mod.Modules
         /// <param name="target"></param>
         /// <returns></returns>
         [Command("unmute"), Alias("um")]
-        [RequireBotPermission(GuildPermission.ManageChannels)]
-        [RequireUserPermission(GuildPermission.ManageChannels)]
+        [RequireBotPermission(GuildPermission.Administrator)]
+        [RequireUserPermission(GuildPermission.ManageMessages)]
         [RequireContext(ContextType.Guild)]
         public async Task UnMute(SocketGuildUser target)
         {
@@ -293,8 +293,8 @@ namespace HeroBot.Plugins.Mod.Modules
         /// <param name="channel"></param>
         /// <returns></returns>
         [Command("add"), Alias("a")]
-        [RequireBotPermission(GuildPermission.ManageChannels)]
-        [RequireUserPermission(GuildPermission.ManageChannels)]
+        [RequireBotPermission(GuildPermission.Administrator)]
+        [RequireUserPermission(GuildPermission.ManageMessages)]
         [RequireContext(ContextType.Guild)]
         public async Task AddToChannel(SocketGuildUser target, SocketTextChannel channel = null)
         {
@@ -336,7 +336,7 @@ namespace HeroBot.Plugins.Mod.Modules
                     channel = Context.Channel as SocketTextChannel;
                 if (!channel.Users.Any(x => x.Id == target.Id))
                 {
-                    await ReplyAsync($"<:fail:606088713705095208> ... This user is not here ...");
+                    await ReplyAsync($"<:fail:606088713705095208> This user is already here !");
                 }
                 else
                 {
@@ -370,7 +370,7 @@ namespace HeroBot.Plugins.Mod.Modules
                     await channel.AddPermissionOverwriteAsync(role, new OverwritePermissions(sendMessages: PermValue.Deny));
                 }
             }
-            await ReplyAsync("<:check:606088713897902081> Channel locked :lock:");
+            await ReplyAsync("<:check:606088713897902081> This channel is now locked :lock:");
         }
         /// <summary>
         /// Unlock a channel
@@ -392,7 +392,7 @@ namespace HeroBot.Plugins.Mod.Modules
                         await channel.RemovePermissionOverwriteAsync(role);
                 }
             }
-            await ReplyAsync("<:check:606088713897902081> | Channel unlocked !");
+            await ReplyAsync("<:check:606088713897902081> | This channel is now unlocked !");
         }
         /// <summary>
         /// Sent a message
@@ -401,9 +401,12 @@ namespace HeroBot.Plugins.Mod.Modules
         /// <returns></returns>
         [Command("say"), Alias("s")]
         [Summary("Made the bots say something")]
-        [RequireBotPermission(GuildPermission.SendMessages)]
+        [RequireBotPermission(GuildPermission.ManageMessages)]
         [RequireUserPermission(ChannelPermission.ManageMessages)]
-        public Task Say([Remainder]string text) => ReplyAsync(text.Replace("@everyone","`@everyone`").Replace("@here","`@here`"));
+        public async Task Say([Remainder]string text) {
+            await Context.Message.DeleteAsync();
+            await ReplyAsync(text.Replace("@everyone", "`@everyone`").Replace("@here", "`@here`"));
+        }
         /// <summary>
         /// Temporaly deny the permission "talk" to a user
         /// </summary>
@@ -447,7 +450,7 @@ namespace HeroBot.Plugins.Mod.Modules
                     }
                 }
                 else
-                    await ReplyAsync("<:fail:606088713705095208> There is no muted role...");
+                    await ReplyAsync("<:fail:606088713705095208> There is no muted role... you can setup the muted role with the `hb!setupmute` command.");
             }
             else
             {
@@ -459,7 +462,7 @@ namespace HeroBot.Plugins.Mod.Modules
         /// </summary>
         [Cooldown(1)]
         [Group("embed")]
-        [RequireUserPermission(GuildPermission.ManageMessages)]
+        [RequireUserPermission(GuildPermission.ManageChannels)]
         public class Embed : ModuleBase<SocketCommandContext>
         {
             [Command("create")]
@@ -540,10 +543,10 @@ namespace HeroBot.Plugins.Mod.Modules
                 {
                     var embed = message.Embeds.First();
                     var export = new EmbedExport() {
-                        description = embed.Description == null ? "" : embed.Description,
+                        description = embed.Description ?? string.Empty,
                         color = embed.Color.HasValue ? embed.Color.Value.RawValue : 0xFFF,
                         thubmail = embed.Thumbnail.HasValue ? embed.Thumbnail.Value.Url : string.Empty,
-                        title = embed.Title == null ? "" : embed.Title,
+                        title = embed.Title ?? "",
                         timeStamp = embed.Timestamp,
                         url = embed.Url
                     };
@@ -692,7 +695,7 @@ namespace HeroBot.Plugins.Mod.Modules
                 }
                 await ReplyAsync("I can't find the message !");
             }
-            class EmbedExport
+            struct EmbedExport
             {
                 public string title;
                 public uint color;
@@ -704,7 +707,7 @@ namespace HeroBot.Plugins.Mod.Modules
                 public EmbedExportAuthor embedAuthor;
                 public EmbedExportFooter embedFooter;
             }
-            class EmbedExportField
+            struct EmbedExportField
             {
                 public string title;
                 public string content;

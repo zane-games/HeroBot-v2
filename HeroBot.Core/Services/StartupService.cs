@@ -17,7 +17,6 @@ namespace HeroBotv2.Services
         private readonly IConfigurationRoot _config;
         private int[] ShardPresences;
         private readonly string[] presence = new[] {
-            "hb!help | v2.0",
             "hb!help | Dragon 🐉",
             "hb!help | [GuildCount] guilds",
             "hb!help | Thanks 💕 !",

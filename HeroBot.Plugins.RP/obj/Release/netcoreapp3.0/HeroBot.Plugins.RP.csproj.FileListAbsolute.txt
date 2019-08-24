@@ -2,7 +2,6 @@ C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\bin\Debug\n
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\bin\Debug\netcoreapp3.0\Modules\HeroBot.Plugins.RP.dll
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\bin\Debug\netcoreapp3.0\Modules\HeroBot.Plugins.RP.pdb
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.RP\obj\Release\netcoreapp3.0\HeroBot.Plugins.RP.csprojAssemblyReference.cache
-C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.RP\obj\Release\netcoreapp3.0\HeroBot.Plugins.RP.csproj.CoreCompileInputs.cache
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.RP\obj\Release\netcoreapp3.0\HeroBot.Plugins.RP.AssemblyInfoInputs.cache
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.RP\obj\Release\netcoreapp3.0\HeroBot.Plugins.RP.AssemblyInfo.cs
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.RP\obj\Release\netcoreapp3.0\HeroBot.Plugins.RP.csproj.CopyComplete

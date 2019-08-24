@@ -70,7 +70,7 @@ namespace HeroBot.Plugins.Mod.Services
             else return false;
         }
     }
-    public class TempMute
+    public struct TempMute
     {
         public TimeSpan TimeSpan { get; set; }
         public string Reason { get; set; }

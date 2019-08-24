@@ -50,10 +50,10 @@ namespace HeroBot.Plugins.Images.Modules
             using WebClient webclient = new WebClient();
             return webclient.DownloadStringTaskAsync(new Uri(DogUrl)).ContinueWith((x) =>
 {
-ReplyAsync($":dog: {Context.User.Mention} {DogGreetings[_random.Next() % DogGreetings.Length].Replace("__great__", DogGreet[_random.Next() % DogGreet.Length])}", false, new EmbedBuilder()
-{
-ImageUrl = $"https://random.dog/{x.Result}"
-}.WithRandomColor().WithCopyrightFooter(Context.User.Username, "dog").Build());
+    ReplyAsync($":dog: {Context.User.Mention} {DogGreetings[_random.Next() % DogGreetings.Length].Replace("__great__", DogGreet[_random.Next() % DogGreet.Length])}", false, new EmbedBuilder()
+    {
+        ImageUrl = $"https://random.dog/{x.Result}"
+    }.WithRandomColor().WithCopyrightFooter(Context.User.Username, "dog").Build());
 });
         }
         [Command("welcome")]

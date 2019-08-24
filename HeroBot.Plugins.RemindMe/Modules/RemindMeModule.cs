@@ -28,7 +28,7 @@ namespace HeroBot.Plugins.RemindMe.Modules
                 TimeSpan = time,
                 UserId = Context.User.Id
             }))
-                await ReplyAsync($":white_check_mark: I will remind you in {time.ToHumanReadable()}s");
+                await ReplyAsync($":white_check_mark: I will remind you in `{time.ToHumanReadable()}`");
             else
                 await ReplyAsync("You have too many reminders !");
         }

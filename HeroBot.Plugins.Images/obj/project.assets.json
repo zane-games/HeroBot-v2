@@ -1968,7 +1968,10 @@
         },
         "runtime": {
           "bin/placeholder/HeroBot.Common.dll": {}
-        }
+        },
+        "frameworkReferences": [
+          "Microsoft.NETCore.App"
+        ]
       },
       "HeroBot.Plugins.Mod/1.0.0": {
         "type": "project",
@@ -1981,7 +1984,10 @@
         },
         "runtime": {
           "bin/placeholder/HeroBot.Plugins.Mod.dll": {}
-        }
+        },
+        "frameworkReferences": [
+          "Microsoft.NETCore.App"
+        ]
       }
     }
   },
@@ -6633,11 +6639,9 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "frameworkReferences": {
-          "Microsoft.NETCore.App": {
-            "privateAssets": "all"
-          }
-        }
+        "frameworkReferences": [
+          "Microsoft.NETCore.App"
+        ]
       }
     }
   }

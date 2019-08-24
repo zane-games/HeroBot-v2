@@ -24,7 +24,7 @@ namespace HeroBot.Plugins.Music.Modules
         public async Task Join() {
             var playerExists = _music.GetLavalinkCluster().GetPlayer<Player>(Context.Guild.Id);
             if (playerExists != null) {
-                await ReplyAsync($"I'm already connected to <#{playerExists.VoiceChannelId}>");
+                await ReplyAsync($"I'm already connected to `<#{playerExists.VoiceChannelId}>`");
             }
             var member = Context.Guild.GetUser(Context.User.Id);
             var payer = await _music.GetLavalinkCluster().JoinAsync<Player>(Context.Guild.Id, member.VoiceChannel.Id);

@@ -1968,7 +1968,10 @@
         },
         "runtime": {
           "bin/placeholder/HeroBot.Common.dll": {}
-        }
+        },
+        "frameworkReferences": [
+          "Microsoft.NETCore.App"
+        ]
       }
     }
   },
@@ -6615,11 +6618,9 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "frameworkReferences": {
-          "Microsoft.NETCore.App": {
-            "privateAssets": "all"
-          }
-        }
+        "frameworkReferences": [
+          "Microsoft.NETCore.App"
+        ]
       }
     }
   }

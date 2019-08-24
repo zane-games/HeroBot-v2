@@ -43,9 +43,8 @@ namespace HeroBot.Plugins.RemindMe.Services
                 Console.WriteLine(name.Length);
                 if (name.Length == 3 && name[0] == "reminder" && name[1] == "remove")
                 {
-                    var reminderId = name[2];
+                    var reminderId = long.Parse(name[2]);
                     using var conn = (NpgsqlConnection)_database.GetDbConnection();
-                    conn.Open();
                     conn.QueryAsync(GetReminderById, new { id = reminderId }).ContinueWith((x) =>
                       {
                           var cont = x.Result.FirstOrDefault();
@@ -58,11 +57,11 @@ namespace HeroBot.Plugins.RemindMe.Services
                                   var dm = x.Result;
                                   dm.SendMessageAsync($"Hay :watch: ! It's time to {reason}").ContinueWith((v) =>
                                   {
-                                      conn.Execute(new CommandDefinition(DeleteReminderbyId, new { id = reminderId }));
+                                      conn.Execute(DeleteReminderbyId, new { id = reminderId });
                                   });
                               });
                           }
-                      });
+                      }).Wait();
                 }
             }
             catch (Exception e) { Console.WriteLine(e); }

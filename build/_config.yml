@@ -1,9 +1,9 @@
 ﻿prefix: hb!
 discord: "jXp6KtA"
 tokens:
-    discord: "NTMyMTk2MzI5Mzg5MTYyNTEw.XVwrtg.7aARORYuIW54S_HMHjZb6c-WCY4"
+    discord: "NDkxNjczNDgwMDA2MjA1NDYx.XV1iHQ.HGGgxNyGa0PMe9-WfpSRf3cJZmg"
 redis:
-    host: redis
+    host: localhost
     database: 1
     port: 6379
     auth:

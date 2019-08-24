@@ -71,13 +71,6 @@
               "target": "Package",
               "version": "[2.2.0, )"
             },
-            "Microsoft.NETCore.App": {
-              "include": "None",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[3.0.0-preview6-27804-01, )",
-              "autoReferenced": true
-            },
             "Npgsql": {
               "target": "Package",
               "version": "[4.0.8, )"
@@ -97,11 +90,9 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          }
+          "frameworkReferences": [
+            "Microsoft.NETCore.App"
+          ]
         }
       }
     },
@@ -151,13 +142,6 @@
             "Lavalink4NET.Discord.NET": {
               "target": "Package",
               "version": "[1.4.0, )"
-            },
-            "Microsoft.NETCore.App": {
-              "include": "None",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[3.0.0-preview6-27804-01, )",
-              "autoReferenced": true
             }
           },
           "imports": [
@@ -170,11 +154,9 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          }
+          "frameworkReferences": [
+            "Microsoft.NETCore.App"
+          ]
         }
       }
     }

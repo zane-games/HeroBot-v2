@@ -14,7 +14,6 @@ namespace HeroBot.Plugins.Music.Services
         public MusicService(DiscordShardedClient discordShardedclient)
         {
             _discord = discordShardedclient;
-
             discordShardedclient.ShardReady += DiscordShardedclient_ShardReady;
         }
         internal LavalinkCluster GetLavalinkCluster() { return lavalinkCluster; }

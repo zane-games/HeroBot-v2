@@ -41,8 +41,8 @@ namespace HeroBotv2.Services
 
         private async Task OnMessageReceivedAsync(SocketMessage s)
         {
-            SocketUserMessage msg = s as SocketUserMessage;                                             // Ensure the message is from a user/bot
-            if (msg == null) return;
+            // Ensure the message is from a user/bot
+            if (!(s is SocketUserMessage msg)) return;
             if (msg.Author.Id == _discord.CurrentUser.Id || msg.Author.IsBot) return;     // Ignore self or bot when checking commands
             if (!(msg.Channel is SocketGuildChannel)) return;
             var context = new SocketCommandContext(_discord.GetShardFor((msg.Channel as SocketGuildChannel).Guild), msg);                        // Create the command context

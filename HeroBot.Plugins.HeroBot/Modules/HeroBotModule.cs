@@ -1,6 +1,7 @@
 ﻿using Discord;
 using Discord.Commands;
 using Discord.Rest;
+using Discord.WebSocket;
 using HeroBot.Common.Attributes;
 using HeroBot.Common.Helpers;
 using HeroBot.Common.Interfaces;
@@ -20,13 +21,15 @@ namespace HeroBot.Plugins.HeroBot.Modules
     [Name("HeroBot Commands")]
     public class HeroBotModule : ModuleBase<SocketCommandContext>
     {
+        private readonly DiscordShardedClient _client;
         private readonly CommandService _service;
         private readonly IConfigurationRoot _config;
         private readonly IServiceProvider _provider;
         private readonly IModulesService _modules;
 
-        public HeroBotModule(CommandService service, IConfigurationRoot config, IServiceProvider serviceProvider,IModulesService _module)
+        public HeroBotModule(DiscordShardedClient client,CommandService service, IConfigurationRoot config, IServiceProvider serviceProvider,IModulesService _module)
         {
+            _client = client;
             _service = service;
             _config = config;
             _provider = serviceProvider;
@@ -65,7 +68,7 @@ namespace HeroBot.Plugins.HeroBot.Modules
                 {
                     x.Name = "Summary";
                     x.IsInline = true;
-                    x.Value = cmd.Summary == null ? "*no summary*" : cmd.Summary;
+                    x.Value = cmd.Summary ?? "*no summary*";
                 });
                 var permBot = string.Join(", ", cmd.Preconditions.Where(v => v is RequireBotPermissionAttribute).Select(v => ((RequireBotPermissionAttribute)v).ChannelPermission).Where(x => x.HasValue).Select(x => x.Value));
                 builder.AddField(x => {
@@ -122,10 +125,10 @@ namespace HeroBot.Plugins.HeroBot.Modules
             await ReplyAsync($"Available commands for {this.Context.User.Mention}", false, builder.Build());
         }
 
-        [Command("quit"), Alias(new[] { "leave", "goodbye" }), RequireContext(ContextType.Guild)]
+        [Command("quit"), Alias(new[] { "leave", "goodbye" }), RequireContext(ContextType.Guild), RequireUserPermission(GuildPermission.Administrator)]
         public async Task LeaveServer()
         {
-            await ReplyAsync($"<:exit:606088713532866591> Thanks for using HeroBot during `{(DateTime.Now - Context.Guild.CurrentUser.JoinedAt)}` please, remember you can leave a commant in our support server !!!");
+            await ReplyAsync($"<:exit:606088713532866591> Thanks for using HeroBot during `{(DateTime.Now - Context.Guild.CurrentUser.JoinedAt).Value.ToHumanReadable()}` please, remember you can leave a commant in our support server !!!");
             await Context.Guild.LeaveAsync();
         }
         [Command("support"), Alias(new[] { "discord", "community" })]
@@ -139,6 +142,7 @@ namespace HeroBot.Plugins.HeroBot.Modules
             return ReplyAsync($"<:wave:606089927356317708> Hi ! I'm HeroBot, your new discord assistant ! My prefix is `{_config["prefix"]}` in this server !");
         }
         [Command("bot"), Alias(new[] { "botinfo", "ping" })]
+        [Cooldown(10)]
         public async Task Bot()
         {
             var websocketPing = DateTime.Now - Context.Message.CreatedAt;
@@ -161,7 +165,7 @@ namespace HeroBot.Plugins.HeroBot.Modules
                 await Task.Delay(500);
             }
             var restPing = pingMoyenne.Average();
-            var memoryCount = $" Heap {SizeSuffix(GetAvailableRam())}";
+            var memoryCount = $" {SizeSuffix(GetAvailableRam())}";
             var processor = await GetCpuUsageForProcess();
             var dotnetVersion = Environment.Version.ToString();
             var processorCount = Environment.ProcessorCount;
@@ -180,7 +184,8 @@ namespace HeroBot.Plugins.HeroBot.Modules
                 .AddField("Processor(s)", $"> {processorCount}c", true)
                 .AddField("Threads actifs", "> " + threadCount.Count, true)
                 .AddField("Uptime", "> " + uptime.ToHumanReadable())
-                .AddField("🎉 Contribs", "`Moitié prix#4263`\n`PsyKo ツ ♡#2586`\n`TheDarkny#9253`\n`Ernest#6450`");
+                .AddField("Bot statistics", $"Channels: {_client.Guilds.Sum(x => x.Channels.Count)} ({_client.Guilds.Sum(x => x.VoiceChannels.Count)} voice channels, {_client.Guilds.Sum(x => x.TextChannels.Count)} text channels, {_client.Guilds.Sum(x => x.CategoryChannels.Count)} categories) \r\nGuilds: {_client.Guilds.Count} \r\nGuild Users: {_client.Guilds.Sum(x => x.MemberCount)}\r\n")
+                .AddField("🎉 Contribs", "> `Moitié prix#4263`\n`PsyKo ツ ♡#2586`\n`TheDarkny#9253`\n`Ernest#6450`");
             await message.ModifyAsync((x) =>
             {
                 x.Embed = embed.Build();
@@ -189,7 +194,7 @@ namespace HeroBot.Plugins.HeroBot.Modules
         }
         public long GetAvailableRam()
         {
-            return Process.GetCurrentProcess().PrivateMemorySize64;
+            return Process.GetCurrentProcess().PeakVirtualMemorySize64;
         }
         private async Task<double> GetCpuUsageForProcess()
         {
@@ -215,7 +220,7 @@ namespace HeroBot.Plugins.HeroBot.Modules
         /// </summary>
         /// <param name="value">The value<see cref="Int64"/></param>
         /// <returns>The <see cref="string"/></returns>
-        internal static string SizeSuffix(Int64 value)
+        internal static string SizeSuffix(long value)
         {
             if (value < 0) { return "-" + SizeSuffix(-value); }
             if (value == 0) { return "0.0 bytes"; }
@@ -277,6 +282,7 @@ namespace HeroBot.Plugins.HeroBot.Modules
                 await ReplyAsync(resp.ToString());
             }
             [Command("enable")]
+            [RequireUserPermission(GuildPermission.Administrator)]
             [RequireContext(ContextType.Guild)]
             public async Task EnablePlugin([Remainder]string plugin)
             {
@@ -291,6 +297,7 @@ namespace HeroBot.Plugins.HeroBot.Modules
                 }
             }
             [Command("disable")]
+            [RequireUserPermission(GuildPermission.Administrator)]
             [RequireContext(ContextType.Guild)]
             public async Task DisablePlugin([Remainder]string plugin)
             {
