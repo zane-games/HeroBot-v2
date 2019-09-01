@@ -45,7 +45,15 @@
           "dependencies": {
             "Dapper": {
               "target": "Package",
-              "version": "[1.60.6, )"
+              "version": "[2.0.4, )"
+            },
+            "Dapper.FastCrud": {
+              "target": "Package",
+              "version": "[2.5.0.39, )"
+            },
+            "Dapper.FluentMap": {
+              "target": "Package",
+              "version": "[1.8.0, )"
             },
             "Discord.Net": {
               "target": "Package",
@@ -55,25 +63,17 @@
               "target": "Package",
               "version": "[3.2.1, )"
             },
-            "FluentMigrator.Runner": {
-              "target": "Package",
-              "version": "[3.2.1, )"
-            },
-            "FluentMigrator.Runner.SQLite": {
-              "target": "Package",
-              "version": "[3.2.1, )"
-            },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
-              "version": "[2.2.0, )"
+              "version": "[3.0.0-preview8.19405.4, )"
             },
             "Microsoft.Extensions.DependencyInjection": {
               "target": "Package",
-              "version": "[2.2.0, )"
+              "version": "[3.0.0-preview8.19405.4, )"
             },
             "Npgsql": {
               "target": "Package",
-              "version": "[4.0.8, )"
+              "version": "[4.1.0-preview1, )"
             },
             "StackExchange.Redis": {
               "target": "Package",

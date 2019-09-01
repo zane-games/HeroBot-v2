@@ -31,13 +31,12 @@ namespace HeroBot.Plugins.RP.Modules
         [Command("me")]
         public async Task Me()
         {
-            if (_rp.GetAccount(Context.User, out RPUser userAccount))
+            var user = await _rp.GetRPUser(Context.User);
+            if (user != null)
             {
-                var embed = new EmbedBuilder();
-                embed.WithAuthor(Context.User)
-                    .WithRandomColor()
-                    .WithCopyrightFooter(Context.User.Username, "me")
-                    .AddField("Ressources", $"Gold: {userAccount.Gold}\nBolt: {userAccount.Bolts}");
+                var embed = new EmbedBuilder() {
+
+                };
                 await ReplyAsync(embed: embed.Build());
             }
             else await ReplyAsync("... I can't find your account `hb!start`");
@@ -45,7 +44,8 @@ namespace HeroBot.Plugins.RP.Modules
         [Cooldown(600)]
         [Command("lottery")]
         public async Task Lottery() {
-            if (_rp.GetAccount(Context.User, out RPUser userAccount))
+            var user = await _rp.GetRPUser(Context.User);
+            if (user != null)
             {
                 var columnCount = 3;
                 var ligneCount = 3;
@@ -72,8 +72,7 @@ namespace HeroBot.Plugins.RP.Modules
                 }) == columnCount;
                 if (v)
                 {
-                    userAccount.Gold += array[1][0].money;
-                    _rp.SetAccount(userAccount);
+                    _rp.UpdateUser(Context.User, x => { x.Money += array[1][0].money; return x; });
                 }
                 sb.Append(v ? $"**Congratulations ! You won {array[1][0].money} gold!**\r\n" : "*Sad trombone*\r\n");
                 foreach (dynamic ar in array)
@@ -91,20 +90,21 @@ namespace HeroBot.Plugins.RP.Modules
 
         [Command("start")]
         public async Task StartRP() {
-            if (!_rp.GetAccount(Context.User, out RPUser userAccount) && await _rp.Start(Context.User))
+            if (await _rp.GetRPUser(Context.User) == null && await _rp.CreateUser(Context.User))
             {
                 await ReplyAsync(":tada: Welcome to the HeroBot's role-play game !");
             }
+            else await ReplyAsync("Im me semble que ton compte existe deja :/");
         }
 
         [Command("daily")]
         [Cooldown(86400)]
         public async Task Daily() {
-            if (_rp.GetAccount(Context.User, out RPUser userAccount))
+            var user = await _rp.GetRPUser(Context.User);
+            if (user != null)
             {
                 var gain = _random.Next() % 200;
-                userAccount.Bolts += gain;
-                _rp.SetAccount(userAccount);
+                _rp.UpdateUser(Context.User, x => { x.Money += gain; return x; });
                 await ReplyAsync($"You won **{gain}** bolts");
             }
             else await ReplyAsync("... I can't find your account `hb!start`");
@@ -113,16 +113,16 @@ namespace HeroBot.Plugins.RP.Modules
         [Command("hourly")]
         [Cooldown(3600)]
         public async Task Hourly() {
-            if (_rp.GetAccount(Context.User, out RPUser userAccount))
+            var user = await _rp.GetRPUser(Context.User);
+            if (user != null)
             {
                 var gain = _random.Next() % 20;
-                userAccount.Bolts += gain;
-                _rp.SetAccount(userAccount);
+                _rp.UpdateUser(Context.User, x => { x.Money += gain; return x; });
                 await ReplyAsync($"You won **{gain}** bolts");
             }
             else await ReplyAsync("... I can't find your account `hb!start`");
         }
-
+        /*
         [Command("pay")]
         public async Task Pay(SocketUser target,String ressource,int amount) {
             var ress = RPService.ToRessourceEnum(ressource);
@@ -163,7 +163,7 @@ namespace HeroBot.Plugins.RP.Modules
                 else await ReplyAsync($"... I can't find {target.Mention}'s account `hb!start`");
             }
             else await ReplyAsync($"... I can't find {Context.User.Mention}'s account `hb!start`");
-        }
+        }*/
 
 
         [Command("8ball")]
