@@ -30,7 +30,7 @@
         "dependencies": {
           "Dapper": "2.0.4",
           "NETStandard.Library": "1.6.1",
-          "System.ComponentModel.Annotations": "4.3.0",
+          "System.ComponentModel.Annotations": "4.4.1",
           "System.ComponentModel.TypeConverter": "4.3.0"
         },
         "runtime": {
@@ -121,6 +121,62 @@
           }
         }
       },
+      "FluentMigrator/3.2.1": {
+        "dependencies": {
+          "FluentMigrator.Abstractions": "3.2.1",
+          "Microsoft.Extensions.DependencyInjection": "3.0.0-preview8.19405.4",
+          "Microsoft.Extensions.Options": "2.0.1"
+        },
+        "runtime": {
+          "lib/netstandard2.0/FluentMigrator.dll": {
+            "assemblyVersion": "3.2.1.0",
+            "fileVersion": "3.2.1.0"
+          }
+        }
+      },
+      "FluentMigrator.Abstractions/3.2.1": {
+        "dependencies": {
+          "System.ComponentModel.Annotations": "4.4.1",
+          "System.ValueTuple": "4.4.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/FluentMigrator.Abstractions.dll": {
+            "assemblyVersion": "3.2.1.0",
+            "fileVersion": "3.2.1.0"
+          }
+        },
+        "resources": {
+          "lib/netstandard2.0/de-DE/FluentMigrator.Abstractions.resources.dll": {
+            "locale": "de-DE"
+          }
+        }
+      },
+      "FluentMigrator.Runner.Core/3.2.1": {
+        "dependencies": {
+          "FluentMigrator.Abstractions": "3.2.1",
+          "Microsoft.Extensions.Configuration.Abstractions": "3.0.0-preview8.19405.4",
+          "Microsoft.Extensions.DependencyInjection": "3.0.0-preview8.19405.4",
+          "Microsoft.Extensions.Logging.Abstractions": "2.0.1",
+          "Microsoft.Extensions.Options": "2.0.1"
+        },
+        "runtime": {
+          "lib/netstandard2.0/FluentMigrator.Runner.Core.dll": {
+            "assemblyVersion": "3.2.1.0",
+            "fileVersion": "3.2.1.0"
+          }
+        }
+      },
+      "FluentMigrator.Runner.Postgres/3.2.1": {
+        "dependencies": {
+          "FluentMigrator.Runner.Core": "3.2.1"
+        },
+        "runtime": {
+          "lib/netstandard2.0/FluentMigrator.Runner.Postgres.dll": {
+            "assemblyVersion": "3.2.1.0",
+            "fileVersion": "3.2.1.0"
+          }
+        }
+      },
       "Lavalink4NET/1.4.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "3.0.0-preview.19073.11",
@@ -183,6 +239,26 @@
           "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
             "assemblyVersion": "3.0.0.0",
             "fileVersion": "3.0.19.40504"
+          }
+        }
+      },
+      "Microsoft.Extensions.Logging.Abstractions/2.0.1": {
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.Logging.Abstractions.dll": {
+            "assemblyVersion": "2.0.1.0",
+            "fileVersion": "2.0.1.18051"
+          }
+        }
+      },
+      "Microsoft.Extensions.Options/2.0.1": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "3.0.0-preview8.19405.4",
+          "Microsoft.Extensions.Primitives": "3.0.0-preview8.19405.4"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.Options.dll": {
+            "assemblyVersion": "2.0.1.0",
+            "fileVersion": "2.0.1.18051"
           }
         }
       },
@@ -421,21 +497,7 @@
           "System.Runtime": "4.3.0"
         }
       },
-      "System.ComponentModel.Annotations/4.3.0": {
-        "dependencies": {
-          "System.Collections": "4.3.0",
-          "System.ComponentModel": "4.3.0",
-          "System.Globalization": "4.3.0",
-          "System.Linq": "4.3.0",
-          "System.Reflection": "4.3.0",
-          "System.Reflection.Extensions": "4.3.0",
-          "System.Resources.ResourceManager": "4.3.0",
-          "System.Runtime": "4.3.0",
-          "System.Runtime.Extensions": "4.3.0",
-          "System.Text.RegularExpressions": "4.3.0",
-          "System.Threading": "4.3.0"
-        }
-      },
+      "System.ComponentModel.Annotations/4.4.1": {},
       "System.ComponentModel.Primitives/4.3.0": {
         "dependencies": {
           "System.ComponentModel": "4.3.0",
@@ -1045,6 +1107,7 @@
           "System.Runtime": "4.3.0"
         }
       },
+      "System.ValueTuple/4.4.0": {},
       "System.Xml.ReaderWriter/4.3.0": {
         "dependencies": {
           "System.Collections": "4.3.0",
@@ -1086,6 +1149,8 @@
           "Dapper.FastCrud": "2.5.0.39",
           "Dapper.FluentMap": "1.8.0",
           "Discord.Net": "2.1.1",
+          "FluentMigrator": "3.2.1",
+          "FluentMigrator.Runner.Postgres": "3.2.1",
           "Microsoft.Extensions.Configuration": "3.0.0-preview8.19405.4",
           "Microsoft.Extensions.DependencyInjection": "3.0.0-preview8.19405.4",
           "Npgsql": "4.1.0-preview1",
@@ -1166,6 +1231,34 @@
       "path": "discord.net.websocket/2.1.1",
       "hashPath": "discord.net.websocket.2.1.1.nupkg.sha512"
     },
+    "FluentMigrator/3.2.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-YESeN4UYxQludNbN1SiwM4GBKlYEC85ZDuWChjPu1icH8SpO7EWAIu62teIsr8ZZ7FpRyrGwsk3euBn9qs0mgg==",
+      "path": "fluentmigrator/3.2.1",
+      "hashPath": "fluentmigrator.3.2.1.nupkg.sha512"
+    },
+    "FluentMigrator.Abstractions/3.2.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-wx5OJCz46eMMCqJ09276emqgYN1L+Eunp7vmRa9/Mwo4PtJK2nQR1u9I7D2+vYvbQVXLQ6S0OUV4zAmrNoSqwQ==",
+      "path": "fluentmigrator.abstractions/3.2.1",
+      "hashPath": "fluentmigrator.abstractions.3.2.1.nupkg.sha512"
+    },
+    "FluentMigrator.Runner.Core/3.2.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-AJNcTBcn2j4da1nMuZ+4mJ+fJvquwMhOSn1NjZCjZs8GwKt/sYZzoWCGvXRSlcPgiaqkZxtbEyN+SieeOwX9lw==",
+      "path": "fluentmigrator.runner.core/3.2.1",
+      "hashPath": "fluentmigrator.runner.core.3.2.1.nupkg.sha512"
+    },
+    "FluentMigrator.Runner.Postgres/3.2.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-hachVTxPWFXRdZPXD0qo0X6MSpKIZVqoOqXVAWe3WSN3y83qJfcfnMBFZjYDrWAanBFJEJpJKjEsgj7UuU1iOw==",
+      "path": "fluentmigrator.runner.postgres/3.2.1",
+      "hashPath": "fluentmigrator.runner.postgres.3.2.1.nupkg.sha512"
+    },
     "Lavalink4NET/1.4.0": {
       "type": "package",
       "serviceable": true,
@@ -1207,6 +1300,20 @@
       "sha512": "sha512-fUUrTKSlDm1o7/PxH/wMokRb3BfeSVCX3LeBTnJjvwp4KUKB+4v5INeCRuyKL63mLxSXQg+L0R3+5/OQch7bnw==",
       "path": "microsoft.extensions.dependencyinjection.abstractions/3.0.0-preview8.19405.4",
       "hashPath": "microsoft.extensions.dependencyinjection.abstractions.3.0.0-preview8.19405.4.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Logging.Abstractions/2.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-DzCKlMdXOysXFDBXgNnxFlpSj5AOdMkUqKEjKT1n+japTxhQ3e3MaGODZGtbIj9ezykRs9oEBGmdSHHfh4oNVA==",
+      "path": "microsoft.extensions.logging.abstractions/2.0.1",
+      "hashPath": "microsoft.extensions.logging.abstractions.2.0.1.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Options/2.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-gxo2Bgg4D6+uyQz1Wdj1FAcBD3870+t37YjplyQXmjLzPWaoU89AIg3AXBXw4fR9CCdWLputZBLm3YaBx+oDFQ==",
+      "path": "microsoft.extensions.options/2.0.1",
+      "hashPath": "microsoft.extensions.options.2.0.1.nupkg.sha512"
     },
     "Microsoft.Extensions.Primitives/3.0.0-preview8.19405.4": {
       "type": "package",
@@ -1446,12 +1553,12 @@
       "path": "system.componentmodel/4.3.0",
       "hashPath": "system.componentmodel.4.3.0.nupkg.sha512"
     },
-    "System.ComponentModel.Annotations/4.3.0": {
+    "System.ComponentModel.Annotations/4.4.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-SY2RLItHt43rd8J9D8M8e8NM4m+9WLN2uUd9G0n1I4hj/7w+v3pzK6ZBjexlG1/2xvLKQsqir3UGVSyBTXMLWA==",
-      "path": "system.componentmodel.annotations/4.3.0",
-      "hashPath": "system.componentmodel.annotations.4.3.0.nupkg.sha512"
+      "sha512": "sha512-ToiYqSCioqhtspq2O/jYKtyTC/T0uwWHBTYlzCi6PRbSSHArN1IaRWeHffDamvms5sye5FDUWCfNZgubQpNRsA==",
+      "path": "system.componentmodel.annotations/4.4.1",
+      "hashPath": "system.componentmodel.annotations.4.4.1.nupkg.sha512"
     },
     "System.ComponentModel.Primitives/4.3.0": {
       "type": "package",
@@ -1879,6 +1986,13 @@
       "sha512": "sha512-Z6YfyYTCg7lOZjJzBjONJTFKGN9/NIYKSxhU5GRd+DTwHSZyvWp1xuI5aR+dLg+ayyC5Xv57KiY4oJ0tMO89fQ==",
       "path": "system.threading.timer/4.3.0",
       "hashPath": "system.threading.timer.4.3.0.nupkg.sha512"
+    },
+    "System.ValueTuple/4.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-BahUww/+mdP4ARCAh2RQhQTg13wYLVrBb9SYVgW8ZlrwjraGCXHGjo0oIiUfZ34LUZkMMR+RAzR7dEY4S1HeQQ==",
+      "path": "system.valuetuple/4.4.0",
+      "hashPath": "system.valuetuple.4.4.0.nupkg.sha512"
     },
     "System.Xml.ReaderWriter/4.3.0": {
       "type": "package",

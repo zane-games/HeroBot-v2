@@ -63,6 +63,10 @@
               "target": "Package",
               "version": "[3.2.1, )"
             },
+            "FluentMigrator.Runner.Postgres": {
+              "target": "Package",
+              "version": "[3.2.1, )"
+            },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
               "version": "[3.0.0-preview8.19405.4, )"

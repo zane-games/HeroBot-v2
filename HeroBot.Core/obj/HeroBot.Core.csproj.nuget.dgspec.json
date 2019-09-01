@@ -63,6 +63,10 @@
               "target": "Package",
               "version": "[3.2.1, )"
             },
+            "FluentMigrator.Runner.Postgres": {
+              "target": "Package",
+              "version": "[3.2.1, )"
+            },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
               "version": "[3.0.0-preview8.19405.4, )"
@@ -139,13 +143,21 @@
       "frameworks": {
         "netcoreapp3.0": {
           "dependencies": {
+            "FluentMigrator.Runner": {
+              "target": "Package",
+              "version": "[3.2.1, )"
+            },
+            "FluentMigrator.Runner.Postgres": {
+              "target": "Package",
+              "version": "[3.2.1, )"
+            },
             "Lavalink4NET": {
               "target": "Package",
-              "version": "[1.4.0, )"
+              "version": "[1.4.3, )"
             },
             "Lavalink4NET.Discord.NET": {
               "target": "Package",
-              "version": "[1.4.0, )"
+              "version": "[1.4.3, )"
             },
             "NetEscapades.Configuration.Yaml": {
               "target": "Package",

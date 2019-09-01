@@ -149,6 +149,34 @@
           }
         }
       },
+      "FluentMigrator.Runner.Core/3.2.1": {
+        "type": "package",
+        "dependencies": {
+          "FluentMigrator.Abstractions": "3.2.1",
+          "Microsoft.Extensions.Configuration.Abstractions": "2.0.1",
+          "Microsoft.Extensions.DependencyInjection": "2.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "2.0.1",
+          "Microsoft.Extensions.Options": "2.0.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/FluentMigrator.Runner.Core.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/FluentMigrator.Runner.Core.dll": {}
+        }
+      },
+      "FluentMigrator.Runner.Postgres/3.2.1": {
+        "type": "package",
+        "dependencies": {
+          "FluentMigrator.Runner.Core": "3.2.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/FluentMigrator.Runner.Postgres.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/FluentMigrator.Runner.Postgres.dll": {}
+        }
+      },
       "Microsoft.Extensions.Configuration/3.0.0-preview8.19405.4": {
         "type": "package",
         "dependencies": {
@@ -192,6 +220,15 @@
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {}
+        }
+      },
+      "Microsoft.Extensions.Logging.Abstractions/2.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Microsoft.Extensions.Logging.Abstractions.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.Logging.Abstractions.dll": {}
         }
       },
       "Microsoft.Extensions.Options/2.0.1": {
@@ -1764,6 +1801,7 @@
           "Dapper.FluentMap": "1.8.0",
           "Discord.Net": "2.1.1",
           "FluentMigrator": "3.2.1",
+          "FluentMigrator.Runner.Postgres": "3.2.1",
           "Microsoft.Extensions.Configuration": "3.0.0-preview8.19405.4",
           "Microsoft.Extensions.DependencyInjection": "3.0.0-preview8.19405.4",
           "Npgsql": "4.1.0-preview1",
@@ -1957,6 +1995,40 @@
         "lib/netstandard2.0/de-DE/FluentMigrator.Abstractions.resources.dll"
       ]
     },
+    "FluentMigrator.Runner.Core/3.2.1": {
+      "sha512": "AJNcTBcn2j4da1nMuZ+4mJ+fJvquwMhOSn1NjZCjZs8GwKt/sYZzoWCGvXRSlcPgiaqkZxtbEyN+SieeOwX9lw==",
+      "type": "package",
+      "path": "fluentmigrator.runner.core/3.2.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "fluentmigrator.runner.core.3.2.1.nupkg.sha512",
+        "fluentmigrator.runner.core.nuspec",
+        "lib/net461/FluentMigrator.Runner.Core.dll",
+        "lib/net461/FluentMigrator.Runner.Core.pdb",
+        "lib/net461/FluentMigrator.Runner.Core.xml",
+        "lib/netstandard2.0/FluentMigrator.Runner.Core.dll",
+        "lib/netstandard2.0/FluentMigrator.Runner.Core.pdb",
+        "lib/netstandard2.0/FluentMigrator.Runner.Core.xml"
+      ]
+    },
+    "FluentMigrator.Runner.Postgres/3.2.1": {
+      "sha512": "hachVTxPWFXRdZPXD0qo0X6MSpKIZVqoOqXVAWe3WSN3y83qJfcfnMBFZjYDrWAanBFJEJpJKjEsgj7UuU1iOw==",
+      "type": "package",
+      "path": "fluentmigrator.runner.postgres/3.2.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "fluentmigrator.runner.postgres.3.2.1.nupkg.sha512",
+        "fluentmigrator.runner.postgres.nuspec",
+        "lib/net461/FluentMigrator.Runner.Postgres.dll",
+        "lib/net461/FluentMigrator.Runner.Postgres.pdb",
+        "lib/net461/FluentMigrator.Runner.Postgres.xml",
+        "lib/netstandard2.0/FluentMigrator.Runner.Postgres.dll",
+        "lib/netstandard2.0/FluentMigrator.Runner.Postgres.pdb",
+        "lib/netstandard2.0/FluentMigrator.Runner.Postgres.xml"
+      ]
+    },
     "Microsoft.Extensions.Configuration/3.0.0-preview8.19405.4": {
       "sha512": "YK8U1AqfzBRzawldKSH6nsdRb6pX6wX4GTd3qbrMNdXrOQKM+SGbugJOxmc84bm/1aRwIshGXnn3sOZpwYa8oQ==",
       "type": "package",
@@ -2011,6 +2083,19 @@
         "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
         "microsoft.extensions.dependencyinjection.abstractions.3.0.0-preview8.19405.4.nupkg.sha512",
         "microsoft.extensions.dependencyinjection.abstractions.nuspec"
+      ]
+    },
+    "Microsoft.Extensions.Logging.Abstractions/2.0.1": {
+      "sha512": "DzCKlMdXOysXFDBXgNnxFlpSj5AOdMkUqKEjKT1n+japTxhQ3e3MaGODZGtbIj9ezykRs9oEBGmdSHHfh4oNVA==",
+      "type": "package",
+      "path": "microsoft.extensions.logging.abstractions/2.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/Microsoft.Extensions.Logging.Abstractions.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.Logging.Abstractions.xml",
+        "microsoft.extensions.logging.abstractions.2.0.1.nupkg.sha512",
+        "microsoft.extensions.logging.abstractions.nuspec"
       ]
     },
     "Microsoft.Extensions.Options/2.0.1": {

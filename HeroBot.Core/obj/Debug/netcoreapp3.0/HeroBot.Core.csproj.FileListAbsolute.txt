@@ -74,3 +74,5 @@ C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\obj\Debug\n
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\obj\Debug\netcoreapp3.0\HeroBot.Core.csproj.CopyComplete
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\obj\Debug\netcoreapp3.0\HeroBot.Core.dll
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\obj\Debug\netcoreapp3.0\HeroBot.Core.pdb
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\bin\Debug\netcoreapp3.0\Dapper.FastCrud.dll
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\bin\Debug\netcoreapp3.0\Dapper.FluentMap.dll

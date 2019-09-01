@@ -32,13 +32,10 @@ namespace HeroBot.Plugins.RP.Services
             return connection.GetAsync<RPUser>(new RPUser() { Id = user.Id.ToString() });
         }
 
-        internal void UpdateUser(IUser user, Func<RPUser, RPUser> func)
+        internal Task UpdateUser(RPUser rPUser)
         {
-            throw new NotImplementedException();
+            using var connection = _database.GetDbConnection();
+            return connection.UpdateAsync(rPUser);
         }
-    }
-    public enum Ressources {
-        BOLT = 0,
-        GOLD = 1
     }
 }

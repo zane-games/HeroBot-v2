@@ -1,8 +1,0 @@
-C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\MigrationTool\bin\Release\netcoreapp2.2\MigrationTool.deps.json
-C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\MigrationTool\bin\Release\netcoreapp2.2\MigrationTool.runtimeconfig.json
-C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\MigrationTool\bin\Release\netcoreapp2.2\MigrationTool.runtimeconfig.dev.json
-C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\MigrationTool\bin\Release\netcoreapp2.2\MigrationTool.dll
-C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\MigrationTool\obj\Release\netcoreapp2.2\MigrationTool.csprojAssemblyReference.cache
-C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\MigrationTool\obj\Release\netcoreapp2.2\MigrationTool.csproj.CoreCompileInputs.cache
-C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\MigrationTool\obj\Release\netcoreapp2.2\MigrationTool.AssemblyInfoInputs.cache
-C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\MigrationTool\obj\Release\netcoreapp2.2\MigrationTool.AssemblyInfo.cs

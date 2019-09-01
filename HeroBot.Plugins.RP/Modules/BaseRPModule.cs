@@ -72,7 +72,8 @@ namespace HeroBot.Plugins.RP.Modules
                 }) == columnCount;
                 if (v)
                 {
-                    _rp.UpdateUser(Context.User, x => { x.Money += array[1][0].money; return x; });
+                    user.Money += array[1][0].money;
+                    await _rp.UpdateUser(user);
                 }
                 sb.Append(v ? $"**Congratulations ! You won {array[1][0].money} gold!**\r\n" : "*Sad trombone*\r\n");
                 foreach (dynamic ar in array)
@@ -104,7 +105,8 @@ namespace HeroBot.Plugins.RP.Modules
             if (user != null)
             {
                 var gain = _random.Next() % 200;
-                _rp.UpdateUser(Context.User, x => { x.Money += gain; return x; });
+                user.Money += gain;
+                await _rp.UpdateUser(user);
                 await ReplyAsync($"You won **{gain}** bolts");
             }
             else await ReplyAsync("... I can't find your account `hb!start`");
@@ -117,7 +119,8 @@ namespace HeroBot.Plugins.RP.Modules
             if (user != null)
             {
                 var gain = _random.Next() % 20;
-                _rp.UpdateUser(Context.User, x => { x.Money += gain; return x; });
+                user.Money += gain;
+                await _rp.UpdateUser(user);
                 await ReplyAsync($"You won **{gain}** bolts");
             }
             else await ReplyAsync("... I can't find your account `hb!start`");
