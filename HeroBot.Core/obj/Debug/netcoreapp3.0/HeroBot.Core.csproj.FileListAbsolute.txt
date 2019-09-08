@@ -68,11 +68,12 @@ C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\bin\Debug\n
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\bin\Debug\netcoreapp3.0\HeroBot.Common.dll
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\bin\Debug\netcoreapp3.0\HeroBot.Common.pdb
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\obj\Debug\netcoreapp3.0\HeroBot.Core.csprojAssemblyReference.cache
-C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\obj\Debug\netcoreapp3.0\HeroBot.Core.csproj.CoreCompileInputs.cache
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\obj\Debug\netcoreapp3.0\HeroBot.Core.AssemblyInfoInputs.cache
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\obj\Debug\netcoreapp3.0\HeroBot.Core.AssemblyInfo.cs
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\obj\Debug\netcoreapp3.0\HeroBot.Core.csproj.CopyComplete
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\obj\Debug\netcoreapp3.0\HeroBot.Core.dll
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\obj\Debug\netcoreapp3.0\HeroBot.Core.pdb
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\bin\Debug\netcoreapp3.0\Dapper.FastCrud.dll
-C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\bin\Debug\netcoreapp3.0\Dapper.FluentMap.dll
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\obj\Debug\netcoreapp3.0\HeroBot.Core.csproj.CoreCompileInputs.cache
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\bin\Debug\netcoreapp3.0\DiscordBotsList.Api.dll
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\bin\Debug\netcoreapp3.0\Miki.Net.Http.dll

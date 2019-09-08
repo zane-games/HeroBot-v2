@@ -1,11 +1,10 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 using Discord;
-using Discord.WebSocket;
 using HeroBot.Common.Interfaces;
-using Dapper.FastCrud;
 using HeroBot.Plugins.RP.Entities;
 
 namespace HeroBot.Plugins.RP.Services
@@ -18,24 +17,32 @@ namespace HeroBot.Plugins.RP.Services
         }
 
         private readonly IDatabaseService _database;
-
+        private static readonly string GetUsetSql = "SELECT * FROM \"RPUser\" WHERE \"UserId\" = @Id";
+        private static readonly string GetCityName = "SELECT \"Name\" FROM \"City\" WHERE \"Id\" = @Id";
+        private static readonly string UpdateUserSql = "UPDATE \"RPUser\" SET \"Badges\" = @Badges, \"CityId\" = @CityId, \"Description\" = @Description, \"Website\" = @Website, \"Emoji\" = @Emoji, \"Personality\" = @Personality, \"Likes\" = @Likes,\"Job\" = @Job, \"Money\" = @Money WHERE \"UserId\" = @UserId";
+        private static readonly string CreateUserSql = "INSERT INTO \"RPUser\" (\"UserId\",\"CityId\",\"Description\",\"Website\",\"Emoji\",\"Personality\",\"Likes\",\"Job\",\"Money\") VALUES (@UserId,@CityId,@Description,@Website,@Emoji,@Personality,@Likes,@Job,@Money)";
         internal async Task<bool> CreateUser(IUser user)
         {
-            var entity = new RPUser() { Id = user.Id.ToString() };
+            var entity = new RPUser() { UserId = user.Id.ToString() };
             using var connection = _database.GetDbConnection();
-            await connection.InsertAsync(entity);
+            await connection.ExecuteAsync(CreateUserSql, entity);
             return true;
         }
-
-        internal Task<RPUser> GetRPUser(IUser user) {
+        
+        internal async Task<RPUser> GetRPUser(IUser user) {
             using var connection = _database.GetDbConnection();
-            return connection.GetAsync<RPUser>(new RPUser() { Id = user.Id.ToString() });
+            var res = (await connection.QueryAsync<RPUser>(GetUsetSql, new { Id = user.Id.ToString() }));
+            if (res.Any())
+                return res.First();
+            return null;
         }
 
-        internal Task UpdateUser(RPUser rPUser)
+        internal async Task UpdateUser(RPUser rPUser)
         {
             using var connection = _database.GetDbConnection();
-            return connection.UpdateAsync(rPUser);
+            await connection.ExecuteAsync(UpdateUserSql, rPUser);
         }
+
+
     }
 }

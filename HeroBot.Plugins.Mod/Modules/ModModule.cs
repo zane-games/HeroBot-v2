@@ -457,6 +457,24 @@ namespace HeroBot.Plugins.Mod.Modules
                 await ReplyAsync($"<:fail:606088713705095208> {target.Mention} has too much power for me ! Please check if the user is behind me !");
             }
         }
+
+        [Command("mention")]
+        [RequireBotPermission(GuildPermission.Administrator)]
+        [RequireUserPermission(ChannelPermission.ManageMessages)]
+        public async Task Mention([Remainder]string role) {
+            if (Context.Guild.Roles.Any(x => x.Name.ToLower().Contains(role.ToLower())))
+            {
+                var roleE = Context.Guild.Roles.First(x => x.Name.Contains(role));
+                var needtoEdit = !roleE.IsMentionable;
+                if (needtoEdit)
+                    await roleE.ModifyAsync(x => x.Mentionable = true);
+                await ReplyAsync(roleE.Mention);
+                if (needtoEdit)
+                    await roleE.ModifyAsync(x => x.Mentionable = false);
+            }
+            else await ReplyAsync($"I can't fint a role matching to `{role}`");
+        }
+
         /// <summary>
         /// User to create & setup embeds
         /// </summary>

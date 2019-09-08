@@ -29,18 +29,6 @@
           "lib/netstandard1.6/Dapper.FastCrud.dll": {}
         }
       },
-      "Dapper.FluentMap/1.8.0": {
-        "type": "package",
-        "dependencies": {
-          "Dapper": "1.60.1"
-        },
-        "compile": {
-          "lib/netstandard2.0/Dapper.FluentMap.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Dapper.FluentMap.dll": {}
-        }
-      },
       "Discord.Net/2.1.1": {
         "type": "package",
         "dependencies": {
@@ -1798,7 +1786,6 @@
         "dependencies": {
           "Dapper": "2.0.4",
           "Dapper.FastCrud": "2.5.0.39",
-          "Dapper.FluentMap": "1.8.0",
           "Discord.Net": "2.1.1",
           "FluentMigrator": "3.2.1",
           "FluentMigrator.Runner.Postgres": "3.2.1",
@@ -1848,23 +1835,6 @@
         "lib/net46/Dapper.FastCrud.xml",
         "lib/netstandard1.6/Dapper.FastCrud.dll",
         "lib/netstandard1.6/Dapper.FastCrud.xml"
-      ]
-    },
-    "Dapper.FluentMap/1.8.0": {
-      "sha512": "2GRcucxPuQpAQUIWEhcGz8M5079Sg09cQ8WSh7nKeOHLb+4rzX0hGwHP4kVLI3Sg4LFbIgzRvhEOf5upP/6sYQ==",
-      "type": "package",
-      "path": "dapper.fluentmap/1.8.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "dapper.fluentmap.1.8.0.nupkg.sha512",
-        "dapper.fluentmap.nuspec",
-        "lib/net451/Dapper.FluentMap.dll",
-        "lib/net451/Dapper.FluentMap.xml",
-        "lib/netstandard1.3/Dapper.FluentMap.dll",
-        "lib/netstandard1.3/Dapper.FluentMap.xml",
-        "lib/netstandard2.0/Dapper.FluentMap.dll",
-        "lib/netstandard2.0/Dapper.FluentMap.xml"
       ]
     },
     "Discord.Net/2.1.1": {

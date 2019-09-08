@@ -51,10 +51,6 @@
               "target": "Package",
               "version": "[2.5.0.39, )"
             },
-            "Dapper.FluentMap": {
-              "target": "Package",
-              "version": "[1.8.0, )"
-            },
             "Discord.Net": {
               "target": "Package",
               "version": "[2.1.1, )"

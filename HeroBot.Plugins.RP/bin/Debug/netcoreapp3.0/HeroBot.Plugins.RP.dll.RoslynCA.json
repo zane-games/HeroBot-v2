@@ -5,155 +5,52 @@
     {
       "tool": {
         "name": "Compilateur Microsoft (R) Visual C#",
-        "version": "3.1.0.0",
-        "fileVersion": "3.100.119.28106 (58a4b1e7)",
-        "semanticVersion": "3.1.0",
+        "version": "3.3.0.0",
+        "fileVersion": "3.3.0-beta2-19381-14 (ef3a7a38)",
+        "semanticVersion": "3.3.0",
         "language": "fr-FR"
       },
       "results": [
         {
-          "ruleId": "S3776",
+          "ruleId": "CS0414",
           "level": "warning",
-          "message": "Refactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed.",
+          "message": "Le champ 'RPService.GetCity' est assigné, mais sa valeur n'est jamais utilisée",
           "locations": [
             {
               "resultFile": {
-                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.RP/Modules/BaseRPModule.cs",
+                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.RP/Services/RPService.cs",
                 "region": {
-                  "startLine": 127,
-                  "startColumn": 27,
-                  "endLine": 127,
-                  "endColumn": 30
-                }
-              }
-            }
-          ],
-          "relatedLocations": [
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.RP/Modules/BaseRPModule.cs",
-                "region": {
-                  "startLine": 131,
-                  "startColumn": 13,
-                  "endLine": 131,
-                  "endColumn": 15
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.RP/Modules/BaseRPModule.cs",
-                "region": {
-                  "startLine": 132,
-                  "startColumn": 17,
-                  "endLine": 132,
-                  "endColumn": 19
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.RP/Modules/BaseRPModule.cs",
-                "region": {
-                  "startLine": 134,
-                  "startColumn": 21,
-                  "endLine": 134,
-                  "endColumn": 23
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.RP/Modules/BaseRPModule.cs",
-                "region": {
-                  "startLine": 140,
-                  "startColumn": 17,
-                  "endLine": 140,
-                  "endColumn": 21
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.RP/Modules/BaseRPModule.cs",
-                "region": {
-                  "startLine": 141,
-                  "startColumn": 21,
-                  "endLine": 141,
-                  "endColumn": 23
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.RP/Modules/BaseRPModule.cs",
-                "region": {
-                  "startLine": 148,
-                  "startColumn": 17,
-                  "endLine": 148,
-                  "endColumn": 19
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.RP/Modules/BaseRPModule.cs",
-                "region": {
-                  "startLine": 150,
-                  "startColumn": 21,
-                  "endLine": 150,
-                  "endColumn": 23
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.RP/Modules/BaseRPModule.cs",
-                "region": {
-                  "startLine": 157,
-                  "startColumn": 21,
-                  "endLine": 157,
-                  "endColumn": 25
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.RP/Modules/BaseRPModule.cs",
-                "region": {
-                  "startLine": 165,
-                  "startColumn": 17,
-                  "endLine": 165,
-                  "endColumn": 21
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.RP/Modules/BaseRPModule.cs",
-                "region": {
-                  "startLine": 167,
-                  "startColumn": 13,
-                  "endLine": 167,
-                  "endColumn": 17
+                  "startLine": 21,
+                  "startColumn": 40,
+                  "endLine": 21,
+                  "endColumn": 47
                 }
               }
             }
           ],
           "properties": {
-            "warningLevel": 1,
-            "customProperties": {
-              "0": "+1",
-              "1": "+2 (incl 1 for nesting)",
-              "2": "+3 (incl 2 for nesting)",
-              "3": "+1",
-              "4": "+3 (incl 2 for nesting)",
-              "5": "+2 (incl 1 for nesting)",
-              "6": "+3 (incl 2 for nesting)",
-              "7": "+1",
-              "8": "+1",
-              "9": "+1"
+            "warningLevel": 3
+          }
+        },
+        {
+          "ruleId": "S1144",
+          "level": "warning",
+          "message": "Remove the unused private field 'GetCity'.",
+          "locations": [
+            {
+              "resultFile": {
+                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.RP/Services/RPService.cs",
+                "region": {
+                  "startLine": 21,
+                  "startColumn": 9,
+                  "endLine": 21,
+                  "endColumn": 53
+                }
+              }
             }
+          ],
+          "properties": {
+            "warningLevel": 1
           }
         },
         {
@@ -165,9 +62,9 @@
               "resultFile": {
                 "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.RP/Modules/BaseRPModule.cs",
                 "region": {
-                  "startLine": 48,
+                  "startLine": 93,
                   "startColumn": 27,
-                  "endLine": 48,
+                  "endLine": 93,
                   "endColumn": 34
                 }
               }
@@ -178,9 +75,9 @@
               "physicalLocation": {
                 "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.RP/Modules/BaseRPModule.cs",
                 "region": {
-                  "startLine": 50,
+                  "startLine": 96,
                   "startColumn": 13,
-                  "endLine": 50,
+                  "endLine": 96,
                   "endColumn": 15
                 }
               }
@@ -189,20 +86,9 @@
               "physicalLocation": {
                 "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.RP/Modules/BaseRPModule.cs",
                 "region": {
-                  "startLine": 55,
-                  "startColumn": 13,
-                  "endLine": 55,
-                  "endColumn": 16
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.RP/Modules/BaseRPModule.cs",
-                "region": {
-                  "startLine": 60,
+                  "startLine": 101,
                   "startColumn": 17,
-                  "endLine": 60,
+                  "endLine": 101,
                   "endColumn": 20
                 }
               }
@@ -211,53 +97,9 @@
               "physicalLocation": {
                 "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.RP/Modules/BaseRPModule.cs",
                 "region": {
-                  "startLine": 70,
+                  "startLine": 106,
                   "startColumn": 21,
-                  "endLine": 70,
-                  "endColumn": 23
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.RP/Modules/BaseRPModule.cs",
-                "region": {
-                  "startLine": 73,
-                  "startColumn": 17,
-                  "endLine": 73,
-                  "endColumn": 19
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.RP/Modules/BaseRPModule.cs",
-                "region": {
-                  "startLine": 77,
-                  "startColumn": 25,
-                  "endLine": 77,
-                  "endColumn": 26
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.RP/Modules/BaseRPModule.cs",
-                "region": {
-                  "startLine": 78,
-                  "startColumn": 13,
-                  "endLine": 78,
-                  "endColumn": 20
-                }
-              }
-            },
-            {
-              "physicalLocation": {
-                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.RP/Modules/BaseRPModule.cs",
-                "region": {
-                  "startLine": 79,
-                  "startColumn": 17,
-                  "endLine": 79,
+                  "endLine": 106,
                   "endColumn": 24
                 }
               }
@@ -266,9 +108,64 @@
               "physicalLocation": {
                 "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.RP/Modules/BaseRPModule.cs",
                 "region": {
-                  "startLine": 86,
+                  "startLine": 118,
+                  "startColumn": 21,
+                  "endLine": 118,
+                  "endColumn": 23
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.RP/Modules/BaseRPModule.cs",
+                "region": {
+                  "startLine": 121,
+                  "startColumn": 17,
+                  "endLine": 121,
+                  "endColumn": 19
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.RP/Modules/BaseRPModule.cs",
+                "region": {
+                  "startLine": 126,
+                  "startColumn": 29,
+                  "endLine": 126,
+                  "endColumn": 30
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.RP/Modules/BaseRPModule.cs",
+                "region": {
+                  "startLine": 127,
+                  "startColumn": 17,
+                  "endLine": 127,
+                  "endColumn": 24
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.RP/Modules/BaseRPModule.cs",
+                "region": {
+                  "startLine": 129,
+                  "startColumn": 21,
+                  "endLine": 129,
+                  "endColumn": 28
+                }
+              }
+            },
+            {
+              "physicalLocation": {
+                "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.RP/Modules/BaseRPModule.cs",
+                "region": {
+                  "startLine": 137,
                   "startColumn": 13,
-                  "endLine": 86,
+                  "endLine": 137,
                   "endColumn": 17
                 }
               }
@@ -298,10 +195,10 @@
               "resultFile": {
                 "uri": "file:///C:/Users/Matthieu/source/repos/HeroBot-deux-point-z%C3%A9ro/HeroBot.Plugins.RP/Modules/BaseRPModule.cs",
                 "region": {
-                  "startLine": 57,
-                  "startColumn": 21,
-                  "endLine": 57,
-                  "endColumn": 29
+                  "startLine": 103,
+                  "startColumn": 25,
+                  "endLine": 103,
+                  "endColumn": 33
                 }
               }
             }
@@ -312,6 +209,37 @@
         }
       ],
       "rules": {
+        "CS0414": {
+          "id": "CS0414",
+          "shortDescription": "Le champ est assigné, mais sa valeur n'est jamais utilisée",
+          "defaultLevel": "warning",
+          "properties": {
+            "category": "Compiler",
+            "isEnabledByDefault": true,
+            "tags": [
+              "Compiler",
+              "Telemetry"
+            ]
+          }
+        },
+        "S1144": {
+          "id": "S1144",
+          "shortDescription": "Unused private types or members should be removed",
+          "fullDescription": "private or internal types or private members that are never executed or referenced are dead code: unnecessary, inoperative code that should be removed. Cleaning out dead code decreases the size of the maintained codebase, making it easier to understand the program and preventing bugs from being introduced.",
+          "defaultLevel": "note",
+          "helpUri": "https://rules.sonarsource.com/csharp/RSPEC-1144",
+          "properties": {
+            "category": "Major Code Smell",
+            "isEnabledByDefault": true,
+            "tags": [
+              "C#",
+              "SonarWay",
+              "MainSourceScope",
+              "TestSourceScope",
+              "Unnecessary"
+            ]
+          }
+        },
         "S1481": {
           "id": "S1481",
           "shortDescription": "Unused local variables should be removed",

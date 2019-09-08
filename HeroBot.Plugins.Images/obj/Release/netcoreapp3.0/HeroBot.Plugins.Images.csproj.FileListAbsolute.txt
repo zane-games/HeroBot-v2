@@ -25,3 +25,10 @@ C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\bin\Debug\M
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\build\Modules\HeroBot.Plugins.Images.deps.json
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\build\Modules\HeroBot.Plugins.Images.dll
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\build\Modules\HeroBot.Plugins.Images.pdb
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Images\bin\Release\netcoreapp3.0\HeroBot.Plugins.Images.deps.json
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Images\bin\Release\netcoreapp3.0\HeroBot.Plugins.Images.dll
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Images\bin\Release\netcoreapp3.0\HeroBot.Plugins.Images.pdb
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Images\bin\Release\netcoreapp3.0\HeroBot.Common.dll
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Images\bin\Release\netcoreapp3.0\HeroBot.Plugins.Mod.dll
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Images\bin\Release\netcoreapp3.0\HeroBot.Plugins.Mod.pdb
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Images\bin\Release\netcoreapp3.0\HeroBot.Common.pdb

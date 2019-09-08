@@ -4,9 +4,12 @@ C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.GiveAway
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.GiveAway\bin\Debug\netcoreapp3.0\HeroBot.Common.dll
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.GiveAway\bin\Debug\netcoreapp3.0\HeroBot.Common.pdb
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.GiveAway\obj\Debug\netcoreapp3.0\HeroBot.Plugins.GiveAway.csprojAssemblyReference.cache
-C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.GiveAway\obj\Debug\netcoreapp3.0\HeroBot.Plugins.GiveAway.csproj.CoreCompileInputs.cache
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.GiveAway\obj\Debug\netcoreapp3.0\HeroBot.Plugins.GiveAway.AssemblyInfoInputs.cache
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.GiveAway\obj\Debug\netcoreapp3.0\HeroBot.Plugins.GiveAway.AssemblyInfo.cs
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.GiveAway\obj\Debug\netcoreapp3.0\HeroBot.Plugins.GiveAway.csproj.CopyComplete
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.GiveAway\obj\Debug\netcoreapp3.0\HeroBot.Plugins.GiveAway.dll
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.GiveAway\obj\Debug\netcoreapp3.0\HeroBot.Plugins.GiveAway.pdb
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\bin\Debug\netcoreapp3.0\Modules\HeroBot.Plugins.GiveAway.deps.json
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\bin\Debug\netcoreapp3.0\Modules\HeroBot.Plugins.GiveAway.dll
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\bin\Debug\netcoreapp3.0\Modules\HeroBot.Plugins.GiveAway.pdb
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.GiveAway\obj\Debug\netcoreapp3.0\HeroBot.Plugins.GiveAway.csproj.CoreCompileInputs.cache

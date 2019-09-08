@@ -29,11 +29,5 @@ namespace HeroBot.Plugins.GiveAway.Modules
             await message.AddReactionAsync(new Emoji("🎉"));
             await _service.CreateGiveaway(channel, message,time,price,winners);
         }
-        [RequireUserPermission(GuildPermission.ManageChannels),
-            RequireBotPermission(GuildPermission.Administrator),
-            Command("giveawayFinish")]
-        public async Task FinishGiveaway() {
-
-        }
     }
 }

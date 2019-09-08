@@ -1,7 +1,7 @@
 ﻿prefix: hb!
 discord: "jXp6KtA"
 tokens:
-    discord: "NTMyMTk2MzI5Mzg5MTYyNTEw.XUlFbw.ETeN0EdalNcIDE83mqnqmarTVaQ"
+    discord: "NDkxNjczNDgwMDA2MjA1NDYx.XW055A.G8zgQGXrhw6HsnX-jvbVWNFkZcQ"
 redis:
     host: localhost
     database: 1

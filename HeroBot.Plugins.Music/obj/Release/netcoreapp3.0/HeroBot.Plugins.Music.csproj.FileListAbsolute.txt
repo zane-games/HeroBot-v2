@@ -25,3 +25,8 @@ C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\bin\Debug\M
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\build\Modules\HeroBot.Plugins.Music.deps.json
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\build\Modules\HeroBot.Plugins.Music.dll
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\build\Modules\HeroBot.Plugins.Music.pdb
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Music\bin\Release\netcoreapp3.0\HeroBot.Plugins.Music.deps.json
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Music\bin\Release\netcoreapp3.0\HeroBot.Plugins.Music.dll
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Music\bin\Release\netcoreapp3.0\HeroBot.Plugins.Music.pdb
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Music\bin\Release\netcoreapp3.0\HeroBot.Common.dll
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Music\bin\Release\netcoreapp3.0\HeroBot.Common.pdb

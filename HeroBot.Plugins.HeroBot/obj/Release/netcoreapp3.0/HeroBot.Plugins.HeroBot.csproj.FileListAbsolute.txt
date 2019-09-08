@@ -25,3 +25,8 @@ C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\bin\Debug\M
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\build\Modules\HeroBot.Plugins.HeroBot.deps.json
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\build\Modules\HeroBot.Plugins.HeroBot.dll
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\build\Modules\HeroBot.Plugins.HeroBot.pdb
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.HeroBot\bin\Release\netcoreapp3.0\HeroBot.Plugins.HeroBot.deps.json
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.HeroBot\bin\Release\netcoreapp3.0\HeroBot.Plugins.HeroBot.dll
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.HeroBot\bin\Release\netcoreapp3.0\HeroBot.Plugins.HeroBot.pdb
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.HeroBot\bin\Release\netcoreapp3.0\HeroBot.Common.dll
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.HeroBot\bin\Release\netcoreapp3.0\HeroBot.Common.pdb

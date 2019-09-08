@@ -1,6 +1,10 @@
-â
-hC:\Users\Matthieu\source\repos\HeroBot-deux-point-zÃ©ro\HeroBot.Plugins.HeroBot\Modules\HeroBotModule.csx (08&@2H&R 0=0;5=0;10=0;20=0;30=1;60=0;90=0Z1=9;2=5;4=1;6=0;8=0;10=0;12=1j×ØÙÜÝÞßàör×	
- "#$%&'(*+,-./01235679:;<=?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcefghilmoprstuvwxyz|}~€‚„…†‡ˆ‰Š‹ŒŽ‘’“”•–—˜™š›œžŸ ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÏÐÑÒÓÔÕÚáâãäæçéêëìíîïðñòóôõ÷øùúûüýþÿ€„…†‡ˆ‰Š‹ŒŽ‘’“”•–—˜™š›œžŸ ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄx8‚³$%&'/13579;<?@BCDFHIJLMNPRSUWX`cefhlmrtvwx}~‡ˆ’—˜š›¡¤¥¦§¨ª«¬­®¯°±³µ¸¼½¿ÁÂÇËÌÍÏÐÑÒÓÔÚãäæéñòúüÿ€Œ”–˜™œ¢¤¥©°²³·¶
-aC:\Users\Matthieu\source\repos\HeroBot-deux-point-zÃ©ro\HeroBot.Plugins.HeroBot\PluginRefferal.cs(0R 0=1;5=0;10=0;20=0;30=0;60=0;90=0Z1=0;2=0;4=0;6=0;8=0;10=0;12=0r
-	
-
+ã
+tC:\Users\Matthieu\source\repos\HeroBot-deux-point-zÃ©ro\HeroBot.Plugins.GiveAway\Migrations\BaseMigration01082019.cs (08@HR 0=1;5=0;10=0;20=0;30=0;60=0;90=0Z1=2;2=0;4=0;6=0;8=0;10=0;12=0r	
+‚
+æ
+jC:\Users\Matthieu\source\repos\HeroBot-deux-point-zÃ©ro\HeroBot.Plugins.GiveAway\Modules\GiveAwayModule.cs (08@HR 0=1;5=0;10=0;20=0;30=0;60=0;90=0Z1=2;2=0;4=0;6=0;8=0;10=0;12=0r	
+ !‚´
+bC:\Users\Matthieu\source\repos\HeroBot-deux-point-zÃ©ro\HeroBot.Plugins.GiveAway\PluginRefferal.cs(0R 0=1;5=0;10=0;20=0;30=0;60=0;90=0Z1=0;2=0;4=0;6=0;8=0;10=0;12=0rÕ
+lC:\Users\Matthieu\source\repos\HeroBot-deux-point-zÃ©ro\HeroBot.Plugins.GiveAway\Services\GiveAwayService.cs' (08@HR 0=0;5=0;10=1;20=0;30=0;60=0;90=0Z1=4;2=0;4=0;6=0;8=0;10=1;12=0j
+35:<?ACF_r_	
+ !"#$%&()+-./01246789;=>@BDEGHIJKLMNOPQRSTUVWXYZ[\]^_`bcefghijlnopx%‚$ !"#$%/0246;=@BDGHKMNOPQSTUVWYZghi

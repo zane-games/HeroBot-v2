@@ -1,12 +1,4 @@
-×
-gC:\Users\Matthieu\source\repos\HeroBot-deux-point-zÃ©ro\HeroBot.Plugins.RP\Migrations\FirstMigration.cs (08@HR 0=1;5=0;10=0;20=0;30=0;60=0;90=0Z1=2;2=0;4=0;6=0;8=0;10=0;12=0r	
-‚ò
-bC:\Users\Matthieu\source\repos\HeroBot-deux-point-zÃ©ro\HeroBot.Plugins.RP\Modules\BaseRPModule.csK (	0	8@HR 0=0;5=0;10=0;20=1;30=0;60=0;90=0Z1=2;2=4;4=0;6=1;8=1;10=0;12=0j;>rÚ	
- !"#$%&'()*+,-./0123456789:<?ABDEFGHIJKLMNOPQRSTUVWYZ[\]^_`bcdefghijklmnpqrstuvwxyz{|~€‚ƒ„…†‡ˆ‰Š‹ŒŽ‘’”•–—˜™š›œžŸ ¡¢£¤¥¦§¨«¬­®¯°±²³´µ¶x-‚W#&()*,27:<?EFGIJKMNOPRTV\^fhijkmtvwxy{€ƒ„†ˆ‰”–˜™š›Ÿ ¢£¥§­³±
-\C:\Users\Matthieu\source\repos\HeroBot-deux-point-zÃ©ro\HeroBot.Plugins.RP\PluginRefferal.cs(0R 0=1;5=0;10=0;20=0;30=0;60=0;90=0Z1=0;2=0;4=0;6=0;8=0;10=0;12=0r
-	
-³
-TC:\Users\Matthieu\source\repos\HeroBot-deux-point-zÃ©ro\HeroBot.Plugins.RP\RPUser.cs (08@HR 0=0;5=1;10=0;20=0;30=0;60=0;90=0Z1=6;2=0;4=0;6=0;8=0;10=0;12=0r	
-ý
-`C:\Users\Matthieu\source\repos\HeroBot-deux-point-zÃ©ro\HeroBot.Plugins.RP\Services\RPService.cs (08@HR 0=0;5=1;10=0;20=0;30=0;60=0;90=0Z1=3;2=2;4=0;6=0;8=0;10=0;12=0r5	
- !"#$%'()*+,-./023456789:;x‚!#)*+,./4
+”
+hC:\Users\Matthieu\source\repos\HeroBot-deux-point-zÃ©ro\HeroBot.Plugins.HeroBot\Modules\HeroBotModule.cs‡ (08+@5H+R 0=0;5=0;10=0;20=0;30=1;60=0;90=0Z1=7;2=7;4=1;6=0;8=0;10=0;12=1jéêëîïðñòˆrñ	
+ !"#$%'()*+,-./02346789:<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnpqrstuvwxz{|}~€‚ƒ„…†‡ˆŠ‹ŒŽ‘’”•–—˜™š›œžŸ ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßáâãäåæçìóôõöøùûüýþÿ€‚ƒ„…†‡‰Š‹ŒŽ‘’“–—˜™š›œžŸ ¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐx@‚Ê !"#$,.024689<=?@ACEFGIJKLNOQRTVW_bcdfghiklprtuv{|}„…†‡Ž‘—˜¢¨©«¬²µ¶·¸¹»¼½¾¿ÀÁÂÄÆÉÍÎÏÑÓÔÙÝÞßáâãäåæìõöøûƒ„ŒŽ‘’žŸ¦¨ª«®µ·¸¼ÄÆÇË³
+aC:\Users\Matthieu\source\repos\HeroBot-deux-point-zÃ©ro\HeroBot.Plugins.HeroBot\PluginRefferal.cs(0R 0=1;5=0;10=0;20=0;30=0;60=0;90=0Z1=0;2=0;4=0;6=0;8=0;10=0;12=0r

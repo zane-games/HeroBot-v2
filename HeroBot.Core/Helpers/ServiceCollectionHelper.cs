@@ -2,6 +2,7 @@
 using HeroBot.Common.Interfaces;
 using HeroBot.Core.Migrations;
 using HeroBot.Core.Services;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -20,10 +21,10 @@ namespace HeroBot.Core.Helpers
         /// </summary>
         /// <param name="services">The ServiceCollection "this"</param>
         /// <returns>The modified IServiceCollection</returns>
-        public static IServiceCollection LoadAllServicesFromExternalAssembiles(this IServiceCollection services)
+        public static IServiceCollection LoadAllServicesFromExternalAssembiles(this IServiceCollection services,IConfigurationRoot _config)
         {
             // Service migraotr used for the main system migrating
-            var serviceProviderMigrateg = CreateserviceMigrator(typeof(Migration1270720191).Assembly);
+            var serviceProviderMigrateg = CreateserviceMigrator(typeof(Migration1270720191).Assembly,_config);
             // We create a scope for the migrator service
             using (var scope = serviceProviderMigrateg.CreateScope())
             {
@@ -39,14 +40,12 @@ namespace HeroBot.Core.Helpers
                 try
                 {
 
-                    var serviceProviderMigrate = CreateserviceMigrator(assm);
-
+                    var serviceProviderMigrate = CreateserviceMigrator(assm,_config);
                     using var scope = serviceProviderMigrate.CreateScope();
                     (scope as IServiceProvider).GetRequiredService<IMigrationRunner>().MigrateUp();
                 }
-                catch { /* We ignore the assemblies loading exceptions */ }
-                IEnumerable<TypeInfo> servicesAss = assm.DefinedTypes.Where(x => !x.IsInterface && !x.IsEnum && x.IsClass && x.IsPublic && x.Name.Contains("Service"));
-                    foreach(TypeInfo typeInfo in servicesAss) 
+                catch(Exception e) { Console.WriteLine(e); }
+                    foreach(TypeInfo typeInfo in assm.DefinedTypes.Where(x => !x.IsInterface && !x.IsEnum && x.IsClass && x.IsPublic && x.Name.Contains("Service"))) 
                         services.AddSingleton(assm.GetTypes().FirstOrDefault(x => x.Name == typeInfo.Name));
 
             }
@@ -57,16 +56,14 @@ namespace HeroBot.Core.Helpers
         /// </summary>
         /// <param name="assembly">Assembly</param>
         /// <returns>A service provider</returns>
-        private static ServiceProvider CreateserviceMigrator(Assembly assembly)
+        private static ServiceProvider CreateserviceMigrator(Assembly assembly,IConfigurationRoot _config)
         {
-            var coll = new ServiceCollection();
-            coll.AddFluentMigratorCore().ConfigureRunner((x) =>
+            return new ServiceCollection().AddFluentMigratorCore().ConfigureRunner((x) =>
             {
                 x.AddPostgres()
-                .WithGlobalConnectionString($"Server=ssh.alivecreation.fr;Port=26257;Database={assembly.GetName().Name};User Id=matthieu;Password=4d9*jC%(hu\"ecN2&;SslMode=Require;Trust Server Certificate=true")
+                .WithGlobalConnectionString($"Server={_config.GetSection("postgres").GetSection("host").Value};Port={_config.GetSection("postgres").GetSection("port").Value};Database={assembly.GetName().Name};User Id={_config.GetSection("postgres").GetSection("auth").GetSection("name").Value};Password={_config.GetSection("postgres").GetSection("auth").GetSection("password").Value};SslMode=Require;Trust Server Certificate=true;Pooling=true;")
                 .ScanIn(assembly).For.Migrations();
-            });
-            return coll.BuildServiceProvider();
+            }).AddLogging(x => x.AddFluentMigratorConsole()).BuildServiceProvider();
         }
     }
 

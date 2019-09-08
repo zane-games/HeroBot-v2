@@ -1,6 +1,7 @@
 ﻿using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
+using HeroBot.Common.Contexts;
 using HeroBot.Core.Services;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -43,15 +44,15 @@ namespace HeroBotv2.Services
         {
             // Ensure the message is from a user/bot
             if (!(s is SocketUserMessage msg)) return;
-            if (msg.Author.Id == _discord.CurrentUser.Id || msg.Author.IsBot) return;     // Ignore self or bot when checking commands
             if (!(msg.Channel is SocketGuildChannel)) return;
-            var context = new SocketCommandContext(_discord.GetShardFor((msg.Channel as SocketGuildChannel).Guild), msg);                        // Create the command context
             int argPos = 0;     // Check if the message has a valid command prefix
-            if (msg.HasStringPrefix(_config["prefix"], ref argPos) || msg.HasMentionPrefix(_discord.CurrentUser, ref argPos))
+            if ((msg.HasStringPrefix(_config["prefix"], ref argPos) && (msg.Channel as IGuildChannel).GuildId != 264445053596991498) || msg.HasMentionPrefix(_discord.CurrentUser, ref argPos))
             {
+                if (msg.Author.Id == _discord.CurrentUser.Id || msg.Author.IsBot) return;     // Ignore self or bot when checking commands
+                var context = new CancelableSocketContext(_discord.GetShardFor((msg.Channel as SocketGuildChannel).Guild), msg);                        // Create the command context
                 var command = _commands.Search(context, argPos);
-                if (command.IsSuccess) {
-
+                if (command.IsSuccess)
+                {
                     var cmd = command.Commands.First().Command;
                     var result = await _commands.ExecuteAsync(context, argPos, _provider);
                     if (!result.IsSuccess)
@@ -62,7 +63,7 @@ namespace HeroBotv2.Services
                                 await s.Channel.SendMessageAsync($"Oops, it look like you made a syntax error in your command :/ `{_config["prefix"]}{(cmd.Aliases.Count > 0 ? $"{"{"}{string.Join(",", cmd.Aliases)}{"}"}" : cmd.Name)} {string.Join(" ", cmd.Parameters.Select(p => p.IsOptional ? $"[{p.Name}{(p.IsRemainder ? "..." : String.Empty)}]" : $"<{p.Name}{(p.IsRemainder ? "..." : String.Empty)}>"))}`");
                                 break;
                             case CommandError.ParseFailed:
-                                await s.Channel.SendMessageAsync("Oops, it look like you sent us a bad argument :/");
+                                await s.Channel.SendMessageAsync($"Oops, it look like you made a syntax error in your command :/ `{_config["prefix"]}{(cmd.Aliases.Count > 0 ? $"{"{"}{string.Join(",", cmd.Aliases)}{"}"}" : cmd.Name)} {string.Join(" ", cmd.Parameters.Select(p => p.IsOptional ? $"[{p.Name}{(p.IsRemainder ? "..." : String.Empty)}]" : $"<{p.Name}{(p.IsRemainder ? "..." : String.Empty)}>"))}`");
                                 break;
                             case CommandError.UnmetPrecondition:
                                 await s.Channel.SendMessageAsync(result.ErrorReason);
@@ -79,7 +80,7 @@ namespace HeroBotv2.Services
                     else
                         await _cooldown.OnCommand(command.Commands.First().Command, context);
                 }
-            }  
+            }
         }
     }
 }

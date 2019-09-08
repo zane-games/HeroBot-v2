@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:3.0 as build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0.100-preview8 as build
 WORKDIR /build
 COPY . .
 RUN bash ./ci/build-all.sh

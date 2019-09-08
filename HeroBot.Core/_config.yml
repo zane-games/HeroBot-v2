@@ -1,7 +1,7 @@
 ﻿prefix: hb!
 discord: "jXp6KtA"
 tokens:
-    discord: "NDkxNjczNDgwMDA2MjA1NDYx.XV1iHQ.HGGgxNyGa0PMe9-WfpSRf3cJZmg"
+    discord: "NDkxNjczNDgwMDA2MjA1NDYx.XW055A.G8zgQGXrhw6HsnX-jvbVWNFkZcQ"
 redis:
     host: redis
     database: 1
@@ -15,3 +15,5 @@ postgres:
     auth:
         name: matthieu
         password: 4d9*jC%(hu"ecN2&
+dbl:
+    token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQ5MTY3MzQ4MDAwNjIwNTQ2MSIsImJvdCI6dHJ1ZSwiaWF0IjoxNTY3MTgwMDAxfQ.YM2AKlrcDkB4k7fqkT2yKEn_6sGx3x-1VAxr5fJEXTo"

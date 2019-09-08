@@ -1,0 +1,17 @@
+﻿prefix: hb!
+discord: "jXp6KtA"
+tokens:
+    discord: "NDkxNjczNDgwMDA2MjA1NDYx.XV1iHQ.HGGgxNyGa0PMe9-WfpSRf3cJZmg"
+redis:
+    host: localhost
+    database: 1
+    port: 6379
+    auth:
+        name: null
+        password: null
+postgres:
+    host: ssh.alivecreation.fr
+    port: 26257
+    auth:
+        name: matthieu
+        password: 4d9*jC%(hu"ecN2&

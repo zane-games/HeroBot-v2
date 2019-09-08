@@ -25,6 +25,7 @@ namespace HeroBot.Plugins.Images.Modules
         private readonly static string[] DogGreetings = new[] { "Let's find a __great__ dog for you :3", "Here is a __great__ dog !", "I've found this __great__ dog for you..." };
         private readonly static string CatUrl = "http://aws.random.cat/meow";
         private readonly static string DogUrl = "https://random.dog/woof";
+        private readonly static string EclyssiaUrl = "https://eclyssia-api.tk/api/v1";
         public ImagesModule(Random random)
         {
             _random = random;
@@ -34,13 +35,14 @@ namespace HeroBot.Plugins.Images.Modules
         public Task RandomCat()
         {
             using WebClient webclient = new WebClient();
-            return webclient.DownloadStringTaskAsync(new Uri(CatUrl)).ContinueWith((x) =>
+            return webclient.DownloadStringTaskAsync(new Uri(CatUrl)).ContinueWith(async (x) =>
             {
                 var url = JsonConvert.DeserializeObject<dynamic>(x.Result).file;
-                ReplyAsync($":cat:  {Context.User.Mention} {CatGreetings[_random.Next() % CatGreetings.Length].Replace("__great__", CatGreet[_random.Next() % CatGreet.Length])}", false, new EmbedBuilder()
+                await ReplyAsync($":cat:  {Context.User.Mention} {CatGreetings[_random.Next() % CatGreetings.Length].Replace("__great__", CatGreet[_random.Next() % CatGreet.Length])}", false, new EmbedBuilder()
                 {
                     ImageUrl = url
                 }.WithRandomColor().WithCopyrightFooter(Context.User.Username, "cat").Build());
+                webclient.Dispose();
             });
         }
 
@@ -48,54 +50,57 @@ namespace HeroBot.Plugins.Images.Modules
         public Task RandomDog()
         {
             using WebClient webclient = new WebClient();
-            return webclient.DownloadStringTaskAsync(new Uri(DogUrl)).ContinueWith((x) =>
+            return webclient.DownloadStringTaskAsync(new Uri(DogUrl)).ContinueWith(async (x) =>
 {
-    ReplyAsync($":dog: {Context.User.Mention} {DogGreetings[_random.Next() % DogGreetings.Length].Replace("__great__", DogGreet[_random.Next() % DogGreet.Length])}", false, new EmbedBuilder()
+    await ReplyAsync($":dog: {Context.User.Mention} {DogGreetings[_random.Next() % DogGreetings.Length].Replace("__great__", DogGreet[_random.Next() % DogGreet.Length])}", false, new EmbedBuilder()
     {
         ImageUrl = $"https://random.dog/{x.Result}"
     }.WithRandomColor().WithCopyrightFooter(Context.User.Username, "dog").Build());
+    webclient.Dispose();
 });
         }
-        [Command("welcome")]
-        public async Task Welcome(string url = null)
-        {
-            var rurl = ResolveUrl(url);
-            using HttpClient client = new HttpClient();
-            var e = HttpUtility.UrlEncode(Context.User.Username + '#' + Context.User.Discriminator);
-            var bytearray = await client.GetByteArrayAsync($"http://imageapi:3000/welcome?imageurl={rurl}&name={e}");
-            var stream = new MemoryStream(bytearray);
-            await Context.Channel.SendFileAsync(stream, "welcome.png", embed: new EmbedBuilder().WithImageUrl("attachment://welcome.png").WithCopyrightFooter()
-                .WithRandomColor()
-                .WithAuthor(Context.User).Build());
-            stream.Close();
-        }
+
         [Command("pixelate")]
         public async Task Pixelate(string url = null)
         {
             var rurl = ResolveUrl(url);
             using HttpClient client = new HttpClient();
-            var bytearray = await client.GetByteArrayAsync($"http://imageapi:3000/pixelate?imageurl={rurl}");
+            var bytearray = await client.GetByteArrayAsync($"{EclyssiaUrl}/pixelate?url={rurl}");
             var stream = new MemoryStream(bytearray);
-            await Context.Channel.SendFileAsync(stream, "pixelate.png", embed: new EmbedBuilder()
-                .WithCopyrightFooter()
+            try
+            {
+                await Context.Channel.SendFileAsync(stream, "pixelate.png", embed: new EmbedBuilder()
                 .WithRandomColor()
                 .WithAuthor(Context.User)
                 .WithImageUrl("attachment://pixelate.png").Build());
-
-            stream.Close();
+            }
+            catch (Exception) { /* Ignore message send errors */}
+            finally {
+                // Close the stream
+                stream.Close();
+            }
         }
         [Command("sepia")]
         public async Task Sepia(string url = null)
         {
             var rurl = ResolveUrl(url);
             using HttpClient client = new HttpClient();
-            var bytearray = await client.GetByteArrayAsync($"http://imageapi:3000/sepia?imageurl={rurl}");
+            var bytearray = await client.GetByteArrayAsync($"{EclyssiaUrl}/sepia?url={rurl}");
             var stream = new MemoryStream(bytearray);
-            await Context.Channel.SendFileAsync(stream, "sepia.png", embed: new EmbedBuilder().WithImageUrl("attachment://sepia.png").WithCopyrightFooter()
+            try
+            {
+                await Context.Channel.SendFileAsync(stream, "sepia.png", embed: new EmbedBuilder()
                 .WithRandomColor()
-                .WithAuthor(Context.User).Build());
-
-            stream.Close();
+                .WithAuthor(Context.User)
+                .WithImageUrl("attachment://sepia.png").Build());
+            }
+            catch (Exception) { /* Ignore message send errors */}
+            finally
+            {
+                // Close the stream
+                stream.Close();
+            }
+            client.Dispose();
         }
 
         [Command("mirror")]
@@ -103,12 +108,22 @@ namespace HeroBot.Plugins.Images.Modules
         {
             var rurl = ResolveUrl(url);
             using HttpClient client = new HttpClient();
-            var bytearray = await client.GetByteArrayAsync($"http://imageapi:3000/mirror?imageurl={rurl}");
+            var bytearray = await client.GetByteArrayAsync($"{EclyssiaUrl}/sepia?url={rurl}");
             var stream = new MemoryStream(bytearray);
-            await Context.Channel.SendFileAsync(stream, "mirror.png", embed: new EmbedBuilder().WithImageUrl("attachment://mirror.png").WithCopyrightFooter()
+            try
+            {
+                await Context.Channel.SendFileAsync(stream, "sepia.png", embed: new EmbedBuilder()
                 .WithRandomColor()
-                .WithAuthor(Context.User).Build());
-            stream.Close();
+                .WithAuthor(Context.User)
+                .WithImageUrl("attachment://sepia.png").Build());
+            }
+            catch (Exception) { /* Ignore message send errors */}
+            finally
+            {
+                // Close the stream
+                stream.Close();
+            }
+            client.Dispose();
         }
 
         [Command("invert")]

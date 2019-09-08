@@ -96,11 +96,13 @@ namespace HeroBot.Plugins.HeroBot.Modules
                 {
                     var description = new StringBuilder();
                     var precondition = module.Preconditions.First(x => x is NeedPluginAttribute);
-
                     var run = await precondition.CheckPermissionsAsync(Context, module.Commands.First(), _provider);
                     if (run.IsSuccess)
                     {
-                        foreach (var cmd in module.Commands)
+                        realCommands += module.Commands.Count;
+                        var commands = ResolveAllCommandsFromModule(module);
+                        subcommands += commands.Count() - module.Commands.Count;
+                        foreach (var cmd in commands)
                         {
                             total++;
                             description.Append($"**>** `{prefix}{cmd.Aliases.First()}`");
@@ -123,6 +125,24 @@ namespace HeroBot.Plugins.HeroBot.Modules
                 return;
             }
             await ReplyAsync($"Available commands for {this.Context.User.Mention}", false, builder.Build());
+        }
+
+        private IEnumerable<CommandInfo> ResolveAllCommandsFromModule(ModuleInfo module)
+        {
+            var allModules = ResolveAllModules(module);
+            foreach (ModuleInfo moduleInfo in allModules)
+                foreach (CommandInfo commandInfo in moduleInfo.Commands)
+                    yield return commandInfo;
+        }
+
+        private List<ModuleInfo> ResolveAllModules(ModuleInfo module)
+        {
+            var modules = new List<ModuleInfo>();
+            modules.Add(module);
+            foreach (ModuleInfo moduleInfo in module.Submodules) {
+                modules.AddRange(ResolveAllModules(moduleInfo));
+            }
+            return modules;
         }
 
         [Command("quit"), Alias(new[] { "leave", "goodbye" }), RequireContext(ContextType.Guild), RequireUserPermission(GuildPermission.Administrator)]

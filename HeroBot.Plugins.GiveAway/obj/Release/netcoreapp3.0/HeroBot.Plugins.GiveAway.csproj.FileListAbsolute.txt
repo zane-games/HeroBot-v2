@@ -20,3 +20,8 @@ C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\out\Modules\HeroBot.Plug
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\build\Modules\HeroBot.Plugins.GiveAway.deps.json
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\build\Modules\HeroBot.Plugins.GiveAway.dll
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\build\Modules\HeroBot.Plugins.GiveAway.pdb
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.GiveAway\bin\Release\netcoreapp3.0\HeroBot.Plugins.GiveAway.deps.json
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.GiveAway\bin\Release\netcoreapp3.0\HeroBot.Plugins.GiveAway.dll
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.GiveAway\bin\Release\netcoreapp3.0\HeroBot.Plugins.GiveAway.pdb
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.GiveAway\bin\Release\netcoreapp3.0\HeroBot.Common.dll
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.GiveAway\bin\Release\netcoreapp3.0\HeroBot.Common.pdb

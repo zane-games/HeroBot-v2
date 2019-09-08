@@ -3,7 +3,8 @@ fC:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Common\Attribut
 hC:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Common\Attributes\NeedPluginAttribute.csutf-8m
 dC:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Common\Attributes\PluginAttribute.csutf-8n
 eC:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Common\Attributes\RuntimeConstants.csutf-8n
-eC:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Common\Attributes\ServiceAttribute.csutf-8t
+eC:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Common\Attributes\ServiceAttribute.csutf-8s
+jC:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Common\Contexts\CancelableSocketContext.csutf-8t
 kC:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Common\ExtendedModules\ModuleLoadcontext.csutf-8p
 gC:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Common\Helpers\EmbedBuilderExtension.csutf-8k
 bC:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Common\Helpers\ExtensionHelpers.csutf-8i
@@ -13,8 +14,7 @@ eC:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Common\Interfac
 eC:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Common\Interfaces\IDatabaseService.csutf-8m
 dC:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Common\Interfaces\IModulesService.csutf-8m
 dC:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Common\Interfaces\IPluginRefferal.csutf-8k
-bC:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Common\Interfaces\IRedisService.csutf-8y
-pC:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Common\Migrations\201807182_Migration_Plugins.csutf-8l
+bC:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Common\Interfaces\IRedisService.csutf-8l
 cC:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Common\SimpleCacheImplementation.csutf-8^
 SC:\Users\Matthieu\AppData\Local\Temp\.NETCoreApp,Version=v3.0.AssemblyAttributes.csutf-8�
 }C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Common\obj\Debug\netcoreapp3.0\HeroBot.Common.AssemblyInfo.csutf-8

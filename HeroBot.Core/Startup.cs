@@ -1,8 +1,10 @@
 ﻿using Discord;
 using Discord.Commands;
+using Discord.Net.WebSockets;
 using Discord.WebSocket;
 using HeroBot.Common;
 using HeroBot.Common.Interfaces;
+using HeroBot.Core;
 using HeroBot.Core.Helpers;
 using HeroBot.Core.Services;
 using HeroBotv2.Services;
@@ -20,7 +22,7 @@ namespace HeroBotv2
 
         public Startup()
         {
-            NpgsqlLogManager.Provider = new ConsoleLoggingProvider(NpgsqlLogLevel.Error, true, true);
+            NpgsqlLogManager.Provider = new ConsoleLoggingProvider(NpgsqlLogLevel.Info, true, true);
             var builder = new ConfigurationBuilder()                  // Create a new instance of the config builder
                 .SetBasePath(AppContext.BaseDirectory)                // Specify the default location for the config file
                 .AddYamlFile("_config.yml");                          // Add this (yaml encoded) file to the configuration
@@ -59,10 +61,11 @@ namespace HeroBotv2
             services.AddSingleton(new DiscordShardedClient(new DiscordSocketConfig
             {                                                          // Add discord to the collection
                 LogLevel = LogSeverity.Info,                           // Tell the logger to give Verbose amount of info
-                MessageCacheSize = 0,                                  // Cache 50 messages per channel
+                MessageCacheSize = 10,                                  // Cache 50 messages per channel
                 AlwaysDownloadUsers = false,
                 ExclusiveBulkDelete = true,
-                LargeThreshold = 0
+                LargeThreshold = 250,
+                
             }))
             .AddSingleton(new CommandService(new CommandServiceConfig
             {                                                         // Add the command service to the collection
@@ -82,7 +85,7 @@ namespace HeroBotv2
             .AddSingleton<IModulesService,ModulesService>()           // Add module handler to the collection
             .AddSingleton<Random>()                                   // Add random to the collection
             .AddSingleton(Configuration)                              // Add the configuration to the collection
-            .LoadAllServicesFromExternalAssembiles();                 // Now we need to load external services.
+            .LoadAllServicesFromExternalAssembiles(Configuration);                 // Now we need to load external services.
         }
     }
 }

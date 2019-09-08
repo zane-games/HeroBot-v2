@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Discord;
 using Discord.Commands;
+using Discord.WebSocket;
 using HeroBot.Common;
 using HeroBot.Common.ExtendedModules;
 using HeroBot.Common.Helpers;
@@ -25,7 +26,7 @@ namespace HeroBot.Core.Services
         private readonly LoggingService _logging;
         private readonly List<ToLoadAssembly> toLoadAssemblies = new List<ToLoadAssembly>();
         private readonly SimpleCacheImplementation _simpleCacheImplementation;
-        public ModulesService(SimpleCacheImplementation simpleCacheImplementation,LoggingService logging, CommandService commandService, IServiceProvider provider, IDatabaseService databaseService)
+        public ModulesService( SimpleCacheImplementation simpleCacheImplementation,LoggingService logging, CommandService commandService, IServiceProvider provider, IDatabaseService databaseService)
         {
             _simpleCacheImplementation = simpleCacheImplementation;
             _provider = provider;

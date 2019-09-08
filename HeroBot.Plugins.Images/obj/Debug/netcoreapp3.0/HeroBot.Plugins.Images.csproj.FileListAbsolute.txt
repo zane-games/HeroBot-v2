@@ -6,9 +6,12 @@ C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Images\b
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Images\bin\Debug\netcoreapp3.0\HeroBot.Plugins.Mod.pdb
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Images\bin\Debug\netcoreapp3.0\HeroBot.Common.pdb
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Images\obj\Debug\netcoreapp3.0\HeroBot.Plugins.Images.csprojAssemblyReference.cache
-C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Images\obj\Debug\netcoreapp3.0\HeroBot.Plugins.Images.csproj.CoreCompileInputs.cache
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Images\obj\Debug\netcoreapp3.0\HeroBot.Plugins.Images.AssemblyInfoInputs.cache
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Images\obj\Debug\netcoreapp3.0\HeroBot.Plugins.Images.AssemblyInfo.cs
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Images\obj\Debug\netcoreapp3.0\HeroBot.Plugins.Images.csproj.CopyComplete
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Images\obj\Debug\netcoreapp3.0\HeroBot.Plugins.Images.dll
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Images\obj\Debug\netcoreapp3.0\HeroBot.Plugins.Images.pdb
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\bin\Debug\netcoreapp3.0\Modules\HeroBot.Plugins.Images.deps.json
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\bin\Debug\netcoreapp3.0\Modules\HeroBot.Plugins.Images.dll
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\bin\Debug\netcoreapp3.0\Modules\HeroBot.Plugins.Images.pdb
+C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.Images\obj\Debug\netcoreapp3.0\HeroBot.Plugins.Images.csproj.CoreCompileInputs.cache

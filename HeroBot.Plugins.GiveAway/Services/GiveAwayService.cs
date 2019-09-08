@@ -44,8 +44,6 @@ namespace HeroBot.Plugins.GiveAway.Services
 
         private void OnRedisEvent(RedisChannel arg1, RedisValue arg2)
         {
-            try
-            {
                 var name = arg2.ToString().Split(':');
                 if (name.Length == 2 && name[0] == "giveaway")
                 {
@@ -94,12 +92,10 @@ namespace HeroBot.Plugins.GiveAway.Services
                                 }
                             }
                         }
-                        catch (Exception) { }
+                        catch (Exception) { /*Ignore exceptions in a redis method */}
                     });
 
                 }
-            }
-            catch (Exception) {  }
         }
 
         public async Task CreateGiveaway(IGuildChannel channel,IMessage message,TimeSpan time,string price,int winners)

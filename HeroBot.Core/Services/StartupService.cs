@@ -15,6 +15,7 @@ namespace HeroBotv2.Services
         private readonly DiscordShardedClient _discord;
         private readonly CommandService _commands;
         private readonly IConfigurationRoot _config;
+        private DiscordBotsList.Api.Objects.IDblSelfBot _self;
         private int[] ShardPresences;
         private readonly string[] presence = new[] {
             "hb!help | Dragon 🐉",
@@ -76,12 +77,61 @@ namespace HeroBotv2.Services
             string discordToken = _config["tokens:discord"];     // Get the discord token from the config file
             if (string.IsNullOrWhiteSpace(discordToken))
                 throw new InvalidProgramException("Please enter your bot's token into the `_configuration.json` file found in the applications root directory.");
-
+            _discord.ShardConnected += _discord_ShardConnected;
             await _discord.LoginAsync(TokenType.Bot, discordToken);     // Login to discord
             await _discord.StartAsync();                                // Connect to the websocket
+            _discord.JoinedGuild += _discord_JoinedGuild;
+            _discord.LeftGuild += _discord_LeftGuild;
+
             ShardPresences = new int[_discord.Shards.Count];
             UpdatePresences.Start();
             await _commands.AddModulesAsync(Assembly.GetEntryAssembly(), _provider);     // Load commands and modules into the command service
+        }
+
+        private async Task _discord_ShardConnected(DiscordSocketClient arg)
+        {
+            try
+            {
+                if (_discord.Shards.Count(x => x.ConnectionState == ConnectionState.Connected) == _discord.Shards.Count)
+                {
+                    var dblClient = new DiscordBotsList.Api.AuthDiscordBotListApi(_discord.CurrentUser.Id, _config.GetSection("dbl").GetSection("token").Value);
+                    _self = await dblClient.GetMeAsync();
+                }
+            }
+            catch { };
+        }
+
+        private async Task _discord_LeftGuild(SocketGuild arg)
+        {
+            try
+            {
+                await _self.UpdateStatsAsync(_discord.Guilds.Count);
+            }
+            catch { };
+            try
+            {
+                await (_discord.GetChannel(579320728663359498) as ITextChannel).SendMessageAsync($"<a:leave:616197734978027520> | J'ai quitté le serveur **`{arg.Name}`**. Je suis maintenant sur {_discord.Guilds.Count} serveurs.");
+            }
+            catch { };
+        }
+
+        private async Task _discord_JoinedGuild(SocketGuild arg)
+        {
+            try
+            {
+                await _self.UpdateStatsAsync(_discord.Guilds.Count);
+            }
+            catch { };
+            try
+            {
+                await (_discord.GetChannel(579320728663359498) as ITextChannel).SendMessageAsync($"<a:join:616197720956338176> | J'ai rejoins le serveur **`{arg.Name}`**. Je suis maintenant sur {_discord.Guilds.Count} serveurs.");
+            }
+            catch { };
+            try
+            {
+                await arg.DefaultChannel.SendMessageAsync($"Hi ! I'm HeroBot, you new discord assistant, you can start configuring me with `hb!plugin list` if you need help, you can look at our wiki (https://doc-herobot.alivecreation.fr/) or at our discord (https://discord.gg/{_config["discord"]})");
+            }
+            catch { };
         }
     }
     public static class DiscordShardedClientExtension
