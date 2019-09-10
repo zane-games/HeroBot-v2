@@ -384,11 +384,11 @@
           "lib/netstandard2.0/Lavalink4NET.dll": {}
         }
       },
-      "Lavalink4NET.Discord.NET/1.4.3": {
+      "Lavalink4NET.Discord.NET/1.4.5": {
         "type": "package",
         "dependencies": {
           "Discord.Net.WebSocket": "2.0.1",
-          "Lavalink4NET": "1.4.3"
+          "Lavalink4NET": "1.4.5"
         },
         "compile": {
           "lib/netstandard2.0/Lavalink4NET.Discord_NET.dll": {}
@@ -2688,14 +2688,14 @@
         "lib/netstandard2.0/Lavalink4NET.dll"
       ]
     },
-    "Lavalink4NET.Discord.NET/1.4.3": {
-      "sha512": "fmx5Ag0+4AVTkkwenYDQhf6LnRPss/wfpHEqCYvTNfzkVOPheAORHukWUpgw3i07wznBn9cklZKhFYP6js3Etw==",
+    "Lavalink4NET.Discord.NET/1.4.5": {
+      "sha512": "GprE8MEpqPh3L5rj5tfKGY08cT1IU6KhFpM+aO4dcRw/J/4KQxpcJY0jGDdn+Z+E2MykBHWRci05mmWoPUN0Kg==",
       "type": "package",
-      "path": "lavalink4net.discord.net/1.4.3",
+      "path": "lavalink4net.discord.net/1.4.5",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "lavalink4net.discord.net.1.4.3.nupkg.sha512",
+        "lavalink4net.discord.net.1.4.5.nupkg.sha512",
         "lavalink4net.discord.net.nuspec",
         "lib/netstandard2.0/Lavalink4NET.Discord_NET.dll"
       ]
@@ -7160,7 +7160,7 @@
       "FluentMigrator.Runner.Postgres >= 3.2.1",
       "HeroBot.Common >= 1.0.0",
       "Lavalink4NET >= 1.4.3",
-      "Lavalink4NET.Discord.NET >= 1.4.3",
+      "Lavalink4NET.Discord.NET >= 1.4.5",
       "NetEscapades.Configuration.Yaml >= 1.6.0"
     ]
   },
@@ -7230,7 +7230,7 @@
           },
           "Lavalink4NET.Discord.NET": {
             "target": "Package",
-            "version": "[1.4.3, )"
+            "version": "[1.4.5, )"
           },
           "NetEscapades.Configuration.Yaml": {
             "target": "Package",
@@ -7252,5 +7252,16 @@
         ]
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1605",
+      "level": "Error",
+      "message": "Passage à une version antérieure du package détecté : Lavalink4NET de 1.4.5 à 1.4.3. Référencez le package directement à partir du projet pour sélectionner une version différente. \r\n HeroBot.Core -> Lavalink4NET.Discord.NET 1.4.5 -> Lavalink4NET (>= 1.4.5) \r\n HeroBot.Core -> Lavalink4NET (>= 1.4.3)",
+      "libraryId": "Lavalink4NET",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.0"
+      ]
+    }
+  ]
 }

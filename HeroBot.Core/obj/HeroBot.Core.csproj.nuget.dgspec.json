@@ -157,7 +157,7 @@
             },
             "Lavalink4NET.Discord.NET": {
               "target": "Package",
-              "version": "[1.4.3, )"
+              "version": "[1.4.5, )"
             },
             "NetEscapades.Configuration.Yaml": {
               "target": "Package",
