@@ -9,7 +9,7 @@ namespace HeroBot.Plugins.RP.Entities
         public string Id { get; set; }
         public string Name { get; set; }
         public string OwnerId {get;set;}
-        public string Description { get; set; }
+        public string Description { get; set; } = "*no description*";
         public long Money { get; set; } = 10;
     }
 }

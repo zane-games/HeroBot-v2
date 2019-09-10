@@ -20,9 +20,9 @@ namespace HeroBot.Plugins.RP.Modules
         private readonly Random _random;
 
         private readonly object[] gear = new[] {
-            new {emoji = "⭐", money = 2 },
-            new {emoji = "🍰", money = 6 } ,
-            new {emoji = "💸", money = 10 }
+            new {emoji = "👀", money = 2 },
+            new {emoji = "🎮", money = 6 } ,
+            new {emoji = "😘", money = 10 }
         };
 
         public BaseRPModule(RPService rPService, Random random)
@@ -39,7 +39,6 @@ namespace HeroBot.Plugins.RP.Modules
             var userg = await _rp.GetRPUser(user);
             if (userg != null)
             {
-                var dadge = string.Join(", ", userg.BadgesData);
                 var embed = new EmbedBuilder()
                 {
                     Title = $"{userg.Emoji} {user.Username}'s profile",
@@ -66,11 +65,6 @@ namespace HeroBot.Plugins.RP.Modules
                             IsInline = true,
                             Name = "Job",
                             Value = $"{userg.Job.GetDescription()}"
-                        },
-                        new EmbedFieldBuilder() {
-                            IsInline = true,
-                            Name = "Special badges",
-                            Value =  dadge == String.Empty ? "*no badge*" : dadge
                         }
                     }
                 }.WithRandomColor();
@@ -177,21 +171,6 @@ namespace HeroBot.Plugins.RP.Modules
             }
             else { await ReplyAsync("... I can't find your account `hb!start`"); this.Context.CooldownCancelled = true; }
         }
-        [Command("addBadge")]
-        public async Task AddBadgeAsync(IUser target,[Remainder]string badge) {
-            if (Context.User.Id != 314354049023737857) {
-                await ReplyAsync("You can't do this...");
-                return;
-            }
-            var user = await _rp.GetRPUser(target);
-            if (user != null)
-            {
-                user.BadgesData.Add(badge);
-                await _rp.UpdateUser(user);
-                await ReplyAsync($"Added the badge {badge} to {target.Username}");
-            }
-            else { await ReplyAsync($"... I can't find {target.Username}'s account `hb!start`"); this.Context.CooldownCancelled = true; }
-        }
 
         [Command("hourly")]
         [Cooldown(3600)]
@@ -215,7 +194,7 @@ namespace HeroBot.Plugins.RP.Modules
             var userAccount = await _rp.GetRPUser(Context.User);
             if (userAccount != null)
             {
-                if (userAccount.Money >= amount)
+                if (amount > 0 && userAccount.Money >= amount)
                 {
                     var targetAccount = await _rp.GetRPUser(target);
                     if (targetAccount != null)
@@ -245,47 +224,6 @@ namespace HeroBot.Plugins.RP.Modules
             public Profile(RPService rPService)
             {
                 _rp = rPService;
-            }
-
-            [Command("view")]
-            public async Task ViewProfileAsync()
-            {
-                var user = Context.User;
-                var userg = await _rp.GetRPUser(user);
-                if (userg != null)
-                {
-                    var embed = new EmbedBuilder()
-                    {
-                        Title = $"{userg.Emoji} {user.Username}'s profile",
-                        Description = $"{userg.Description}",
-                        Url = userg.Website ?? null,
-                        ThumbnailUrl = user.GetAvatarUrl(),
-                        Fields = new System.Collections.Generic.List<EmbedFieldBuilder>() {
-                        new EmbedFieldBuilder() {
-                            IsInline = true,
-                            Name = "Likes \\👍",
-                            Value = $"{userg.Likes} `👍`"
-                        },
-                        new EmbedFieldBuilder() {
-                            IsInline = true,
-                            Name = "Money",
-                            Value = $"{userg.Money} 💸"
-                        },
-                        new EmbedFieldBuilder() {
-                            IsInline = true,
-                            Name = "Personality",
-                            Value = $"{(userg.Personality == String.Empty ? "*not definied*" : userg.Personality )}"
-                        },
-                        new EmbedFieldBuilder() {
-                            IsInline = true,
-                            Name = "Job",
-                            Value = $"{userg.Job.GetDescription()}"
-                        }
-                    }
-                    }.WithRandomColor();
-                    await ReplyAsync(embed: embed.Build());
-                }
-                else await ReplyAsync("... I can't find your account `hb!start`");
             }
 
             [Command("description")]
