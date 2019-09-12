@@ -14,7 +14,6 @@ jobs:
         name: matthis974/herobot
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-       steps:
   deploy:
     on:
       push:
