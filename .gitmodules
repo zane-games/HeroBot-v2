@@ -1,0 +1,15 @@
+[submodule "HeroBot.Common"]
+	path = HeroBot.Common
+	url = https://github.com/HeroBot-discord/HeroBot.Common.git
+[submodule "HeroBot.Plugins.RP"]
+	path = HeroBot.Plugins.RP
+	url = https://github.com/HeroBot-discord/Plugins.RP.git
+[submodule "HeroBot.Plugins.Example"]
+	path = HeroBot.Plugins.Example
+	url = https://github.com/HeroBot-discord/HeroBot.Plugins.Example.git
+[submodule "HeroBot.Plugins.RemindMe"]
+	path = HeroBot.Plugins.RemindMe
+	url = https://github.com/HeroBot-discord/Plugins.RemindMe.git
+[submodule "HeroBot.Plugins.Mod"]
+	path = HeroBot.Plugins.Mod
+	url = https://github.com/HeroBot-discord/Plugins.Mod.git
