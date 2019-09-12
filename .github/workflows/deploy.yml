@@ -1,0 +1,12 @@
+on:
+  push:
+     branches:
+       - master
+jobs:
+  
+  deploy:
+    runs-on: ubuntu-latest
+    - name: curl
+    uses: wei/curl@v1
+    with:
+      args: -X POST https://admin.alivecreation.fr/portainer/api/webhooks/d000bcb8-c2f7-4ad4-bd7a-43143c645cae
