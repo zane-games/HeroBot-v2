@@ -1,9 +1,10 @@
-on:
+name: HeroBotDeploy
+
+on: 
   push:
-     branches:
-       - master
+    branches:
+      - master
 jobs:
-  
   deploy:
     runs-on: ubuntu-latest
     - name: curl
