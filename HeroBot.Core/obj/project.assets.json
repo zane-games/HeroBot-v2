@@ -29,6 +29,19 @@
           "lib/netstandard1.6/Dapper.FastCrud.dll": {}
         }
       },
+      "Discord.Addons.PassiveInteractive/2.0.4": {
+        "type": "package",
+        "dependencies": {
+          "Discord.Net.Commands": "1.0.1",
+          "Discord.Net.WebSocket": "1.0.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/Discord.Addons.Interactive.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Discord.Addons.Interactive.dll": {}
+        }
+      },
       "Discord.Net/2.1.1": {
         "type": "package",
         "dependencies": {
@@ -384,11 +397,11 @@
           "lib/netstandard2.0/Lavalink4NET.dll": {}
         }
       },
-      "Lavalink4NET.Discord.NET/1.4.5": {
+      "Lavalink4NET.Discord.NET/1.4.3": {
         "type": "package",
         "dependencies": {
           "Discord.Net.WebSocket": "2.0.1",
-          "Lavalink4NET": "1.4.5"
+          "Lavalink4NET": "1.4.3"
         },
         "compile": {
           "lib/netstandard2.0/Lavalink4NET.Discord_NET.dll": {}
@@ -2193,6 +2206,7 @@
         "dependencies": {
           "Dapper": "2.0.4",
           "Dapper.FastCrud": "2.5.0.39",
+          "Discord.Addons.PassiveInteractive": "2.0.4",
           "Discord.Net": "2.1.1",
           "FluentMigrator": "3.2.1",
           "FluentMigrator.Runner.Postgres": "3.2.1",
@@ -2206,10 +2220,7 @@
         },
         "runtime": {
           "bin/placeholder/HeroBot.Common.dll": {}
-        },
-        "frameworkReferences": [
-          "Microsoft.NETCore.App"
-        ]
+        }
       }
     }
   },
@@ -2242,6 +2253,18 @@
         "lib/net46/Dapper.FastCrud.xml",
         "lib/netstandard1.6/Dapper.FastCrud.dll",
         "lib/netstandard1.6/Dapper.FastCrud.xml"
+      ]
+    },
+    "Discord.Addons.PassiveInteractive/2.0.4": {
+      "sha512": "O8Eyu7r+05dVGwAKca3SgbfHVLGOpKhODR7XzGX2mbFOlRdyywHf4ZSDFUb8o3J8n9JyTaFld9z7fSeHBDExvA==",
+      "type": "package",
+      "path": "discord.addons.passiveinteractive/2.0.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "discord.addons.passiveinteractive.2.0.4.nupkg.sha512",
+        "discord.addons.passiveinteractive.nuspec",
+        "lib/netstandard2.0/Discord.Addons.Interactive.dll"
       ]
     },
     "Discord.Net/2.1.1": {
@@ -2688,14 +2711,14 @@
         "lib/netstandard2.0/Lavalink4NET.dll"
       ]
     },
-    "Lavalink4NET.Discord.NET/1.4.5": {
-      "sha512": "GprE8MEpqPh3L5rj5tfKGY08cT1IU6KhFpM+aO4dcRw/J/4KQxpcJY0jGDdn+Z+E2MykBHWRci05mmWoPUN0Kg==",
+    "Lavalink4NET.Discord.NET/1.4.3": {
+      "sha512": "fmx5Ag0+4AVTkkwenYDQhf6LnRPss/wfpHEqCYvTNfzkVOPheAORHukWUpgw3i07wznBn9cklZKhFYP6js3Etw==",
       "type": "package",
-      "path": "lavalink4net.discord.net/1.4.5",
+      "path": "lavalink4net.discord.net/1.4.3",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "lavalink4net.discord.net.1.4.5.nupkg.sha512",
+        "lavalink4net.discord.net.1.4.3.nupkg.sha512",
         "lavalink4net.discord.net.nuspec",
         "lib/netstandard2.0/Lavalink4NET.Discord_NET.dll"
       ]
@@ -7160,7 +7183,7 @@
       "FluentMigrator.Runner.Postgres >= 3.2.1",
       "HeroBot.Common >= 1.0.0",
       "Lavalink4NET >= 1.4.3",
-      "Lavalink4NET.Discord.NET >= 1.4.5",
+      "Lavalink4NET.Discord.NET >= 1.4.3",
       "NetEscapades.Configuration.Yaml >= 1.6.0"
     ]
   },
@@ -7230,7 +7253,7 @@
           },
           "Lavalink4NET.Discord.NET": {
             "target": "Package",
-            "version": "[1.4.5, )"
+            "version": "[1.4.3, )"
           },
           "NetEscapades.Configuration.Yaml": {
             "target": "Package",
@@ -7247,21 +7270,13 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "frameworkReferences": [
-          "Microsoft.NETCore.App"
-        ]
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100-preview8-013656\\RuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1605",
-      "level": "Error",
-      "message": "Passage à une version antérieure du package détecté : Lavalink4NET de 1.4.5 à 1.4.3. Référencez le package directement à partir du projet pour sélectionner une version différente. \r\n HeroBot.Core -> Lavalink4NET.Discord.NET 1.4.5 -> Lavalink4NET (>= 1.4.5) \r\n HeroBot.Core -> Lavalink4NET (>= 1.4.3)",
-      "libraryId": "Lavalink4NET",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v3.0"
-      ]
-    }
-  ]
+  }
 }

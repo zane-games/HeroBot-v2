@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace HeroBot.Plugins.RP.Entities
@@ -14,5 +15,6 @@ namespace HeroBot.Plugins.RP.Entities
         public long Likes { get; set; } = 0;
         public Jobs Job { get; set; } = Jobs.NO_JOB;
         public long Money { get; set; } = 10;
+        public DateTime? Birthday { get; set; } = null;
     }
 }

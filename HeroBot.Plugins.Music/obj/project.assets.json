@@ -29,6 +29,19 @@
           "lib/netstandard1.6/Dapper.FastCrud.dll": {}
         }
       },
+      "Discord.Addons.PassiveInteractive/2.0.4": {
+        "type": "package",
+        "dependencies": {
+          "Discord.Net.Commands": "1.0.1",
+          "Discord.Net.WebSocket": "1.0.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/Discord.Addons.Interactive.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Discord.Addons.Interactive.dll": {}
+        }
+      },
       "Discord.Net/2.1.1": {
         "type": "package",
         "dependencies": {
@@ -165,30 +178,30 @@
           "lib/netstandard2.0/FluentMigrator.Runner.Postgres.dll": {}
         }
       },
-      "Lavalink4NET/1.4.5": {
+      "Lavalink4NET/1.4.0": {
         "type": "package",
         "dependencies": {
-          "Newtonsoft.Json": "12.0.2",
-          "System.Buffers": "4.5.0"
+          "Microsoft.NETCore.Platforms": "3.0.0-preview.19073.11",
+          "Newtonsoft.Json": "12.0.2"
         },
         "compile": {
-          "lib/netstandard2.0/Lavalink4NET.dll": {}
+          "lib/netcoreapp3.0/Lavalink4NET.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/Lavalink4NET.dll": {}
+          "lib/netcoreapp3.0/Lavalink4NET.dll": {}
         }
       },
-      "Lavalink4NET.Discord.NET/1.4.5": {
+      "Lavalink4NET.Discord.NET/1.4.0": {
         "type": "package",
         "dependencies": {
           "Discord.Net.WebSocket": "2.0.1",
-          "Lavalink4NET": "1.4.5"
+          "Lavalink4NET": "1.4.0"
         },
         "compile": {
-          "lib/netstandard2.0/Lavalink4NET.Discord_NET.dll": {}
+          "lib/netcoreapp2.0/Lavalink4NET.Discord_NET.dll": {}
         },
         "runtime": {
-          "lib/netstandard2.0/Lavalink4NET.Discord_NET.dll": {}
+          "lib/netcoreapp2.0/Lavalink4NET.Discord_NET.dll": {}
         }
       },
       "Microsoft.Extensions.Configuration/3.0.0-preview8.19405.4": {
@@ -271,7 +284,7 @@
           "lib/netcoreapp3.0/Microsoft.Extensions.Primitives.dll": {}
         }
       },
-      "Microsoft.NETCore.Platforms/2.0.0": {
+      "Microsoft.NETCore.Platforms/3.0.0-preview.19073.11": {
         "type": "package",
         "compile": {
           "lib/netstandard1.0/_._": {}
@@ -606,7 +619,7 @@
           "lib/netstandard1.6/System.AppContext.dll": {}
         }
       },
-      "System.Buffers/4.5.0": {
+      "System.Buffers/4.4.0": {
         "type": "package",
         "compile": {
           "ref/netcoreapp2.0/_._": {}
@@ -1812,6 +1825,7 @@
         "dependencies": {
           "Dapper": "2.0.4",
           "Dapper.FastCrud": "2.5.0.39",
+          "Discord.Addons.PassiveInteractive": "2.0.4",
           "Discord.Net": "2.1.1",
           "FluentMigrator": "3.2.1",
           "FluentMigrator.Runner.Postgres": "3.2.1",
@@ -1825,10 +1839,7 @@
         },
         "runtime": {
           "bin/placeholder/HeroBot.Common.dll": {}
-        },
-        "frameworkReferences": [
-          "Microsoft.NETCore.App"
-        ]
+        }
       }
     }
   },
@@ -1861,6 +1872,18 @@
         "lib/net46/Dapper.FastCrud.xml",
         "lib/netstandard1.6/Dapper.FastCrud.dll",
         "lib/netstandard1.6/Dapper.FastCrud.xml"
+      ]
+    },
+    "Discord.Addons.PassiveInteractive/2.0.4": {
+      "sha512": "O8Eyu7r+05dVGwAKca3SgbfHVLGOpKhODR7XzGX2mbFOlRdyywHf4ZSDFUb8o3J8n9JyTaFld9z7fSeHBDExvA==",
+      "type": "package",
+      "path": "discord.addons.passiveinteractive/2.0.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "discord.addons.passiveinteractive.2.0.4.nupkg.sha512",
+        "discord.addons.passiveinteractive.nuspec",
+        "lib/netstandard2.0/Discord.Addons.Interactive.dll"
       ]
     },
     "Discord.Net/2.1.1": {
@@ -2025,28 +2048,32 @@
         "lib/netstandard2.0/FluentMigrator.Runner.Postgres.xml"
       ]
     },
-    "Lavalink4NET/1.4.5": {
-      "sha512": "j4Xv9V5oP2yFoy45riAU61bxN4issrxontppA3nom+nezHabx743XxYSMJF9MDhbSoi5ts3pUb0gOHW84lWE/w==",
+    "Lavalink4NET/1.4.0": {
+      "sha512": "elLtpRUhaUPwrfJwF0aFxArjAfrqT2Z/7eEeVuxWoAq2BlGHaKscj/UuLmNb6BC50f+ycQ4pvnRqX9qUgYaFug==",
       "type": "package",
-      "path": "lavalink4net/1.4.5",
+      "path": "lavalink4net/1.4.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "lavalink4net.1.4.5.nupkg.sha512",
+        "lavalink4net.1.4.0.nupkg.sha512",
         "lavalink4net.nuspec",
-        "lib/netstandard2.0/Lavalink4NET.dll"
+        "lib/netcoreapp2.0/Lavalink4NET.dll",
+        "lib/netcoreapp2.0/Lavalink4NET.xml",
+        "lib/netcoreapp3.0/Lavalink4NET.dll",
+        "lib/netcoreapp3.0/Lavalink4NET.xml"
       ]
     },
-    "Lavalink4NET.Discord.NET/1.4.5": {
-      "sha512": "GprE8MEpqPh3L5rj5tfKGY08cT1IU6KhFpM+aO4dcRw/J/4KQxpcJY0jGDdn+Z+E2MykBHWRci05mmWoPUN0Kg==",
+    "Lavalink4NET.Discord.NET/1.4.0": {
+      "sha512": "KhB6kpKBxiPvQbMf57e7It3g1vP/mNf82m7tq/hGkHo72zxoL0fXaPkDKawzECngYmkL1hcgy8nLuyzze0EYYw==",
       "type": "package",
-      "path": "lavalink4net.discord.net/1.4.5",
+      "path": "lavalink4net.discord.net/1.4.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "lavalink4net.discord.net.1.4.5.nupkg.sha512",
+        "lavalink4net.discord.net.1.4.0.nupkg.sha512",
         "lavalink4net.discord.net.nuspec",
-        "lib/netstandard2.0/Lavalink4NET.Discord_NET.dll"
+        "lib/netcoreapp2.0/Lavalink4NET.Discord_NET.dll",
+        "lib/netcoreapp2.0/Lavalink4NET.Discord_NET.xml"
       ]
     },
     "Microsoft.Extensions.Configuration/3.0.0-preview8.19405.4": {
@@ -2146,17 +2173,17 @@
         "microsoft.extensions.primitives.nuspec"
       ]
     },
-    "Microsoft.NETCore.Platforms/2.0.0": {
-      "sha512": "VdLJOCXhZaEMY7Hm2GKiULmn7IEPFE4XC5LPSfBVCUIA8YLZVh846gtfBJalsPQF2PlzdD7ecX7DZEulJ402ZQ==",
+    "Microsoft.NETCore.Platforms/3.0.0-preview.19073.11": {
+      "sha512": "9lLkGd9xOH8kmV1p/evihvUzJxl8r0L5pPJvk4Dq/LmMjaSyeCl3kRFoqtw7/kekSlgXIPb4WO5AQR+wEwzeqA==",
       "type": "package",
-      "path": "microsoft.netcore.platforms/2.0.0",
+      "path": "microsoft.netcore.platforms/3.0.0-preview.19073.11",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
         "lib/netstandard1.0/_._",
-        "microsoft.netcore.platforms.2.0.0.nupkg.sha512",
+        "microsoft.netcore.platforms.3.0.0-preview.19073.11.nupkg.sha512",
         "microsoft.netcore.platforms.nuspec",
         "runtime.json",
         "useSharedDesignerContext.txt",
@@ -2623,10 +2650,10 @@
         "system.appcontext.nuspec"
       ]
     },
-    "System.Buffers/4.5.0": {
-      "sha512": "pL2ChpaRRWI/p4LXyy4RgeWlYF2sgfj/pnVMvBqwNFr5cXg7CXNnWZWxrOONLg8VGdFB8oB+EG2Qw4MLgTOe+A==",
+    "System.Buffers/4.4.0": {
+      "sha512": "AwarXzzoDwX6BgrhjoJsk6tUezZEozOT5Y9QKF94Gl4JK91I4PIIBkBco9068Y9/Dra8Dkbie99kXB8+1BaYKw==",
       "type": "package",
-      "path": "system.buffers/4.5.0",
+      "path": "system.buffers/4.4.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -2637,16 +2664,12 @@
         "lib/netstandard1.1/System.Buffers.xml",
         "lib/netstandard2.0/System.Buffers.dll",
         "lib/netstandard2.0/System.Buffers.xml",
-        "lib/uap10.0.16299/_._",
-        "ref/net45/System.Buffers.dll",
-        "ref/net45/System.Buffers.xml",
         "ref/netcoreapp2.0/_._",
         "ref/netstandard1.1/System.Buffers.dll",
         "ref/netstandard1.1/System.Buffers.xml",
         "ref/netstandard2.0/System.Buffers.dll",
         "ref/netstandard2.0/System.Buffers.xml",
-        "ref/uap10.0.16299/_._",
-        "system.buffers.4.5.0.nupkg.sha512",
+        "system.buffers.4.4.0.nupkg.sha512",
         "system.buffers.nuspec",
         "useSharedDesignerContext.txt",
         "version.txt"
@@ -6217,7 +6240,7 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.0": [
       "HeroBot.Common >= 1.0.0",
-      "Lavalink4NET.Discord.NET >= 1.4.5"
+      "Lavalink4NET.Discord.NET >= 1.4.0"
     ]
   },
   "packageFolders": {
@@ -6270,7 +6293,7 @@
         "dependencies": {
           "Lavalink4NET.Discord.NET": {
             "target": "Package",
-            "version": "[1.4.5, )"
+            "version": "[1.4.0, )"
           }
         },
         "imports": [
@@ -6283,9 +6306,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "frameworkReferences": [
-          "Microsoft.NETCore.App"
-        ]
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100-preview8-013656\\RuntimeIdentifierGraph.json"
       }
     }
   }

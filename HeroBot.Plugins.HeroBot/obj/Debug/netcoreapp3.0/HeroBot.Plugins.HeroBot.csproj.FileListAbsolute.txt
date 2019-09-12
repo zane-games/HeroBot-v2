@@ -1,15 +1,3 @@
-C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.HeroBot\bin\Debug\netcoreapp3.0\HeroBot.Plugins.HeroBot.deps.json
-C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.HeroBot\bin\Debug\netcoreapp3.0\HeroBot.Plugins.HeroBot.dll
-C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.HeroBot\bin\Debug\netcoreapp3.0\HeroBot.Plugins.HeroBot.pdb
-C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.HeroBot\bin\Debug\netcoreapp3.0\HeroBot.Common.dll
-C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.HeroBot\bin\Debug\netcoreapp3.0\HeroBot.Common.pdb
-C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.HeroBot\obj\Debug\netcoreapp3.0\HeroBot.Plugins.HeroBot.AssemblyInfoInputs.cache
-C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.HeroBot\obj\Debug\netcoreapp3.0\HeroBot.Plugins.HeroBot.AssemblyInfo.cs
-C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.HeroBot\obj\Debug\netcoreapp3.0\HeroBot.Plugins.HeroBot.csproj.CopyComplete
-C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.HeroBot\obj\Debug\netcoreapp3.0\HeroBot.Plugins.HeroBot.dll
-C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.HeroBot\obj\Debug\netcoreapp3.0\HeroBot.Plugins.HeroBot.pdb
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\bin\Debug\netcoreapp3.0\Modules\HeroBot.Plugins.HeroBot.deps.json
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\bin\Debug\netcoreapp3.0\Modules\HeroBot.Plugins.HeroBot.dll
 C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\bin\Debug\netcoreapp3.0\Modules\HeroBot.Plugins.HeroBot.pdb
-C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.HeroBot\obj\Debug\netcoreapp3.0\HeroBot.Plugins.HeroBot.csprojAssemblyReference.cache
-C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Plugins.HeroBot\obj\Debug\netcoreapp3.0\HeroBot.Plugins.HeroBot.csproj.CoreCompileInputs.cache

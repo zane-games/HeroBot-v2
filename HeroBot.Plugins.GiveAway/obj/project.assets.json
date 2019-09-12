@@ -29,6 +29,19 @@
           "lib/netstandard1.6/Dapper.FastCrud.dll": {}
         }
       },
+      "Discord.Addons.PassiveInteractive/2.0.4": {
+        "type": "package",
+        "dependencies": {
+          "Discord.Net.Commands": "1.0.1",
+          "Discord.Net.WebSocket": "1.0.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/Discord.Addons.Interactive.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Discord.Addons.Interactive.dll": {}
+        }
+      },
       "Discord.Net/2.1.1": {
         "type": "package",
         "dependencies": {
@@ -1786,6 +1799,7 @@
         "dependencies": {
           "Dapper": "2.0.4",
           "Dapper.FastCrud": "2.5.0.39",
+          "Discord.Addons.PassiveInteractive": "2.0.4",
           "Discord.Net": "2.1.1",
           "FluentMigrator": "3.2.1",
           "FluentMigrator.Runner.Postgres": "3.2.1",
@@ -1799,10 +1813,7 @@
         },
         "runtime": {
           "bin/placeholder/HeroBot.Common.dll": {}
-        },
-        "frameworkReferences": [
-          "Microsoft.NETCore.App"
-        ]
+        }
       }
     }
   },
@@ -1835,6 +1846,18 @@
         "lib/net46/Dapper.FastCrud.xml",
         "lib/netstandard1.6/Dapper.FastCrud.dll",
         "lib/netstandard1.6/Dapper.FastCrud.xml"
+      ]
+    },
+    "Discord.Addons.PassiveInteractive/2.0.4": {
+      "sha512": "O8Eyu7r+05dVGwAKca3SgbfHVLGOpKhODR7XzGX2mbFOlRdyywHf4ZSDFUb8o3J8n9JyTaFld9z7fSeHBDExvA==",
+      "type": "package",
+      "path": "discord.addons.passiveinteractive/2.0.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "discord.addons.passiveinteractive.2.0.4.nupkg.sha512",
+        "discord.addons.passiveinteractive.nuspec",
+        "lib/netstandard2.0/Discord.Addons.Interactive.dll"
       ]
     },
     "Discord.Net/2.1.1": {
@@ -6222,9 +6245,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "frameworkReferences": [
-          "Microsoft.NETCore.App"
-        ]
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100-preview8-013656\\RuntimeIdentifierGraph.json"
       }
     }
   }

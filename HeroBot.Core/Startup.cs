@@ -1,4 +1,5 @@
 ﻿using Discord;
+using Discord.Addons.Interactive;
 using Discord.Commands;
 using Discord.Net.WebSockets;
 using Discord.WebSocket;
@@ -46,6 +47,7 @@ namespace HeroBotv2
             provider.GetRequiredService<IRedisService>();             // Initialize the redis cache connection
             provider.GetRequiredService<ICooldownService>();
             provider.GetRequiredService<CooldownService>();
+            provider.GetRequiredService<InteractiveService>();
             provider.GetRequiredService<SimpleCacheImplementation>();
             provider.GetAllServicesFromExternalAssemblies();          // Initialize services from other assemblies
             provider.GetRequiredService<CommandHandler>(); 		      // Start the command handler service
@@ -79,6 +81,7 @@ namespace HeroBotv2
             .AddSingleton<IRedisService, RedisService>()              // Adding interface-resolvable redis for caching
             .AddSingleton<ICooldownService, CooldownService>()
             .AddSingleton<CooldownService>()
+            .AddSingleton<InteractiveService>()
             .AddSingleton<CommandHandler>()                           // Add the command handler to the collection
             .AddSingleton<StartupService>()                           // Add startupservice to the collection
             .AddSingleton<LoggingService>()                           // Add loggingservice to the collection

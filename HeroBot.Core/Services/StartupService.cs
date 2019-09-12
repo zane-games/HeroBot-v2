@@ -140,7 +140,7 @@ namespace HeroBotv2.Services
         {
             return discordsocket.SetGameAsync(str
                 .Replace("[GuildCount]", discordShardedClient.Guilds.Count.ToString())
-                .Replace("[UsersCount]", discordShardedClient.Guilds.Sum(x => x.Users.Count).ToString())
+                .Replace("[UsersCount]", discordShardedClient.Guilds.Sum(x => x.MemberCount).ToString())
                 // More here
                 );
         }

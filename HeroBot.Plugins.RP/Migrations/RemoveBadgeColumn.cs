@@ -5,6 +5,7 @@ using System.Text;
 
 namespace HeroBot.Plugins.RP.Migrations
 {
+    [Migration(10092019)]
     public class RemoveBadgeColumn : Migration
     {
         public override void Down()
@@ -17,7 +18,6 @@ namespace HeroBot.Plugins.RP.Migrations
             /**
              * Deleting the badge columtn, because the shop is comming ^^ 
             **/
-            Delete.Column("RPUser.Badges");
             Create.Table("BadgeBuy")
                 .WithColumn("Id").AsString().PrimaryKey()
                 .WithColumn("BadgeId").AsString()

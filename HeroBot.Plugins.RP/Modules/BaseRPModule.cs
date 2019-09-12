@@ -16,6 +16,7 @@ namespace HeroBot.Plugins.RP.Modules
     [NeedPlugin()]
     public class BaseRPModule : ModuleBase<CancelableSocketContext>
     {
+        private readonly DiscordShardedClient _discord;
         private readonly RPService _rp;
         private readonly Random _random;
 
@@ -25,8 +26,9 @@ namespace HeroBot.Plugins.RP.Modules
             new {emoji = "😘", money = 10 }
         };
 
-        public BaseRPModule(RPService rPService, Random random)
+        public BaseRPModule(RPService rPService, Random random,DiscordShardedClient discordShardedClient)
         {
+            _discord = discordShardedClient;
             _rp = rPService;
             _random = random;
         }
@@ -187,6 +189,35 @@ namespace HeroBot.Plugins.RP.Modules
             else { await ReplyAsync("... I can't find your account `hb!start`"); this.Context.CooldownCancelled = true; }
         }
 
+
+        [Command("leaderboard")]
+        public async Task LeaderBoard()
+        {
+            var stringBuilder = new StringBuilder();
+            var i = 1;
+            var leaderboard = await _rp.GetLeaderBoard();
+            foreach (var user in leaderboard.Select(x =>
+            {
+                return new
+                {
+                    account = x,
+                    discord = _discord.GetUser(ulong.Parse(x.UserId))
+                };
+            }))
+            {
+                stringBuilder
+                    .Append("**")
+                    .Append(i == 1 ? "🥇 1" : (i == 2 ? "🥈" : (i == 3 ? "🥉" : $"{i}")))
+                    .Append("** `")
+                    .Append(user.discord.Username)
+                    .Append("` ")
+                    .Append(user.account.Money)
+                    .Append(" 💸\r\n");
+                i++;
+            }
+            await ReplyAsync(stringBuilder.ToString());
+        }
+
         [Command("pay")]
         public async Task Pay(IUser target, int amount)
         {
@@ -295,9 +326,37 @@ namespace HeroBot.Plugins.RP.Modules
                     }
                     else
                     {
+                        Uri uriResult;
+                        bool result = Uri.TryCreate(website, UriKind.Absolute, out uriResult)
+                        && uriResult.Scheme == Uri.UriSchemeHttp;
+                        if (result)
+                        {
                             user.Website = website;
                             await _rp.UpdateUser(user);
                             await ReplyAsync($"You website is now ```{user.Website}```");
+                        }
+                        else {
+                            await ReplyAsync("This is not a valid website.");
+                        }
+                    }
+                }
+            }
+
+            [Command("birthday")]
+            public async Task Birthday([Remainder]DateTime? birthday = null)
+            {
+                var user = await _rp.GetRPUser(Context.User);
+                if (user != null)
+                {
+                    if (!birthday.HasValue)
+                    {
+                        await ReplyAsync($"Your birthday is `{user.Birthday}`");
+                    }
+                    else
+                    {
+                            user.Birthday = birthday;
+                            await _rp.UpdateUser(user);
+                            await ReplyAsync($"You birthday is now ```{user.Birthday.Value}```");
                     }
                 }
             }

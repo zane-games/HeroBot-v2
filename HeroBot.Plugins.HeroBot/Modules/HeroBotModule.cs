@@ -1,4 +1,5 @@
 ﻿using Discord;
+using Discord.Addons.Interactive;
 using Discord.Commands;
 using Discord.Rest;
 using Discord.WebSocket;
@@ -27,7 +28,7 @@ namespace HeroBot.Plugins.HeroBot.Modules
         private readonly IServiceProvider _provider;
         private readonly IModulesService _modules;
 
-        public HeroBotModule(DiscordShardedClient client,CommandService service, IConfigurationRoot config, IServiceProvider serviceProvider,IModulesService _module)
+        public HeroBotModule(DiscordShardedClient client, CommandService service, IConfigurationRoot config, IServiceProvider serviceProvider, IModulesService _module)
         {
             _client = client;
             _service = service;
@@ -36,7 +37,7 @@ namespace HeroBot.Plugins.HeroBot.Modules
             _modules = _module;
         }
 
-        [Command("help"), Alias(new[] { "h", "hh", "hmp" }),Summary("Gives you some information about a certain command")]
+        [Command("help"), Alias(new[] { "h", "hh", "hmp" }), Summary("Gives you some information about a certain command")]
         public async Task HelpCommandAsync([Remainder]string command = null)
         {
             string prefix = _config["prefix"];
@@ -71,7 +72,8 @@ namespace HeroBot.Plugins.HeroBot.Modules
                     x.Value = cmd.Summary ?? "*no summary*";
                 });
                 var permBot = string.Join(", ", cmd.Preconditions.Where(v => v is RequireBotPermissionAttribute).Select(v => ((RequireBotPermissionAttribute)v).ChannelPermission).Where(x => x.HasValue).Select(x => x.Value));
-                builder.AddField(x => {
+                builder.AddField(x =>
+                {
                     x.Name = "Permissions nécessaires au bot";
                     x.Value = string.IsNullOrEmpty(permBot) ? "*no permissions required*" : permBot;
                 });
@@ -94,30 +96,34 @@ namespace HeroBot.Plugins.HeroBot.Modules
                 int subcommands = 0;
                 foreach (var module in _service.Modules.Where(x => !x.IsSubmodule && x.Commands.Count > 0))
                 {
-                    var description = new StringBuilder();
-                    var precondition = module.Preconditions.First(x => x is NeedPluginAttribute);
-                    var run = await precondition.CheckPermissionsAsync(Context, module.Commands.First(), _provider);
-                    if (run.IsSuccess)
+                    try
                     {
-                        realCommands += module.Commands.Count;
-                        var commands = ResolveAllCommandsFromModule(module);
-                        subcommands += commands.Count() - module.Commands.Count;
-                        foreach (var cmd in commands)
+                        var description = new StringBuilder();
+                        var precondition = module.Preconditions.First(x => x is NeedPluginAttribute);
+                        var run = await precondition.CheckPermissionsAsync(Context, module.Commands.First(), _provider);
+                        if (run.IsSuccess)
                         {
-                            total++;
-                            description.Append($"**>** `{prefix}{cmd.Aliases.First()}`");
+                            realCommands += module.Commands.Count;
+                            var commands = ResolveAllCommandsFromModule(module);
+                            subcommands += commands.Count() - module.Commands.Count;
+                            foreach (var cmd in commands)
+                            {
+                                total++;
+                                description.Append($"**>** `{prefix}{cmd.Aliases.First()}`");
+                            }
+                        }
+
+                        if (!string.IsNullOrWhiteSpace(description.ToString()))
+                        {
+                            builder.AddField(x =>
+                            {
+                                x.Name = module.Name;
+                                x.Value = description;
+                                x.IsInline = false;
+                            });
                         }
                     }
-
-                    if (!string.IsNullOrWhiteSpace(description.ToString()))
-                    {
-                        builder.AddField(x =>
-                        {
-                            x.Name = module.Name;
-                            x.Value = description;
-                            x.IsInline = false;
-                        });
-                    }
+                    catch (Exception) { /* Avoid command crash on wrong command config */}
 
                 }
                 realCommands = total - subcommands;
@@ -139,7 +145,8 @@ namespace HeroBot.Plugins.HeroBot.Modules
         {
             var modules = new List<ModuleInfo>();
             modules.Add(module);
-            foreach (ModuleInfo moduleInfo in module.Submodules) {
+            foreach (ModuleInfo moduleInfo in module.Submodules)
+            {
                 modules.AddRange(ResolveAllModules(moduleInfo));
             }
             return modules;
@@ -168,7 +175,7 @@ namespace HeroBot.Plugins.HeroBot.Modules
             var websocketPing = DateTime.Now - Context.Message.CreatedAt;
             var hostPing = PingHost("google.com");
             var pingMoyenne = new List<long>();
-            RestUserMessage message = await Context.Channel.SendMessageAsync("Ping <:ping:581772617481060363> ! **(>====)**");
+            RestUserMessage message = await Context.Channel.SendMessageAsync("Pong ! **(>====)**");
             var messages = new[] {
                 "=>===",
                 "==>==",
@@ -205,7 +212,7 @@ namespace HeroBot.Plugins.HeroBot.Modules
                 .AddField("Threads actifs", "> " + threadCount.Count, true)
                 .AddField("Uptime", "> " + uptime.ToHumanReadable())
                 .AddField("Bot statistics", $"Channels: {_client.Guilds.Sum(x => x.Channels.Count)} ({_client.Guilds.Sum(x => x.VoiceChannels.Count)} voice channels, {_client.Guilds.Sum(x => x.TextChannels.Count)} text channels, {_client.Guilds.Sum(x => x.CategoryChannels.Count)} categories) \r\nGuilds: {_client.Guilds.Count} \r\nGuild Users: {_client.Guilds.Sum(x => x.MemberCount)}\r\n")
-                .AddField("🎉 Contribs", "> `Moitié prix#4263`\n`PsyKo ツ ♡#2586`\n`TheDarkny#9253`\n`Ernest#6450`");
+                .AddField("🎉 Contribs", "> `Moitié prix#4263`\n> `PsyKo ツ ♡#2586`\n> `TheDarkny#9253`\n> `Ernest#6450`");
             await message.ModifyAsync((x) =>
             {
                 x.Embed = embed.Build();
@@ -214,7 +221,7 @@ namespace HeroBot.Plugins.HeroBot.Modules
         }
         public long GetAvailableRam()
         {
-            return Process.GetCurrentProcess().PeakVirtualMemorySize64;
+            return Process.GetCurrentProcess().PrivateMemorySize64;
         }
         private async Task<double> GetCpuUsageForProcess()
         {
@@ -274,63 +281,77 @@ namespace HeroBot.Plugins.HeroBot.Modules
             return timer.ElapsedMilliseconds;
         }
 
-
-        [Group("plugin")]
-        [Cooldown(120)]
-        public class PluginCommands : ModuleBase<SocketCommandContext>
+    }
+    [Group("plugin")]
+    [Cooldown(120)]
+    public class PluginCommands : ModuleBase<SocketCommandContext>
+    {
+        private readonly CommandService _commands;
+        private readonly IModulesService _modules;
+        public PluginCommands(CommandService commandService, IModulesService modulesService)
         {
-            private readonly CommandService _commands;
-            private readonly IModulesService _modules;
-            public PluginCommands(CommandService commandService, IModulesService modulesService)
-            {
-                _commands = commandService;
-                _modules = modulesService;
-            }
+            _commands = commandService;
+            _modules = modulesService;
+        }
 
-            [Command("list")]
-            public async Task ListPlugins()
+        [Command("list")]
+        public async Task ListPlugins()
+        {
+            var resp = new StringBuilder("**Liste des modules disponibles**\n");
+            foreach (var module in _commands.Modules)
             {
-                var resp = new StringBuilder("**Liste des modules disponibles**\n");
-                foreach (var module in _commands.Modules)
+                if (!module.IsSubmodule)
                 {
-                    if (!module.IsSubmodule)
-                    {
-                        var isEnabled = await _modules.IsPluginEnabled(Context.Guild, module);
-                        resp.Append($"**{(isEnabled ? "\\🔷" : "\\🔶")} • {(isEnabled ? "Enabled" : "Disabled")}** • {_modules.GetAssemblyEntityByModule(module).Assembly.GetName().Name.SanitizAssembly()} \n");
-                    }
-                }
-                await ReplyAsync(resp.ToString());
-            }
-            [Command("enable")]
-            [RequireUserPermission(GuildPermission.Administrator)]
-            [RequireContext(ContextType.Guild)]
-            public async Task EnablePlugin([Remainder]string plugin)
-            {
-                if (_commands.Modules.Any(x => plugin == _modules.GetAssemblyEntityByModule(x).Assembly.GetName().Name.SanitizAssembly()))
-                {
-                    await _modules.EnablePlugin(Context.Guild,_commands.Modules.First(x => plugin == _modules.GetAssemblyEntityByModule(x).Assembly.GetName().Name.SanitizAssembly()));
-                    await ReplyAsync("<:check:606088713897902081> The plugin is now enabled.");
-                }
-                else
-                {
-                    await ReplyAsync($"I can't find a plugin named `{plugin}`");
+                    var isEnabled = await _modules.IsPluginEnabled(Context.Guild, module);
+                    resp.Append($"**{(isEnabled ? "\\🔷" : "\\🔶")} • {(isEnabled ? "Enabled" : "Disabled")}** • {_modules.GetAssemblyEntityByModule(module).Assembly.GetName().Name.SanitizAssembly()} \n");
                 }
             }
-            [Command("disable")]
-            [RequireUserPermission(GuildPermission.Administrator)]
-            [RequireContext(ContextType.Guild)]
-            public async Task DisablePlugin([Remainder]string plugin)
+            await ReplyAsync(resp.ToString());
+        }
+        [Command("enable")]
+        [RequireUserPermission(GuildPermission.Administrator)]
+        [RequireContext(ContextType.Guild)]
+        public async Task EnablePlugin([Remainder]string plugin)
+        {
+            if (_commands.Modules.Any(x => plugin == _modules.GetAssemblyEntityByModule(x).Assembly.GetName().Name.SanitizAssembly()))
             {
-                if (_commands.Modules.Any(x => plugin == _modules.GetAssemblyEntityByModule(x).Assembly.GetName().Name.SanitizAssembly()))
-                {
-                    await _modules.DisablePlugin(Context.Guild, _commands.Modules.First(x => plugin == _modules.GetAssemblyEntityByModule(x).Assembly.GetName().Name.SanitizAssembly()));
-                    await ReplyAsync("<:check:606088713897902081> The plugin is now disabled.");
-                }
-                else
-                {
-                    await ReplyAsync($"I can't find a plugin named `{plugin}`");
-                }
+                await _modules.EnablePlugin(Context.Guild, _commands.Modules.First(x => plugin == _modules.GetAssemblyEntityByModule(x).Assembly.GetName().Name.SanitizAssembly()));
+                await ReplyAsync("<:check:606088713897902081> The plugin is now enabled.");
+            }
+            else
+            {
+                await ReplyAsync($"I can't find a plugin named `{plugin}`");
+            }
+        }
+        [Command("disable")]
+        [RequireUserPermission(GuildPermission.Administrator)]
+        [RequireContext(ContextType.Guild)]
+        public async Task DisablePlugin([Remainder]string plugin)
+        {
+            if (_commands.Modules.Any(x => plugin == _modules.GetAssemblyEntityByModule(x).Assembly.GetName().Name.SanitizAssembly()))
+            {
+                await _modules.DisablePlugin(Context.Guild, _commands.Modules.First(x => plugin == _modules.GetAssemblyEntityByModule(x).Assembly.GetName().Name.SanitizAssembly()));
+                await ReplyAsync("<:check:606088713897902081> The plugin is now disabled.");
+            }
+            else
+            {
+                await ReplyAsync($"I can't find a plugin named `{plugin}`");
             }
         }
     }
+
 }
+    /// <summary>
+    /// Helper methods for the lists.
+    /// </summary>
+    public static class ListExtensions
+    {
+        public static List<List<T>> ChunkBy<T>(this List<T> source, int chunkSize)
+        {
+            return source
+                .Select((x, i) => new { Index = i, Value = x })
+                .GroupBy(x => x.Index / chunkSize)
+                .Select(x => x.Select(v => v.Value).ToList())
+                .ToList();
+        }
+    }
