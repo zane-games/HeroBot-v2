@@ -1,3 +1,0 @@
-C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\bin\Debug\netcoreapp3.0\Modules\HeroBot.Plugins.Images.deps.json
-C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\bin\Debug\netcoreapp3.0\Modules\HeroBot.Plugins.Images.dll
-C:\Users\Matthieu\source\repos\HeroBot-deux-point-zéro\HeroBot.Core\bin\Debug\netcoreapp3.0\Modules\HeroBot.Plugins.Images.pdb
