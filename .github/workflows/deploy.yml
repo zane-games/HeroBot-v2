@@ -1,6 +1,6 @@
 name: HeroBotDeploy
 
-on: [tag]
+on: [release]
 jobs:
   deploy:
     runs-on: ubuntu-latest
