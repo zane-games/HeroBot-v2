@@ -2,5 +2,3 @@
 	url = https://github.com/HeroBot-discord/HeroBot.Plugins.Example.git
 [submodule "HeroBot.Plugins.RP"]
 	url = https://github.com/HeroBot-discord/Plugins.RP.git
-[submodule "HeroBot.Common"]
-	url = https://github.com/HeroBot-discord/HeroBot.Common
