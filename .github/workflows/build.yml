@@ -1,6 +1,6 @@
 name: HeroBotBuild
 
-on: [push,master]
+on: [push]
 
 jobs:
   build:
