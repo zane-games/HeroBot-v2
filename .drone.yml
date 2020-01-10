@@ -2,6 +2,6 @@ kind: pipeline
 
 steps:
 - name: test
-  image: golang
+  image: ubuntu
   commands:
-  - echo "Test"
+  - echo "Testahahah"
