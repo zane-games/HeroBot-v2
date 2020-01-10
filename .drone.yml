@@ -1,0 +1,7 @@
+kind: pipeline
+
+steps:
+- name: test
+  image: golang
+  commands:
+  - echo "Test"
