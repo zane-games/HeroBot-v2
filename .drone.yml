@@ -7,5 +7,5 @@ steps:
 - name: echo_coucou
   image: alpine
   commands:
-  - echo "Coucou"
+  - cat .drone.yml
 ...
