@@ -4,8 +4,8 @@ type: kubernetes
 name: default
 
 steps:
-- name: test
-  image: ubuntu
+- name: echo_coucou
+  image: alpine
   commands:
   - echo "Coucou"
 ...
