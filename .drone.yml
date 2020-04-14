@@ -7,8 +7,10 @@ steps:
 - name: kaniko
   image: banzaicloud/drone-kaniko
   settings:
-    username: matthis974
-    password: PDI12345678
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
     repo: matthis974/dockspace
     dockerfile: Dockerfile
-    tags: herobot-last-final
+    tags: herobot2
