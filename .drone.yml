@@ -8,3 +8,11 @@ steps:
   image: alpine
   commands:
   - cat .drone.yml
+- name: kaniko
+  image: banzaicloud/drone-kaniko
+  settings:
+    username: matthis974
+    password: PDI12345678
+    repo: matthis974/dockspace
+    dockerfile: Dockerfile
+    tags: herobot-last-final
