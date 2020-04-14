@@ -4,10 +4,6 @@ type: kubernetes
 name: default
 
 steps:
-- name: echo_coucou
-  image: alpine
-  commands:
-  - cat .drone.yml
 - name: kaniko
   image: banzaicloud/drone-kaniko
   settings:
