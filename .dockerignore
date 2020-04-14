@@ -3,3 +3,4 @@
 .git
 .vs
 bin/
+node_modules/
