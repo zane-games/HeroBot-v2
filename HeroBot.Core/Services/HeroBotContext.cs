@@ -21,12 +21,12 @@ namespace HeroBot.Core.Services
             StackFrame[] stackFrames = stackTrace.GetFrames();  // get method calls (frames)
 
             var assembly = stackFrames[1].GetMethod().DeclaringType.Assembly;
-            return new NpgsqlConnection($"Server={_config.GetSection("postgres").GetSection("host").Value};Port={_config.GetSection("postgres").GetSection("port").Value};Database={assembly.GetName().Name};User Id={_config.GetSection("postgres").GetSection("auth").GetSection("name").Value};Password={_config.GetSection("postgres").GetSection("auth").GetSection("password").Value};SslMode=Require;Trust Server Certificate=true;Pooling=true;");
+            return new NpgsqlConnection($"Server={_config.GetSection("postgres").GetSection("host").Value};Port={_config.GetSection("postgres").GetSection("port").Value};Database={assembly.GetName().Name};User Id={_config.GetSection("postgres").GetSection("auth").GetSection("name").Value};Password={_config.GetSection("postgres").GetSection("auth").GetSection("password").Value};SslMode=Prefer;Trust Server Certificate=true;Pooling=true;");
         }
 
         public IDbConnection GetDbConnection(string v)
         {
-            return new NpgsqlConnection($"Server={_config.GetSection("postgres").GetSection("host").Value};Port={_config.GetSection("postgres").GetSection("port").Value};Database={v};User Id={_config.GetSection("postgres").GetSection("auth").GetSection("name").Value};Password={_config.GetSection("postgres").GetSection("auth").GetSection("password").Value};SslMode=Require;Trust Server Certificate=true;Pooling=true;");
+            return new NpgsqlConnection($"Server={_config.GetSection("postgres").GetSection("host").Value};Port={_config.GetSection("postgres").GetSection("port").Value};Database={v};User Id={_config.GetSection("postgres").GetSection("auth").GetSection("name").Value};Password={_config.GetSection("postgres").GetSection("auth").GetSection("password").Value};SslMode=Prefer;Trust Server Certificate=true;Pooling=true;");
         }
     }
 }
