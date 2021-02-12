@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  redis:
+    image: redis
+    networks:
+      - herobot
+    restart: always
+    volumes:
+      - ./config/redis.conf:/redis.conf
+  postgres:
+    image: postgres
+    networks:
+      - herobot
+    restart: always
+    volumes:
+      - ./config/init.sql:/docker-entrypoint-initdb.d/init.sql
+  herobot:
+    image: docker.pkg.github.com/herobot-discord/herobot-v2/herobot-v2:latest
+    networks:
+      - herobot
+    restart: always
+    volumes:
+      - ./config/config.yml:/herobot/_config.yml
