@@ -26,7 +26,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
+      - name: Checkout submodules	
+        uses: textbook/git-checkout-submodule-action@2.0.0
       - name: Build image
         run: docker build . --file Dockerfile --tag $IMAGE_NAME
 
