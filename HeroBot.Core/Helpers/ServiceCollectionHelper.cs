@@ -61,7 +61,7 @@ namespace HeroBot.Core.Helpers
             return new ServiceCollection().AddFluentMigratorCore().ConfigureRunner((x) =>
             {
                 x.AddPostgres()
-                .WithGlobalConnectionString($"Server={_config.GetSection("postgres").GetSection("host").Value};Port={_config.GetSection("postgres").GetSection("port").Value};Database={assembly.GetName().Name};User Id={_config.GetSection("postgres").GetSection("auth").GetSection("name").Value};Password={_config.GetSection("postgres").GetSection("auth").GetSection("password").Value};SslMode=Require;Trust Server Certificate=true;Pooling=true;")
+                .WithGlobalConnectionString($"Server={_config.GetSection("postgres").GetSection("host").Value};Port={_config.GetSection("postgres").GetSection("port").Value};Database={assembly.GetName().Name};User Id={_config.GetSection("postgres").GetSection("auth").GetSection("name").Value};Password={_config.GetSection("postgres").GetSection("auth").GetSection("password").Value};SslMode=Prefer;Trust Server Certificate=true;Pooling=true;")
                 .ScanIn(assembly).For.Migrations();
             }).AddLogging(x => x.AddFluentMigratorConsole()).BuildServiceProvider();
         }
