@@ -1,0 +1,23 @@
+version: 2
+updates:
+- package-ecosystem: nuget
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "13:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: Lavalink4NET.Discord.NET
+    versions:
+    - 1.6.2
+    - 1.6.3
+  - dependency-name: Lavalink4NET
+    versions:
+    - 1.6.2
+    - 1.6.3
+  - dependency-name: FluentMigrator.Runner.Postgres
+    versions:
+    - 3.2.11
+  - dependency-name: FluentMigrator.Runner
+    versions:
+    - 3.2.11
